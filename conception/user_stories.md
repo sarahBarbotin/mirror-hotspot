@@ -2,7 +2,7 @@
 
 Fiche récap : https://kourou.oclock.io/ressources/fiche-recap/user-stories/
 
-## PARTIE SOCIALE
+## PARTIE VISITEUR
 
 | En tant que | Je veux | Afin de (si besoin/nécessaire) |
 |--|--|--|
@@ -16,24 +16,26 @@ Fiche récap : https://kourou.oclock.io/ressources/fiche-recap/user-stories/
 | visiteur | pouvoir changer la langue (FR ou ENG) du site | voir les events dans ma langue |
 | visiteur | pouvoir m'enregister | - |
 
-## PARTIE INFORMATIONS
+## PARTIE USER
 
 | En tant que | Je veux | Afin de (si besoin/nécessaire) |
 |--|--|--|
 | utilisateur | pouvoir ajouter un event | pour organiser une session |
-| utilisateur | pouvoir signaler un event | - |
 | utilisateur | pouvoir renseigner le lieu de l'event | pouvoir le rejoindre |
 | utilisateur | pouvoir renseigner la date et l'heure de l'event | pouvoir le rejoindre |
 | utilisateur | pouvoir renseigner une description de l'event | pouvoir le rejoindre |
 | utilisateur | pouvoir modifier un event qu'on a crée | - |
 | utilisateur | pouvoir commenter un event | pour organiser une session |
+| utilisateur | pouvoir participer à un event | - |
 | utilisateur | pouvoir me connecter | - |
+| utilisateur | pouvoir signaler un event | - |
 | utilisateur | pouvoir me déconnecter | - |
-| utilisateur | pouvoir personnaliser mon profil | - |
+| utilisateur | pouvoir remplir mon profil | - |
 | utilisateur | pouvoir voir le profil des autres utilisateurs | - |
 | utilisateur | pouvoir noter un spot | - |
 | utilisateur | pouvoir suivre un spot | - |
 | utilisateur | pouvoir ajouter un spot sur son profil | pour que les autres utilisateurs voient |
+| utilisateur | pouvoir évaluer un autre utilisateur | - |
 
 ## BACKOFFICE
 
