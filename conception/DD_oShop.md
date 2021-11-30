@@ -1,54 +1,83 @@
 # Dictionnaire de données
 
-## Produits (`product`)
+## User profile (`hs_user_profile`)
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
-|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de notre produit|
-|name|VARCHAR(64)|NOT NULL|Le nom du produit|
-|description|TEXT|NULL|La description du produit|
-|picture|VARCHAR(128)|NULL|L'URL de l'image du produit|
-|price|DECIMAL(10,2)|NOT NULL, DEFAULT 0|Le prix du produit|
-|rate|TINYINT(1)|NOT NULL, DEFAULT 0|L'avis sur le produit, de 1 à 5|
-|status|TINYINT(1)|NOT NULL, DEFAULT 0|Le statut du produit (1=dispo, 2=pas dispo)|
-|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du produit|
-|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du produit|
-|brand|entity|NOT NULL|La marque (autre entité) du produit|
-|category|entity|NULL|La catégorie (autre entité) du produit|
-|type|entity|NOT NULL|Le type (autre entité) du produit|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'utilisateur connecté|
+|username|VARCHAR(64)|NOT NULL|Le pseudo de l'utilisateur|
+|description|TEXT|NULL|Présentation de l'utilisateur|
+|picture|VARCHAR(128)|NULL|L'URL de la photo de l'utilisateur|
+|level|TINYINT(1)|NOT NULL, DEFAULT 0|Niveau de compétence en surf de l'utilisateur|
+|city|VARCHAR(64)|NULL|La ville de l'utilisateur|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du profil utilisateur|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du profil utilisateur|
 
 
-## Catégories (`category`)
+## Events (`hs_event`)
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
-|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de la catégorie|
-|name|VARCHAR(64)|NOT NULL|Le nom de la catégorie|
-|subtitle|VARCHAR(64)|NULL|Le sous-titre/slogan de la catégorie|
-|picture|VARCHAR(128)|NULL|L'URL de l'image de la catégorie (utilisée en home, par exemple)|
-|home_order|TINYINT(1)|NOT NULL, DEFAULT 0|L'ordre d'affichage de la catégorie sur la home (0=pas affichée en home)|
-|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la catégorie|
-|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la catégorie|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'événement|
+|name|VARCHAR(64)|NOT NULL|Le nom de l'événement|
+|description|TEXT|NULL|La description de l'événement|
+|picture|VARCHAR(128)|NULL|L'URL de l'image de l'événement|
+|date|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de l'événement|
+|status|TINYINT(1)|NOT NULL, DEFAULT 0|événement courant ou passé|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de l'événement|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'événement|
 
 
 
-## Marques (`brand`)
-
-|Champ|Type|Spécificités|Description|
-|-|-|-|-|
-|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de la marque|
-|name|VARCHAR(64)|NOT NULL|Le nom de la marque|
-|footer_order|TINYINT(1)|NOT NULL, DEFAULT 0|L'ordre d'affichage de la marque dans le footer (0=pas affichée dans le footer)|
-|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la marque|
-|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la marque|
-
-
-## Types de produit (`type`)
+## Spots (`hs_spot`)
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
-|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du type de produit|
-|name|VARCHAR(64)|NOT NULL|Le nom du type|
-|footer_order|TINYINT(1)|NOT NULL, DEFAULT 0|L'ordre d'affichage du type dans le footer (0=pas affichée dans le footer)|
-|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du type de produit|
-|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du type de produit|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du spot|
+|name|VARCHAR(64)|NOT NULL|Le nom du spot|
+|picture|VARCHAR(128)|NULL|L'URL de l'image du spot|
+|address|VARCHAR(64)|NULL|L'adresse du spot|
+|city|VARCHAR(64)|NULL|La ville du spot|
+|zipcode|MEDIUMINT|NULL|Le code postal du spot|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du spot|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du spot|
+
+
+## Levels (`hs_level`)
+
+|Champ|Type|Spécificités|Description|
+|-|-|-|-|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du niveau de compétence|
+|name|VARCHAR(64)|NOT NULL|Le nom du niveau de compétence|
+|icon|VARCHAR(128)|NULL|L'URL de l'image d'illustration de la compétence|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du niveau de compétence|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du niveau de compétence|
+
+
+## Departements (`hs_departement`)
+
+|Champ|Type|Spécificités|Description|
+|-|-|-|-|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant du département|
+|name|VARCHAR(64)|NOT NULL|Le nom du niveau de compétence|
+|zipcode|VARCHAR(4)|NULL|Le numéro du département|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du département|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du département|
+
+## Event Discipline (`hs_discipline`)
+
+|Champ|Type|Spécificités|Description|
+|-|-|-|-|
+|id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de la discipline|
+|name|VARCHAR(64)|NOT NULL|Le nom de la discipline|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la discipline|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la discipline|
+
+## Participation (`hs_user_event_participation`)
+
+|Champ|Type|Spécificités|Description|
+|-|-|-|-|
+|user_id|INT|NOT NULL, UNSIGNED|L'identifiant de l'utilisateur|
+|event_id|INT|NOT NULL, UNSIGNED|L'identifiant de l'event|
+|created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la participation|
+|updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la participation|
