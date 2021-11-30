@@ -42,7 +42,7 @@ Fiche récap : https://kourou.oclock.io/ressources/fiche-recap/user-stories/
 | En tant que | Je veux | Afin de (si besoin/nécessaire) |
 |--|--|--|
 | modo | pouvoir me connecter à l'interface d'administration | - |
-| modo | pouvoir visualiser tous les vents signalés | pouvoir les changer régulièrement |
+| modo | pouvoir visualiser tous les vents signalés | - |
 | catalog manager | sélectionner les 5 types de produits en bas de page | pouvoir les changer régulièrement |
 | catalog manager | sélectionner les 5 marques en bas de page | pouvoir les changer régulièrement |
 | catalog manager | pouvoir ajouter une catégorie de produit | - |
