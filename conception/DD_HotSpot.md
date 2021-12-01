@@ -23,7 +23,6 @@
 |description|TEXT|NULL|La description de l'événement|
 |picture|VARCHAR(128)|NULL|L'URL de l'image de l'événement|
 |date|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de l'événement|
-|status|TINYINT(1)|NOT NULL, DEFAULT 0|événement courant ou passé|
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de l'événement|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'événement|
 
@@ -39,6 +38,8 @@
 |address|VARCHAR(64)|NULL|L'adresse du spot|
 |city|VARCHAR(64)|NULL|La ville du spot|
 |zipcode|MEDIUMINT|NULL|Le code postal du spot|
+|latitude|VARCHAR(128)|NULL|Latitude du spot pour la carte|
+|longitude|VARCHAR(128)|NULL|Longitude du spot pour la carte|
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création du spot|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour du spot|
 
@@ -70,6 +71,7 @@
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de la discipline|
 |name|VARCHAR(64)|NOT NULL|Le nom de la discipline|
+|icon|VARCHAR(128)|NULL|L'URL de l'image d'illustration de la discipline|
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la discipline|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la discipline|
 
