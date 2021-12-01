@@ -14,11 +14,11 @@
 | `/login` | `POST` | `UserController` | `loginPost` | `login-post` | `Connexion` | `Connexion de l'utilisateur` |  |
 | `/register` | `GET` | `UserController` | `register` | `register` | `Inscription` | `Formulaire d'inscription` |  |
 | `/register` | `POST` | `UserController` | `registerPost` | `register-post` | `Inscription` | `Inscription en tant qu'utilisateur` |  |
-| `/my-profile` | `GET` | `UserController` | `profile` | `profile` | `Profil de l'utilisateur` | `Formulaire de modification du profil connecté` |  |
+| `/my-profile` | `GET` | `UserController` | `profile` | `profile` | `Profil de l'utilisateur` | `Formulaire de modification du profil connecté  / !!Ajout des route permettant de modifier-supprimer son compte` |  |
 | `/my-profile` | `POST` | `UserController` | `profilePost` | `profile-post` | `Profil de l'utilisateur` | `Modification du profil utilisateur connecté` |  |
 | `/user/[id]` | `GET` | `UserController` | `userDetail` | `user-detail` | `Détail d'un profil utilisateur` | `Le détail de l'utilisateur sélectionné` | `[id] est l'identifiant de l'utilisateur dans la base de données` |
-| `/events` | `GET` | `EventController` | `eventsList` | `events-list` | `Liste des events` | `La liste de tous les events futurs` | `Rangés du plus proche au plus lointain` |
-| `/event/[id]` | `GET` | `EventController` | `eventDetail` | `event-detail` | `Détail d'un event` | `L'event sélectionné détaillé` | `[id] est l'identifiant de l'event sélectionné` |
-| `/spots` | `GET` | `SpotController` | `spotsList` | `spots-list` | `Liste des spots` | `La liste de tous les spots` |  |
-| `/spot/[id]` | `GET` | `SpotController` | `spotDetail` | `spot-detail` | `Détail d'un spot` | `Le spot sélectionné détaillé` | `[id] est l'identifiant du spot sélectionné` |
-| `/search/[action]` | `GET` | `SearchController` | `searchResult` | `search-result` | `Résultat de la recherche` | `Les résultats de la recherche` | `[action] est le terme recherché` |
+| `/events` | `GET/POST` | `EventController` | `eventsList/eventPost` | `events-list/event-post` | `Liste des events/Ajouter un event` | `La liste de tous les events futurs/Formulaire d'ajout d'un event` | `Rangés du plus proche au plus lointain` |
+| `/event/[id]` | `GET/UPDATE/DELETE` | `EventController` | `eventDetail/eventUpdate/eventDelete` | `event-detail/event-update/event-delete` | `Détail d'un event/Modification d'un event/suppression d'un event` | `L'event sélectionné détaillé/Formulaire de modification d'un event/Bouton de suppression d'un event` | `[id] est l'identifiant de l'event sélectionné/Formlaire accessible uniquement si auteur de l'event connecté/Bouton accessible uniquement si auteur de l'event connecté` |
+| `/spots` | `GET` | `SpotController` | `spotsList` | `spots-list` | `Liste des spots` | `La liste de tous les spots` | `!!Ajout de la route pour créer un spot` |
+| `/spot/[id]` | `GET` | `SpotController` | `spotDetail` | `spot-detail` | `Détail d'un spot` | `Le spot sélectionné détaillé` | `[id] est l'identifiant du spot sélectionné / !! Ajout des routes pour modifier-supprimer un spot` |
+| `/search/[action]` | `GET` | `SearchController` | `searchResult` | `search-result` | `Résultat de la recherche` | `Les résultats de la recherche` | `[action] est le terme recherché / !!Ajouter la méthode POST de la barre de recherhe ?` |
