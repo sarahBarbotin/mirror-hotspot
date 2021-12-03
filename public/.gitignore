@@ -8,11 +8,11 @@ package-lock.json
 vendor
 composer.lock
 
-.htaccess
+#.htaccess
 
 wp
 
-wp-config.php
+#wp-config.php
 wp-config.php.bak
 
 content/*
