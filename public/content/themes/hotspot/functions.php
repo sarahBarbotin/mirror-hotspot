@@ -14,8 +14,6 @@ add_action(
     'hotspot_initializeTheme'
 );
 
-
-// seulement si la fonction oSailing_initializeTheme n'existe pas ; alors nous la déclarons (ce mécanisme est lié au système de thèmes enfants)
 if (!function_exists('hotspot_initializeTheme')) {
     function hotspot_initializeTheme()
     {
@@ -107,4 +105,3 @@ add_action(
     'wp_enqueue_scripts', // event pour charger nos assets
     'hotspot_loadAssets'
 );
-
