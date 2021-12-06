@@ -16,7 +16,7 @@ class CoreTaxonomy
 
         register_taxonomy(
             $this->identifier,   // identifiant de la taxonomy
-            $this->customPostTypes,   // la taxonomy skill peut s'appliquer sur le CPT developer-profile
+            $this->customPostTypes,   // la taxonomy level peut s'appliquer sur le CPT surfer-profile
             [
                 'show_in_rest' => true, // la taxonomy est accessible en mode API ; nécessaire pour l'éditeur de bloc (Gutemberg)
                 'label' => $this->label,

@@ -5,6 +5,7 @@ namespace Hotspot;
 use Hotspot\Models\SurferEventModel;
 use Hotspot\CustomPostType\Spot;
 use Hotspot\CustomPostType\Event;
+use Hotspot\CustomPostType\SurferProfile;
 use Hotspot\CustomTaxonomy\Level;
 use Hotspot\CustomTaxonomy\Departement;
 use Hotspot\CustomTaxonomy\EventDiscipline;
@@ -24,11 +25,18 @@ class Plugin
     protected $spotCPT;
 
     /**
-     * Propriété gérant le custom post type Spot
+     * Propriété gérant le custom post type Event
      *
      * @var Event
      */
     protected $eventCPT;
+
+    /**
+     * Propriété gérant le custom post type SurferProfile
+     *
+     * @var SurferProfile
+     */
+    protected $surferProfileCPT;
     
 
 
@@ -98,6 +106,7 @@ class Plugin
         // enregistrement des CPT
         $this->spotCPT = new Spot();
         $this->eventCPT = new Event();
+        $this->surferProfileCPT = new SurferProfile();
 
         // enregistrement des taxonomies custom
         $this->levelTaxonomy = new Level();
@@ -107,6 +116,12 @@ class Plugin
         
         // enregistrement du gestionnaire de roles
         $this->roleManager = new RoleManager();
+
+        // Gestion du formulaire d'inscription
+        $this->userRegistration = new UserRegistration();
+
+        // chargement du router wordpress
+        $this->wordpressRouter = new WordpressRouter();
 
         //instanciation d'un SurferEventModel
         $this->surferEventModel = new SurferEventModel;
@@ -121,6 +136,7 @@ class Plugin
 
         $this->roleManager->giveAllCapabilitiesOnCPT('event', 'administrator');
         $this->roleManager->giveAllCapabilitiesOnCPT('spot', 'administrator');
+        $this->roleManager->giveAllCapabilitiesOnCPT('surfer-profile', 'administrator');
 
         //création de la table custom hs_surfer_event_participation
         $this->surferEventModel->createTable();

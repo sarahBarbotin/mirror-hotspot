@@ -5,8 +5,8 @@ namespace Hotspot\CustomTaxonomy;
 
 class Departement extends CoreTaxonomy
 {
-    protected $customPostTypes = ['departement'];
+    protected $customPostTypes = ['spot', 'surfer-profile'];
     protected $label = 'Departement';
-    protected $identifier = 'Departement';
+    protected $identifier = 'departement';
 
 }
