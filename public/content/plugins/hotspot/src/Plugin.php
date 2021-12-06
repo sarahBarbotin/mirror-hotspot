@@ -2,6 +2,8 @@
 
 namespace Hotspot;
 
+use Hotspot\Models\SurferEventModel;
+
 class Plugin
 {
 
@@ -42,9 +44,9 @@ class Plugin
     // ===========================================================
 
     /**
-     * @var DeveloperTechnologyModel;
+     * @var SurferEventModel;
      */
-
+    protected $surferEventModel;
 
     // ===========================================================
     // ===========================================================
@@ -68,7 +70,8 @@ class Plugin
     // cette méthode sera appellée lorsque le plugin oprofile sera chargé par wordpress
     public function initialize()
     {
-
+        $this->surferEventModel = new SurferEventModel;
+        $this->surferEventModel->createTable();
     }
 
     // déclenché à l'activation du plugin

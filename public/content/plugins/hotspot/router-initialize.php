@@ -3,7 +3,7 @@
 
 // déclaration du router. Nous allons avoir besoin de ce router dans de nombreux fichier. Ce n'est pas propre mais pour des raisons de simplicité de code ; nous déclarons ce router comme étant une variable globale
 
-
+use Hotspot\Controllers\SurferController;
 global $router;
 
 
@@ -16,6 +16,47 @@ $baseURI = dirname($_SERVER['SCRIPT_NAME']);
 $router->setBasePath($baseURI);
 
 // configuration des routes
+
+$router->map(
+    'GET', // surveille les appels HTTP de type GET
+    '/surfer/dashboard/', // url a surveiller
+    function() {
+        $surferController = new SurferController();
+        $surferController->home();
+    },
+    'surfer-home'
+);
+
+$router->map(
+    'GET',
+    '/surfer/skills/',
+    function() {
+        $surferController = new SurferController();
+        $surferController->skills();
+    },
+    'surfer-skills'
+);
+
+$router->map(
+    'GET',
+    '/surfer/confirm-delete-account/',
+    function() {
+        $surferController = new SurferController();
+        $surferController->confirmDeleteAccount();
+    },
+    'surfer-confirm-delete-account'
+);
+
+
+$router->map(
+    'GET,POST',
+    '/surfer/update-form/',
+    function() {
+        $surferController = new SurferController();
+        $surferController->updateForm();
+    },
+    'surfer-update-form'
+);
 
 
 
