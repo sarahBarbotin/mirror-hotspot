@@ -8,6 +8,8 @@ use WP_Query;
 class SurferController extends CoreController
 {
 
+
+
     public function getProfile()
     {
         $query = new WP_Query([

@@ -7,15 +7,10 @@ use Hotspot\Models\SurferEventModel;
 class TestController extends CoreController
 {
 
-
-
     public function test()
     {
         $this->show('views/test.view');
     }
-
-
-
 
 
     public function createSurferEventTable()
@@ -143,7 +138,6 @@ class TestController extends CoreController
             echo '</div>';
         }
     }
-
 
     public function insertIntoProjectDeveloper($projectId, $developerId)
     {
