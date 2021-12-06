@@ -28,6 +28,7 @@ class SurferEventModel extends CoreModel
         $primaryKeySQL = 'ALTER TABLE `' . $tableName . '` ADD PRIMARY KEY `surfer_id_event_id` (`surfer_id`, `event_id`)';
         $this->wpdb->query($primaryKeySQL);
 
+
     }
 
     public function dropTable()
