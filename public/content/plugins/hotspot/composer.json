@@ -1,0 +1,14 @@
+{
+    "autoload": {
+        "psr-4" : {
+            "Hotspot\\" : "./src"
+        }
+    },
+    "config": {
+        "vendor-dir": "vendor-hotspot"
+    },
+    "require": {
+        "altorouter/altorouter": "^2.0",
+        "symfony/var-dumper": "^5.3"
+    }
+}

@@ -1,11 +1,11 @@
 # Dictionnaire de données
 
-## User profile (`hs_user_profile`)
+## Surfer profile (`hs_surfer_profile`)
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
 |id|INT|PRIMARY KEY, NOT NULL, UNSIGNED, AUTO_INCREMENT|L'identifiant de l'utilisateur connecté|
-|username|VARCHAR(64)|NOT NULL|Le pseudo de l'utilisateur|
+|surfername|VARCHAR(64)|NOT NULL|Le pseudo de l'utilisateur|
 |description|TEXT|NULL|Présentation de l'utilisateur|
 |picture|VARCHAR(128)|NULL|L'URL de la photo de l'utilisateur|
 |level|TINYINT(1)|NOT NULL, DEFAULT 0|Niveau de compétence en surf de l'utilisateur|
@@ -75,11 +75,11 @@
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la discipline|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la discipline|
 
-## Participation (`hs_user_event_participation`)
+## Participation (`hs_surfer_event_participation`)
 
 |Champ|Type|Spécificités|Description|
 |-|-|-|-|
-|user_id|INT|NOT NULL, UNSIGNED|L'identifiant de l'utilisateur|
+|surfer_id|INT|NOT NULL, UNSIGNED|L'identifiant de l'utilisateur|
 |event_id|INT|NOT NULL, UNSIGNED|L'identifiant de l'event|
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de la participation|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de la participation|
