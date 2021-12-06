@@ -2,7 +2,6 @@
 
 namespace Hotspot\Controllers;
 
-use Hotspot\Models\SurferEventModel;
 use WP_Query;
 
 class SurferController extends CoreController
@@ -26,18 +25,18 @@ class SurferController extends CoreController
         $this->show('views/surfer-home.view');
     }
 
-    public function levels()
+    public function skills()
     {
         // récupération de l'utilisateur courant
         $currentUser = wp_get_current_user();
         $userId = $currentUser->ID;
 
         // nous devons récupérer toutes les lignes correspondant au niveau de maitrise de l'utilisateur courant
-        $surferEventModel = new SurferEventModel();
-        $surfersLevels = $surferEventModel->getBySurferId($userId);
+        $developerTechnologyModel = new DeveloperTechnologyModel();
+        $technologiesLevels = $developerTechnologyModel->getByDeveloperId($userId);
 
-        $this->show('views/surfer-levels.view', [
-            'surferLevels' => $surfersLevels
+        $this->show('views/user-skills.view', [
+            'technologiesLevels' => $technologiesLevels
         ]);
     }
 
@@ -51,10 +50,10 @@ class SurferController extends CoreController
 
             header("HTTP/1.1 403 Forbidden");
             // BONUS il es possible de faire http_response_code(403);
-            $this->show('views/surfer-forbidden');
+            $this->show('views/user-forbidden');
         }
         else {
-            $this->show('views/surfer-confirm-delete-account.view');
+            $this->show('views/user-confirm-delete-account.view');
         }
     }
 
@@ -83,7 +82,7 @@ class SurferController extends CoreController
         }
     }
 
-    public function updateLevel()
+    public function updateSkills()
     {
 
         // Récupération des données envoyées depuis le formulaire de selectection des niveaux de maitrise des différentes technologies
@@ -96,13 +95,13 @@ class SurferController extends CoreController
         $userId = $currentUser->ID;
 
         // nous devons supprimer toutes les lignes de la table developer_technology pour l'utilisateur courant
-        $surferEventModel = new SurferEventModel();
-        $surferEventModel->deleteBySurferId($userId);
+        $developerTechnologyModel = new DeveloperTechnologyModel();
+        $developerTechnologyModel->deleteByDeveloperId($userId);
 
         // pour chaque technologies, association de la technologie à l'utilisateur
 
         foreach($technologiesLevels as $termId => $level) {
-            $surferEventModel->insert(
+            $developerTechnologyModel->insert(
                 $userId,
                 $termId,
                 $level
@@ -111,23 +110,22 @@ class SurferController extends CoreController
 
         // redirection vers la page de gestion des compétences
         global $router;
-        $skillURL = $router->generate('surfer-skills');
+        $skillURL = $router->generate('user-skills');
 
         header('Location: ' . $skillURL);
     }
 
-    public function participateToProject($eventId)
+    public function participateToProject($projectId)
     {
         // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
 
-        $model = new SurferEventModel();
+        $model = new ProjectDeveloperModel();
         $user = wp_get_current_user();
         $userId = $user->ID;
-        
 
         $model->insert(
-            $userId,
-            $eventId
+            $projectId,
+            $userId
         );
 
         $url = get_post_type_archive_link('project');
@@ -136,7 +134,7 @@ class SurferController extends CoreController
 
     public function leaveProject($projectId)
     {
-        $model = new SurferEventModel();
+        $model = new ProjectDeveloperModel();
         $user = wp_get_current_user();
         $userId = $user->ID;
 

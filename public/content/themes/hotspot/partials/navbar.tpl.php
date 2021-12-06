@@ -16,16 +16,16 @@
                             id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="index.html">Home</a>
+                                    <a class="nav-link" href="<?=get_home_url();?>">Home</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="about.html">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="packages.html">Events</a>
+                                    <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Events</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="packages.html">Spots</a>
+                                    <a class="nav-link" href="<?=get_post_type_archive_link('spot');?>">Spots</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>
@@ -35,8 +35,27 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="#" class="btn_1 d-none d-lg-block">Connexion</a>
-                        <a href="#" class="btn_2 d-none d-lg-block">Inscription</a>
+
+                        <?php
+                            if(!is_user_logged_in()) {
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block">Connexion</a>';
+                                echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block">Inscription</a>';
+                            }
+                            else {
+                                $user = wp_get_current_user();
+                                global $router;
+                                
+                                // TODO
+                                //route custom pour afficher le profil
+                                // echo '<li><a href="' . $url . '">' . $user->display_name . '</a></li>';
+                                echo '<a href="#" class="btn_1 d-none d-lg-block">Mon Profil</a>';
+                                echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
+
+                                
+                            }
+                        ?>
+
+
                     </nav>
                 </div>
             </div>

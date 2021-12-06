@@ -4,6 +4,7 @@
 // déclaration du router. Nous allons avoir besoin de ce router dans de nombreux fichier. Ce n'est pas propre mais pour des raisons de simplicité de code ; nous déclarons ce router comme étant une variable globale
 
 use Hotspot\Controllers\SurferController;
+use Hotspot\Controllers\TestController;
 global $router;
 
 
@@ -29,12 +30,12 @@ $router->map(
 
 $router->map(
     'GET',
-    '/surfer/skills/',
+    '/surfer/level/',
     function() {
         $surferController = new SurferController();
-        $surferController->skills();
+        $surferController->levels();
     },
-    'surfer-skills'
+    'surfer-level'
 );
 
 $router->map(
@@ -59,4 +60,28 @@ $router->map(
 );
 
 
+// ===========================================================
+// enregistrement des niveaux de maitrise pour les technologiess
 
+$router->map(
+    'POST',
+    '/surfer/update-level/',
+    function() {
+        $userController = new SurferController();
+        $userController->updateLevel();
+    },
+    'surfer-update-level'
+);
+
+// ===========================================================
+// Routes pour tester nos modèles
+// ===========================================================
+$router->map(
+    'GET',
+    '/model-tests/test/',
+    function() {
+        $testController = new TestController();
+        $testController->test();
+    },
+    'model-tests-test'
+);

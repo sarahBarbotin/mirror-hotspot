@@ -6,8 +6,8 @@
                 <div class="banner_text text-center">
                     <div class="banner_text_iner">
                         <h1> Hotspot</h1>
-                        <p>Let’s start your journey with us, your dream will come true</p>
-                        <a href="#" class="btn_1 ">Connexion</a>
+                        <p><?=get_bloginfo('description');?></p>
+                        <a href="<?php  wp_login_url() ?>" class="btn_1 ">Connexion</a>
                         <a href="#" class="btn_1">Inscription</a>
                     </div>
                 </div>

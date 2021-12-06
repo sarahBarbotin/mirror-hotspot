@@ -22,7 +22,6 @@
     ?>
     <!-- Header end -->
 
-
     <!-- Content start -->
     <?php
         get_template_part('partials/home/home-spots.tpl');

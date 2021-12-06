@@ -55,7 +55,7 @@ class Plugin
     protected $departementTaxonomy;
 
     /**
-     * @var Departement;
+     * @var EventDiscipline;
      */
     protected $eventDisciplineTaxonomy;
 
@@ -71,6 +71,18 @@ class Plugin
      * @var RoleManager
      */
     protected $roleManager;
+
+        /**
+     * Configuration du router wordpress
+     *
+     * @var WordpressRouter
+     */
+    protected $wordpressRouter;
+
+     /**
+     * @var UserRegistration
+     */
+    protected $userRegistration;
 
     // ===========================================================
     // Classes du modèle
@@ -123,6 +135,9 @@ class Plugin
         // chargement du router wordpress
         $this->wordpressRouter = new WordpressRouter();
 
+        // chargement des custom fields acf à activer lorsque le plugin sera configuré
+        //$this->customFields = new CustomFields();
+
         //instanciation d'un SurferEventModel
         $this->surferEventModel = new SurferEventModel;
         
@@ -137,6 +152,9 @@ class Plugin
         $this->roleManager->giveAllCapabilitiesOnCPT('event', 'administrator');
         $this->roleManager->giveAllCapabilitiesOnCPT('spot', 'administrator');
         $this->roleManager->giveAllCapabilitiesOnCPT('surfer-profile', 'administrator');
+
+        // création des rôles custom de notre plugin
+        $this->roleManager->createSurferRole();
 
         //création de la table custom hs_surfer_event_participation
         $this->surferEventModel->createTable();
