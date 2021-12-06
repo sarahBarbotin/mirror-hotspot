@@ -13,6 +13,9 @@
 <body>
 
 
+    <!-- nom du fichier :
+je l'ai appelé single-surfer-profile.php pour faire comme oprofile, 
+mais on pourrait eventuellement utiliser "author" de wp-hierarchy ? à voir -->
 
     TODO
 
