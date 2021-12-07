@@ -9,6 +9,101 @@ class CustomFields
         if( function_exists('acf_add_local_field_group') ):
 
             acf_add_local_field_group(array(
+                'key' => 'group_61af27aa3dd90',
+                'title' => 'Departement',
+                'fields' => array(
+                    array(
+                        'key' => 'field_61af27f0c3fe9',
+                        'label' => 'Zipcode',
+                        'name' => 'zipcode',
+                        'type' => 'number',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'default_value' => '',
+                        'placeholder' => 'Departement zipcode',
+                        'prepend' => '',
+                        'append' => '',
+                        'min' => '',
+                        'max' => '',
+                        'step' => '',
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'taxonomy',
+                            'operator' => '==',
+                            'value' => 'departement',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => '',
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+            ));
+            
+            acf_add_local_field_group(array(
+                'key' => 'group_61af2888ccea2',
+                'title' => 'Discipline',
+                'fields' => array(
+                    array(
+                        'key' => 'field_61af28c060a46',
+                        'label' => 'Icon',
+                        'name' => 'icon',
+                        'type' => 'image',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'return_format' => 'url',
+                        'preview_size' => 'medium',
+                        'library' => 'all',
+                        'min_width' => '',
+                        'min_height' => '',
+                        'min_size' => '',
+                        'max_width' => '',
+                        'max_height' => '',
+                        'max_size' => '',
+                        'mime_types' => '',
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'taxonomy',
+                            'operator' => '==',
+                            'value' => 'event_discipline',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => '',
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+            ));
+            
+            acf_add_local_field_group(array(
                 'key' => 'group_61af254616998',
                 'title' => 'Event',
                 'fields' => array(
@@ -36,6 +131,55 @@ class CustomFields
                             'param' => 'post_type',
                             'operator' => '==',
                             'value' => 'event',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => '',
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+            ));
+            
+            acf_add_local_field_group(array(
+                'key' => 'group_61af291207d23',
+                'title' => 'Level',
+                'fields' => array(
+                    array(
+                        'key' => 'field_61af2932980e8',
+                        'label' => 'Icon',
+                        'name' => 'icon',
+                        'type' => 'image',
+                        'instructions' => '',
+                        'required' => 0,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'return_format' => 'url',
+                        'preview_size' => 'medium',
+                        'library' => 'all',
+                        'min_width' => '',
+                        'min_height' => '',
+                        'min_size' => '',
+                        'max_width' => '',
+                        'max_height' => '',
+                        'max_size' => '',
+                        'mime_types' => '',
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'taxonomy',
+                            'operator' => '==',
+                            'value' => 'level',
                         ),
                     ),
                 ),
@@ -226,6 +370,6 @@ class CustomFields
             ));
             
             endif;		
-    }
+    }     
 }
 
