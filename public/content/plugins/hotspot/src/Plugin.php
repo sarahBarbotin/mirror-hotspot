@@ -143,7 +143,7 @@ class Plugin
         $this->wordpressRouter = new WordpressRouter();
 
         // chargement des custom fields acf à activer lorsque ACF sera configuré
-        //$this->customFields = new CustomFields();
+        $this->customFields = new CustomFields();
 
         //instanciation d'un SurferEventModel
         $this->surferEventModel = new SurferEventModel;
