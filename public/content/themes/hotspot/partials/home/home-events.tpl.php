@@ -6,17 +6,17 @@
                     <div class="event_slider owl-carousel">
 
                         <?php
-                        $home_events = new WP_Query(
+                        $homeEvents = new WP_Query(
                             ['post_type' => 'event',
                             'posts_per_page' => 5,
-                            'order' => 'DESC',
+                            'order' => 'ASC',
                             'orderby' => 'meta_value',
                             'meta_key' => 'date']
                         );
-                        if ($home_events->have_posts()) {
+                        if ($homeEvents->have_posts()) {
 
-                            while ($home_events->have_posts()) {
-                                $home_events->the_post();
+                            while ($homeEvents->have_posts()) {
+                                $homeEvents->the_post();
                         ?>                                
                                         <div class="single_event_slider">
                                             <div class="row justify-content-end">
