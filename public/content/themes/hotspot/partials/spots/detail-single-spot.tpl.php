@@ -15,7 +15,7 @@ if ($hasImage) {
                     <!-- Author -->
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="blog-author">
+                            <div class="blog-author" style="margin-top:0;height:100%;">
                                 <div class="media align-items-center">
                                     <img src="<?= $imageURL; ?>" alt="">
                                     <div class="media-body">
@@ -24,7 +24,12 @@ if ($hasImage) {
                                         </a>
                                         <p><i class="fas fa-swimmer"></i>
                                             <?php
-                                            $spotAdress = get_field('level');
+                                            $taxonomies = wp_get_post_terms($post->ID, ['level']);
+                                            if (!empty($taxonomies)) {
+                                                foreach ($taxonomies as $taxonomy) {
+                                                    echo $taxonomy->name;
+                                                }
+                                            }
                                             ?>
                                         </p>
                                         <p><i class="fas fa-map-pin"></i>
@@ -39,12 +44,26 @@ if ($hasImage) {
                                             echo $surferZipcode;
                                             ?>
                                         </p>
+                                        <p><i class="fas fa-swimmer"></i>
+                                            <?php
+                                            $taxonomies = wp_get_post_terms($post->ID, ['departement']);
+                                            if (!empty($taxonomies)) {
+                                                foreach ($taxonomies as $taxonomy) {
+                                                    echo $taxonomy->name;
+                                                }
+                                            }
+                                            ?>
+                                        </p>
                                     </div>
+
+                                </div>
+                                <div class="mt-3">
+                                    <?= get_the_content(); ?>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="d-none d-sm-block mb-5 pb-4">
+                            <div class="d-none d-sm-block">
                                 <div id="map" style="height: 480px;"></div>
                                 <script>
                                     function initMap() {
@@ -83,13 +102,87 @@ if ($hasImage) {
                         </div>
                     </div>
 
-                    <!-- profile description -->
-                    <div class="quote-wrapper">
-                        <div class="quotes">
-                            <?= get_the_content(); ?>
+                    
+                    <!-- Comments -->
+                    <?php
+                        // Arguments for the query
+                        $args = array();
+
+                        // The comment query
+                        $comments_query = new WP_Comment_Query;
+                        $comments = $comments_query->query($args);
+
+                        
+                    ?>
+                    <div class="comments-area">
+                        <h4>05 Comments</h4>
+                        <div class="comment-list">
+                            <div class="single-comment justify-content-between d-flex">
+                                <div class="user justify-content-between d-flex">
+                                    <div class="thumb">
+                                        <img src="<?php echo get_theme_file_uri('assets/img/comment/comment_1.png'); ?>" alt="">
+                                    </div>
+                                    <div class="desc">
+                                        <p class="comment">
+                                            <?php 
+                                                // The comment loop
+                                                if (!empty($comments)) {
+                                                    foreach ($comments as $comment) {
+                                                        echo $comment->comment_content;
+                                                    }
+                                                } else {
+                                                    echo 'No comments found.';
+                                                } 
+                                            ?>
+                                        </p>
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <h5>
+                                                    <a href="#">Emilly Blunt</a>
+                                                </h5>
+                                                <p class="date">December 4, 2017 at 3:12 pm </p>
+                                            </div>
+                                            <div class="reply-btn">
+                                                <a href="#" class="btn-reply text-uppercase">reply</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
+                    <!-- Reply -->
+                    <div class="comment-form">
+                        <h4>Leave a Reply</h4>
+                        <form class="form-contact comment_form" action="#" id="commentForm">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="button button-contactForm btn_1">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
 
                 </div>
             </div>
