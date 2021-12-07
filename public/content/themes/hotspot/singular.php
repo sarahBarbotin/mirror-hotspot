@@ -1,3 +1,8 @@
+<?php
+the_post();
+?>
+
+
 <!doctype html>
 <html lang="<?=get_bloginfo('language');?>">
 
@@ -22,36 +27,96 @@
     <!-- Header end -->
 
     <!--================Blog Area =================-->
+
+    <?php
+        // Récupération des images thumbnail
+        $articleId = get_the_id();
+        $hasImage = has_post_thumbnail($articleId);
+        if($hasImage) {
+            $imageURL = get_the_post_thumbnail_url();
+        }
+        else {
+            $imageURL = 'https://picsum.photos/300/200?random=1';
+        }
+
+        // Récupération des taxonomies
+        $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
+
+        dump($taxonomies);
+        //dump($the_query);
+
+        $fields = get_fields();
+        dump($fields);
+    ?>
+
     <section class="blog_area single-post-area section_padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 posts-list">
+                <div class="posts-list">
                     <div class="single-post">
                         <div class="feature-img">
                             <!-- Image -->
-                            <img class="img-fluid" src="<?php echo get_theme_file_uri('assets/img/blog/single_blog_1.png');?>" alt="">
+                            <img class="img-fluid" src="<?php echo $imageURL?>" alt="">
                         </div>
                         <div class="blog_details">
                             <!-- Title -->
-                            <h2>Second divided from form fish beast made every of seas
-                        all gathered us saying he our
+                            <h2><?= get_the_title() ?>
                      </h2>
                             <!-- Tags & nb comments-->
                             <ul class="blog-info-link mt-3 mb-4">
-                                <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                                <li><i class="far fa-user"></i> 
+                                <?php if(!empty($taxonomies)) {
+                                foreach($taxonomies as $taxonomy) {
+                                    echo $taxonomy->name . ' ';
+                                }
+                            } ?></li>
                                 <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
                             </ul>
                             <!-- excert -->
                             <p class="excert">
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower
+                            <?= get_the_content(); ?>
                             </p>
-                            <p>
-                                MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training. who has the willpower to actually
-                            </p>
+                            
                             <!-- spot map -->
                             <div class="quote-wrapper">
                                 <div class="quotes">
+                                <div class="col-lg-6">
                                     MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.
+                                </div>
+                                
+                                <div class="">
+                                <div class="d-none d-sm-block">
+                                    <div id="map" style="height: 480px; background-color:aqua;"></div>
+                                    <script>
+                                        function initMap() {
+                                            var uluru = {
+                                                lat: -25.363,
+                                                lng: 131.044
+                                            };
+                                            var grayStyles = [{
+                                                featureType: "all",
+                                                stylers: [{
+                                                    saturation: -90
+                                                }, {
+                                                    lightness: 50
+                                                }]
+                                            }, {
+                                                elementType: 'labels.text.fill',
+                                                stylers: [{
+                                                    color: '#ccdee9'
+                                                }]
+                                            }];
+                                            var map = new google.maps.Map(document.getElementById('map'), {
+                                                center: {
+                                                    lat: -31.197,
+                                                    lng: 150.744
+                                                },
+                                                zoom: 9,
+                                                styles: grayStyles,
+                                                scrollwheel: false
+                                            });
+                                        }
+                                    </script>
                                 </div>
                             </div>
                         </div>
@@ -116,17 +181,19 @@
                                 </div>
                             </div>
                         </div> -->
+
                     </div>
 
                     <!-- Author -->
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <img src="<?php echo get_theme_file_uri('assets/img/blog/author.png');?>" alt="">
+                            <div><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></div>
                             <div class="media-body">
                                 <a href="#">
-                                    <h4>Harvard milan</h4>
+                                    <h4><?= get_the_author(); ?></h4>
                                 </a>
-                                <p>Second divided from form fish beast made. Every of seas all gathered use saying you're, he our dominion twon Second divided from</p>
+                                <p>
+                                Second divided from form fish beast made. Every of seas all gathered use saying you're, he our dominion twon Second divided from</p>
                             </div>
                         </div>
                     </div>

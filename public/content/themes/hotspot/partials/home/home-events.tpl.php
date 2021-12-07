@@ -16,6 +16,7 @@ $the_query = new WP_Query( $args ); ?>
                 <?php if ( $the_query->have_posts() ) : ?>
                 <?php while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
 
+
                     <div class="single_event_slider">
                         <div class="row justify-content-end">
                             <div class="col-lg-6 col-md-6">
@@ -26,7 +27,7 @@ $the_query = new WP_Query( $args ); ?>
                                     </p>
                                     <p>date: <span>12 Aug 2019</span> </p>
                                     <p>Cost: <span>Start from $820</span> </p>
-                                    <p>Organizer: <span> Martine Agency</span> </p>
+                                    <p>Organizer: <span><a href="<?php echo  get_the_permalink();?>"> <?php the_author(); ?></a></span> </p>
                                     <div class="rating">
                                         <span>Rating:</span>
                                         <div class="place_review">

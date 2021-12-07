@@ -57,6 +57,7 @@
 
                     <?php
                     get_template_part('partials/aside/categories.tpl');
+                    get_template_part('partials/aside/categories-discipline.tpl');
                     ?>
 
                     <?php

@@ -43,8 +43,9 @@
                 <!-- Aside (right col) -->
                 <div class="col-lg-4 mt-5">
                     <div class="blog_right_sidebar">
+
                         <?php
-                            get_template_part('partials/aside/categories.tpl');
+                        get_template_part('partials/aside/categories.tpl');
                         ?>
                     </div>
                 </div>
