@@ -84,6 +84,13 @@ class Plugin
      */
     protected $userRegistration;
 
+        /**
+     *
+     * @var CustomFields
+     */
+    protected $customFields;
+
+
     // ===========================================================
     // Classes du modèle
     // ===========================================================
@@ -135,7 +142,7 @@ class Plugin
         // chargement du router wordpress
         $this->wordpressRouter = new WordpressRouter();
 
-        // chargement des custom fields acf à activer lorsque le plugin sera configuré
+        // chargement des custom fields acf à activer lorsque ACF sera configuré
         //$this->customFields = new CustomFields();
 
         //instanciation d'un SurferEventModel

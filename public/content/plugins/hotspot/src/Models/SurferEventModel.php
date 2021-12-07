@@ -33,8 +33,6 @@ class SurferEventModel extends CoreModel
 
         $primaryKeySQL = 'ALTER TABLE `' . $tableName . '` ADD PRIMARY KEY `surfer_id_event_id` (`surfer_id`, `event_id`)';
         $this->wpdb->query($primaryKeySQL);
-
-
     }
 
     public function dropTable()
@@ -60,17 +58,10 @@ class SurferEventModel extends CoreModel
         );
     }
 
-    // permet de récupérer pour un développeur toutes les technologies qui lui sont associées
-    public function getBySurferId($surferId)
+    public function getEventsBySurferId($surferId)
     {
-        $tablePrefix = $this->wpdb->prefix;
-        $tableName = $tablePrefix.'surfer_event_participation';
-
-        // IMPORTANT il faut utiliser des requêtes préparées dès qu'il y a des partie variables dans la requêtes. Sinon vous créez des failles de sécurité
-        // %d dans la requête signifie qu'il y aura un nombre injecté à cet endroit
-        // DOC E11 WPDB query spécification des types de paramètre attendu https://www.php.net/sprintf (%d == nombre; %s == string)
         $sql = "
-            SELECT * FROM `" . $tableName . "`
+            SELECT * FROM `" . $this->getTableName() . "`
             WHERE
                 surfer_id = %d
         ";
@@ -86,43 +77,22 @@ class SurferEventModel extends CoreModel
         return $rows;
     }
 
-    public function getBySurferIdAndEventId($surferId, $eventId)
+    public function getSurfersByEventId($eventId)
     {
-        $tablePrefix = $this->wpdb->prefix;
-        $tableName = $tablePrefix.'surfer_event_participation';
-
         $sql = "
-            SELECT * FROM `" . $tableName . "`
+            SELECT * FROM `" . $this->getTableName() . "`
             WHERE
-                surfer_id = %d
-                AND event_id = %d
+                event_id = %d
         ";
 
         $preparedStatement = $this->wpdb->prepare(
             $sql,
             [
-                $surferId,
                 $eventId
             ]
         );
         $rows = $this->wpdb->get_results($preparedStatement);
-
         return $rows;
-    }
-
-    public function deleteBySurferId($surferId)
-    {
-        $tablePrefix = $this->wpdb->prefix;
-        $tableName = $tablePrefix.'surfer_event_participation';
-
-        $conditions = [
-            'surfer_id' => $surferId, // équivalent à WHERE surfer_id = $surferId
-        ];
-
-        $this->wpdb->delete(
-            $tableName,
-            $conditions
-        );
     }
 
     public function delete($eventId, $surferId)
@@ -138,4 +108,3 @@ class SurferEventModel extends CoreModel
         );
     }
 }
-

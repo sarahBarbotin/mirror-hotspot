@@ -1,4 +1,5 @@
 <!-- banner part start-->
+
 <section class="banner_part">
     <div class="container">
         <div class="row align-items-center justify-content-center">
@@ -7,8 +8,24 @@
                     <div class="banner_text_iner">
                         <h1> Hotspot</h1>
                         <p><?=get_bloginfo('description');?></p>
-                        <a href="<?php  wp_login_url() ?>" class="btn_1 ">Connexion</a>
-                        <a href="#" class="btn_1">Inscription</a>
+
+                        <?php
+                            if(!is_user_logged_in()) {
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 ">Connexion</a>';
+                                echo '<a href="'. wp_registration_url() .'" class="btn_1">Inscription</a>';
+                            }
+                            else {
+                                $user = wp_get_current_user();
+                                global $router;
+                                
+                                // TODO
+                                //route custom pour afficher le profil
+                                // echo '<li><a href="' . $url . '">' . $user->display_name . '</a></li>';
+                                echo '<a href="#" class="btn_1">Mon Profil</a>';
+                                echo '<a href="'. wp_logout_url() .'" class="btn_1">Déconnexion</a>';
+                        
+                            }
+                        ?>
                     </div>
                 </div>
             </div>

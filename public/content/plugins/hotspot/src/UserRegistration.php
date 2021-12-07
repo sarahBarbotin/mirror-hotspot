@@ -72,8 +72,7 @@ class UserRegistration
         // BONUS E9 IN_ARRAY
         // DOC in_array https://www.php.net/in_array
         $allowedRoles = [
-            'developer',
-            'customer'
+            'surfer'
         ];
 
         if(!in_array($role, $allowedRoles)) {
@@ -101,9 +100,9 @@ class UserRegistration
         // récupération de l'utilisateur via l'id founit par wordpress
         $user = new WP_User($newUserId);
 
-        // si le role choisi est "developer" création d'un contenu de type "developer-profile".
-        if($role === 'developer') {
-            $postType = 'developer-profile';
+        // si le role choisi est "surfer" création d'un contenu de type "surfer-profile".
+        if($role === 'surfer') {
+            $postType = 'surfer-profile';
         }
         //si le role choisie est customer
         elseif($role === 'customer') {

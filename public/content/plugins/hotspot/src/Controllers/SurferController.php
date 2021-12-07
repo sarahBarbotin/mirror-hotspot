@@ -23,26 +23,6 @@ class SurferController extends CoreController
         return $profile;
     }
 
-    public function home()
-    {
-        $this->show('views/surfer-home.view');
-    }
-
-    public function levels()
-    {
-        // récupération de l'utilisateur courant
-        $currentUser = wp_get_current_user();
-        $userId = $currentUser->ID;
-
-        // nous devons récupérer toutes les lignes correspondant au niveau de maitrise de l'utilisateur courant
-        $surferEventModel = new SurferEventModel();
-        $surfersLevels = $surferEventModel->getBySurferId($userId);
-
-        $this->show('views/surfer-levels.view', [
-            'surferLevels' => $surfersLevels
-        ]);
-    }
-
     public function confirmDeleteAccount()
     {
 
@@ -85,40 +65,7 @@ class SurferController extends CoreController
         }
     }
 
-    public function updateLevel()
-    {
-
-        // Récupération des données envoyées depuis le formulaire de selectection des niveaux de maitrise des différentes technologies
-
-        // TODO vérifier la validité des données envoyées dans $technologiesLevels
-        $technologiesLevels = $_POST['technologiesLevels'];
-
-        // récupération de l'utilisateur courant
-        $currentUser = wp_get_current_user();
-        $userId = $currentUser->ID;
-
-        // nous devons supprimer toutes les lignes de la table developer_technology pour l'utilisateur courant
-        $surferEventModel = new SurferEventModel();
-        $surferEventModel->deleteBySurferId($userId);
-
-        // pour chaque technologies, association de la technologie à l'utilisateur
-
-        foreach($technologiesLevels as $termId => $level) {
-            $surferEventModel->insert(
-                $userId,
-                $termId,
-                $level
-            );
-        }
-
-        // redirection vers la page de gestion des compétences
-        global $router;
-        $skillURL = $router->generate('surfer-skills');
-
-        header('Location: ' . $skillURL);
-    }
-
-    public function participateToProject($eventId)
+    public function participateToEvent($eventId)
     {
         // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
 
@@ -132,19 +79,19 @@ class SurferController extends CoreController
             $eventId
         );
 
-        $url = get_post_type_archive_link('project');
+        $url = get_post_type_archive_link('event');
         header('Location: ' . $url);
     }
 
-    public function leaveProject($projectId)
+    public function leaveEvent($eventId)
     {
         $model = new SurferEventModel();
         $user = wp_get_current_user();
         $userId = $user->ID;
 
-        $model->delete($projectId, $userId);
+        $model->delete($eventId, $userId);
 
-        $url = get_post_type_archive_link('project');
+        $url = get_post_type_archive_link('event');
         header('Location: ' . $url);
     }
 }

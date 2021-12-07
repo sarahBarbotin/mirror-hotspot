@@ -11,9 +11,14 @@
 </head>
 <body>
 
+    <!-- Header start-->
     <?php
         get_template_part('partials/navbar.tpl');
     ?>
+    <?php
+        get_template_part('partials/banner.tpl');
+    ?>
+    <!-- Header end -->
 
     <p>404 TODO</p>
 
