@@ -23,20 +23,11 @@ $router->map(
     '/surfer/dashboard/', // url a surveiller
     function() {
         $surferController = new SurferController();
-        $surferController->home();
+        $surferController->getProfile();
     },
     'surfer-home'
 );
 
-$router->map(
-    'GET',
-    '/surfer/level/',
-    function() {
-        $surferController = new SurferController();
-        $surferController->levels();
-    },
-    'surfer-level'
-);
 
 $router->map(
     'GET',
@@ -60,18 +51,7 @@ $router->map(
 );
 
 
-// ===========================================================
-// enregistrement des niveaux de maitrise pour les technologiess
 
-$router->map(
-    'POST',
-    '/surfer/update-level/',
-    function() {
-        $userController = new SurferController();
-        $userController->updateLevel();
-    },
-    'surfer-update-level'
-);
 
 // ===========================================================
 // Routes pour tester nos modèles

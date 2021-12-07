@@ -24,7 +24,7 @@
     <!--================Blog Area =================-->
     <section class="blog_area single-post-area section_padding">
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-8 posts-list">
                     <div class="single-post">
                         <div class="feature-img">

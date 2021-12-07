@@ -14,7 +14,7 @@ class SurferController extends CoreController
     {
         $query = new WP_Query([
             'author' => get_current_user_id(),
-            'post_type' => 'surfer-profile'
+            'post_type' => 'surfer'
 
         ]);
 
