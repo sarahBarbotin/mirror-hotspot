@@ -10,7 +10,7 @@
 
 <!-- Niveau -->
 <aside class="single_sidebar_widget post_category_widget">
-    <h4 class="widget_title">Niveau</h4>
+    <h4 class="widget_title">Niveau(event et spot)</h4>
     <ul class="list cat-list">
 
 <?php foreach ($levels as $level){ ?>
@@ -28,7 +28,7 @@
 
 <!-- Département -->
 <aside class="single_sidebar_widget post_category_widget">
-    <h4 class="widget_title">Départements</h4>
+    <h4 class="widget_title">Départements(event et spot)</h4>
     <ul class="list cat-list">
 
 <?php foreach ($departements as $departement){ ?>
@@ -46,7 +46,7 @@
 
 <!-- Discipline -->
 <aside class="single_sidebar_widget post_category_widget">
-    <h4 class="widget_title">Disciplines</h4>
+    <h4 class="widget_title">Disciplines (event)</h4>
     <ul class="list cat-list">
 
 <?php foreach ($eventDisciplines as $eventDiscipline){ ?>
