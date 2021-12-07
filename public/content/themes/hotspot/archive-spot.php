@@ -19,7 +19,7 @@
         get_template_part('partials/banner.tpl');
     ?>
     <!-- Header end -->
-
+    <p>CJOILUIYGTFDGXFCDFGHYJUKILOOKIJUHYGTFDFGTHYJUKI</p>
     <!-- Spots List -->
     <?php
         get_template_part('partials/spots/spots-list.tpl');

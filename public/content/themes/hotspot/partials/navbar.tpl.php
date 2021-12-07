@@ -38,7 +38,7 @@
 
                         <?php
                             if(!is_user_logged_in()) {
-                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block">Connexion</a>';
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block mr-2">Connexion</a>';
                                 echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block">Inscription</a>';
                             }
                             else {
@@ -48,7 +48,7 @@
                                 // TODO
                                 //route custom pour afficher le profil
                                 // echo '<li><a href="' . $url . '">' . $user->display_name . '</a></li>';
-                                echo '<a href="#" class="btn_1 d-none d-lg-block">Mon Profil</a>';
+                                echo '<a href="#" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
                                 echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
 
                                 
