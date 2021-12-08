@@ -34,7 +34,7 @@ if ($eventList->have_posts()) {
             </div>
 
             <div class="blog_details">
-                <a class="d-inline-block" href="single-blog.html">
+                <a class="d-inline-block" href="<?= get_the_permalink() ?>">
                     <h2><?= get_the_title() ?></h2>
                 </a>
                 <p><?= get_the_excerpt() ?></p>
