@@ -77,6 +77,7 @@ if (!function_exists('hotspot_loadAssets')) {
             "assets/js/mail-script.js",
             "assets/js/contact.js",
             "assets/js/custom.js",
+            
         ];
 
         foreach($javascripts as $index => $path) {
@@ -118,11 +119,11 @@ function get_breadcrumb() {
         the_category(' &bull; ');
             if (is_single()) {
                 if (get_post_type(get_the_ID()) === 'event') {
-                    echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+                    
                     echo ("Liste des évènements");
                 }
-                elseif (get_post_type(get_the_ID()) === 'post') {
-                    echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+                elseif (get_post_type(get_the_ID()) === 'spot') {
+                    
                     echo ("Liste des spots");
                 }
                 echo " &nbsp;&nbsp;&#187;&nbsp;&nbsp; ";
