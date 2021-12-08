@@ -80,7 +80,7 @@ class UserRegistration
             'post_author' => $newUserId,
 
             'post_status' => 'publish', // le status du "profil" est publié
-            "post_title" => $user->data->display_name ."'s profile", // titre du "profil"
+            "post_title" => $user->data->display_name, // titre du "profil"
 
             // le type de post
             'post_type' => $postType

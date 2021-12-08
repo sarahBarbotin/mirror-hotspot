@@ -48,7 +48,12 @@
                                 // TODO
                                 //route custom pour afficher le profil
                                 // echo '<li><a href="' . $url . '">' . $user->display_name . '</a></li>';
-                                echo '<a href="#" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
+                                $userID = get_current_user_id();
+                                $surferProfile = new WP_Query(
+                                    ['post_type' => 'surfer-profile',
+                                    'author' => $userID]
+                                );
+                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
                                 echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
 
                                 
