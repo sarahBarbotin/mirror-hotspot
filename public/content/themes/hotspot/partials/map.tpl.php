@@ -1,3 +1,17 @@
+<?php
+
+$fields = get_fields();
+
+if(!empty($fields['latitude'])){
+    $latitude = $fields['latitude'];
+    $longitude = $fields['longitude'];
+}else{
+    $latitude = 51.505;
+    $longitude = -0.09;
+}  
+
+?>
+
 
 <div style="height: 480px; background-color: blue;">
     
@@ -9,7 +23,7 @@
             console.log('console de la carte chargée');
 
             // point sur laquelle la carte s'ouvre
-            var map = L.map('map').setView([51.505, -0.09], 13);
+            var map = L.map('map').setView([<?php echo $latitude .','.$longitude ?>], 13);
 
             var OpenStreetMap_Mapnik = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             maxZoom: 19,
@@ -17,19 +31,27 @@
             }).addTo(map);
 
             // marqueur +popup
-            var marker = L.marker([51.5, -0.09]).addTo(map);
-            marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
+            var marker = L.marker([<?php echo $latitude .','.$longitude ?>]).addTo(map);
+            marker.bindPopup("<b><?php echo get_the_title(); ?></b><br>I am a popup.").openPopup();
 
             // quand on clique, affiche latitude longitude
             var popup = L.popup();
-
             function onMapClick(e) {
                 popup
                     .setLatLng(e.latlng)
                     .setContent("You clicked the map at " + e.latlng.toString())
                     .openOn(map);
+
+                    //quand on clique, affiche en console les coordonnées du clic
+                    // console.log(e.latlng);
             }
 
             map.on('click', onMapClick);
+
+            // LATLONG PICKER
+
+            //1 récup latlong (élément du dom)
+            //2 récup inpu
+            //3 mettre latlong dans input (+value)
         }       
     </script>

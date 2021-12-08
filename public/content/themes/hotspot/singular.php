@@ -25,7 +25,7 @@ $comments = get_comments(['post_id'=>$articleId]);
 * Comment author information fetched from the comment cookies.
 */
 $commenter = wp_get_current_commenter();
-dump($commenter);
+//dump($commenter);
 
 ?>
 
@@ -96,7 +96,7 @@ dump($commenter);
                                     </div>
                                 
                                 </div>
-                                
+
                                 <?php get_template_part('partials/map.tpl');?>
 
 

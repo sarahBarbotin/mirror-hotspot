@@ -91,6 +91,11 @@
                         </div>
                     </form>
                 </div>
+
+                <?php
+                    get_template_part('partials/map.tpl');
+                ?>
+                
                 <div class="col-lg-4">
                 <div class="about_img">
                         <img src="http://localhost/projet-hotspot/public/content/themes/hotspot/assets/img/single_place_1.png" alt="#">
