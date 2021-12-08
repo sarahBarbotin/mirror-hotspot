@@ -7,7 +7,7 @@ class WordpressRouter
 
     // STEP E9 ROUTER Configuration du router de wordpress
     protected $customRoutes = [
-        'surfer-home' => 'surfer/dashboard/',
+        //'surfer-home' => 'surfer/dashboard/',
         'model-tests' => 'model-tests/.*',
         'surfer-all' => 'surfer/.*'
     ];
