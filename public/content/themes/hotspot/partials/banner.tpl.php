@@ -4,8 +4,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
-                    <div class="breadcrumb_iner_item text-center">
-                        <h2>Liste d'event ou de spots (dynamiser)</h2>
+                    <div class="breadcrumb_iner_item text-left">
+                        <h2>
+                            <?=get_the_title()?>
+                        </h2>';
                         <p>home . blog</p>
                     </div>
                 </div>
@@ -14,3 +16,4 @@
     </div>
 </section>
 <!-- breadcrumb start-->
+                            }

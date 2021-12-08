@@ -32,7 +32,7 @@
                         </div>
                         <div class="single_event_slider">
                             <div class="row justify-content-end">
-                                <div class="ol-lg-6 col-md-6">
+                                <div class="col-lg-6 col-md-6">
                                     <div class="event_slider_content">
                                         <h5>Upcoming Event</h5>
                                         <h2>Maldeve - Asia</h2>
