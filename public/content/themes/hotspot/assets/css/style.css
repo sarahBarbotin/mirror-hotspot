@@ -2210,6 +2210,13 @@ ul {
   padding-top: 0rem;
 }
 
+.navbar-brand {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 150px;
+}
+
 @media (max-width: 575px) {
   /* line 7, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
   .main_menu .navbar-brand img {
@@ -5562,5 +5569,3 @@ h6 {
 .switch-wrap {
   margin-bottom: 10px;
 }
-
-/*# sourceMappingURL=../css/style.map */

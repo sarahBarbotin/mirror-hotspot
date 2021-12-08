@@ -59,55 +59,18 @@ class UserRegistration
     // ===========================================================
     // Méthodes appelées une fois l'utilisateur créé
     // ===========================================================
-    public function setUserRole($newUserId)
-    {
-        // récupération de l'utilisateur via son id
-        $user = new WP_User($newUserId);
-
-        // IMPORTANT E9 SECURITE toujours controller les données de l'utilisateur
-        // si le role choisi par l'utilisateur ne figure pas dans la liste des rôles autorisés, supression de son compte; et blocage de la page
-
-        $role = filter_input(INPUT_POST, 'user_type');
-
-        // BONUS E9 IN_ARRAY
-        // DOC in_array https://www.php.net/in_array
-        $allowedRoles = [
-            'surfer'
-        ];
-
-        if(!in_array($role, $allowedRoles)) {
-
-            // WARNING il faut inclure ce fichier manuellement pour supprimer un utilisateur
-            require_once ABSPATH . '/wp-admin/includes/user.php';
-            wp_delete_user($newUserId);
-            exit('SOMETHING WRONG HAPPENED');
-        }
-        else {
-            // affectation du bon rôle à l'utilisateur
-            $user->add_role($role);
-
-            // suppression du role "subscriber" pour l'utilisateur
-            $user->remove_role('subscriber');
-        }
-    }
-
-
+    
     public function createUserProfile($newUserId)
     {
-        // récupération du rôle choisi par l'utilisateur. Le controle du rôle a été fait auparavant
-        $role = filter_input(INPUT_POST, 'user_type');
+
 
         // récupération de l'utilisateur via l'id founit par wordpress
         $user = new WP_User($newUserId);
-
+        
         // si le role choisi est "surfer" création d'un contenu de type "surfer-profile".
-        if($role === 'surfer') {
-            $postType = 'surfer-profile';
-        }
-        //si le role choisie est customer
-        elseif($role === 'customer') {
-            $postType = 'customer-profile';
-        }
+        $postType = 'surfer-profile';
+        
+        
 
         // IMPORTANT E9 Création d'un post
         // DOC wp_insert_post https://developer.wordpress.org/reference/functions/wp_insert_post/
@@ -117,9 +80,9 @@ class UserRegistration
             'post_author' => $newUserId,
 
             'post_status' => 'publish', // le status du "profil" est publié
-            "post_title" => $user->data->display_name ."'s profile", // titre du "profil"
+            "post_title" => $user->data->display_name, // titre du "profil"
 
-            // le type de post. Soit developer-profile, soit customer-profile
+            // le type de post
             'post_type' => $postType
         ]);
     }
@@ -141,23 +104,6 @@ class UserRegistration
         // récupération du mot de passe envoyé par l'utilisateur
         $password0 = filter_input(INPUT_POST, 'user_password');
         $password1 = filter_input(INPUT_POST, 'user_password_confirmation');
-
-
-        // récupération de l'utilisateur via son id
-        $role = filter_input(INPUT_POST, 'user_type');
-
-        // BONUS E9 IN_ARRAY
-        $allowedRoles = [
-            'developer',
-            'customer'
-        ];
-        if(!in_array($role, $allowedRoles)) {
-            $errors->add(
-                'passwords-different',  // identifiant du message d'erreur
-                '<strong>' . __('Error: ') . '</strong> Invalid role'    // message d'erreur à aficher
-            );
-        }
-
 
         // vérification est ce que les deux mots de passe sont identiques
         if($password0 !== $password1) {
@@ -269,14 +215,6 @@ class UserRegistration
                 <input type="text" name="user_password_confirmation" id="user_password_confirmation" class="form-control" value="" size="20" autocapitalize="off">
             </p>
 
-            <p>
-                <label for="user_password_confirmation">Register as</label>
-                <select id="user_type" name="user_type">
-                    <option value="developer">Developer</option>
-                    <option value="customer">Customer</option>
-                </select>
-            </p>
-            <br/>
             <p>
                 <label for="user_accept_conditions">Accept terms and conditions</label>
                 <input required type="checkbox" name="user_accept_conditions" id="user_accept_conditions"/>

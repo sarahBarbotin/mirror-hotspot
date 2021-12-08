@@ -5,7 +5,7 @@
             <div class="row align-items-center ">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-                        <a class="navbar-brand" href="index.html"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png');?>" alt="logo"> </a>
+                        <a class="navbar-brand" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png');?>" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -19,16 +19,18 @@
                                     <a class="nav-link" href="<?=get_home_url();?>">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
+                                    <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'about'
+                                    ) ); ?>">About</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Events</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?=get_post_type_archive_link('spots');?>">Spots</a>
+                                    <a class="nav-link" href="<?=get_post_type_archive_link('spot');?>">Spots</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
+                                    <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'contact'
+                                    ) ); ?>">Contact</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Search</a>
@@ -48,7 +50,12 @@
                                 // TODO
                                 //route custom pour afficher le profil
                                 // echo '<li><a href="' . $url . '">' . $user->display_name . '</a></li>';
-                                echo '<a href="#" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
+                                $userID = get_current_user_id();
+                                $surferProfile = new WP_Query(
+                                    ['post_type' => 'surfer-profile',
+                                    'author' => $userID]
+                                );
+                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
                                 echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
 
                                 
