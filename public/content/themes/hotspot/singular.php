@@ -1,5 +1,26 @@
 <?php
 the_post();
+
+// Images thumbnail
+$articleId = get_the_id();
+$hasImage = has_post_thumbnail($articleId);
+if($hasImage) {
+    $imageURL = get_the_post_thumbnail_url();
+}
+else {
+    $imageURL = 'https://picsum.photos/300/200?random=1';
+}
+
+// Taxonomies
+$taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
+
+$fields = get_fields();
+//dump($fields);
+
+// Commentaires
+$postCommentCount = get_comments_number($post->ID);
+$comments = get_comments(['post_id'=>$articleId]);
+
 ?>
 
 
@@ -26,28 +47,7 @@ the_post();
     ?>
     <!-- Header end -->
 
-    <!--================Blog Area =================-->
-
-    <?php
-        // Récupération des images thumbnail
-        $articleId = get_the_id();
-        $hasImage = has_post_thumbnail($articleId);
-        if($hasImage) {
-            $imageURL = get_the_post_thumbnail_url();
-        }
-        else {
-            $imageURL = 'https://picsum.photos/300/200?random=1';
-        }
-
-        // Récupération des taxonomies
-        $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
-
-        dump($taxonomies);
-        //dump($the_query);
-
-        $fields = get_fields();
-        dump($fields);
-    ?>
+    <!--================EVENT Area =================-->
 
     <section class="blog_area single-post-area section_padding">
         <div class="container">
@@ -61,16 +61,15 @@ the_post();
                         <div class="blog_details">
                             <!-- Title -->
                             <h2><?= get_the_title() ?>
-                     </h2>
+                            </h2>
                             <!-- Tags & nb comments-->
                             <ul class="blog-info-link mt-3 mb-4">
                                 <li><i class="far fa-user"></i> 
                                 <?php if(!empty($taxonomies)) {
                                 foreach($taxonomies as $taxonomy) {
                                     echo $taxonomy->name . ' ';
-                                }
-                            } ?></li>
-                                <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                }} ?></li>
+                                <li><i class="ti ti-announcement"></i> <?php echo $fields['date'] ?></li>
                             </ul>
                             <!-- excert -->
                             <p class="excert">
@@ -80,11 +79,17 @@ the_post();
                             <!-- spot map -->
                             <div class="quote-wrapper">
                                 <div class="quotes">
-                                <div class="col-lg-6">
-                                    MCSE boot camps have its supporters and its detractors. Some people do not understand why you should have to spend money on boot camp when you can get the MCSE study materials yourself at a fraction of the camp price. However, who has the willpower to actually sit through a self-imposed MCSE training.
-                                </div>
+                                    <div class="col-lg-6">
+
+                                        <h3><a href="#">Spot</a></h3>
+
+                                        <i class="ti-direction"></i>Paris
+                                            <br/>
+                                        <i class="ti-location-pin"></i>Charente-Maritime
                                 
-                                <div class="">
+                                    </div>
+                                
+                                </div>
                                 <div class="d-none d-sm-block">
                                     <div id="map" style="height: 480px; background-color:aqua;"></div>
                                     <script>
@@ -124,9 +129,10 @@ the_post();
                     <div class="navigation-top">
                         <div class="d-sm-flex justify-content-between text-center">
                             <!-- participation -->
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4 people like this</p>
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
+                                <a href="#" class="genric-btn success circle mr-5">Participer</a>
                             </div>
 
                             <!-- SOCIAL MEDIA -->
@@ -192,40 +198,52 @@ the_post();
                                 <a href="#">
                                     <h4><?= get_the_author(); ?></h4>
                                 </a>
-                                <p>
-                                Second divided from form fish beast made. Every of seas all gathered use saying you're, he our dominion twon Second divided from</p>
+                                <!-- TODO:récupérer les infos du profil associé à l'auteur -->
+                                <!-- <p>
+                                Second divided from form fish beast made. Every of seas all gathered use saying you're, he our dominion twon Second divided from</p> -->
                             </div>
                         </div>
                     </div>
 
                     <!-- Comments -->
                     <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
+
+                        <h4><?php echo $postCommentCount ?> Comments</h4>
+
+                       <?php foreach ( $comments as $comment ) {?>
+                        <div class="comment-list"> 
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
                                     <div class="thumb">
-                                        <img src="<?php echo get_theme_file_uri('assets/img/comment/comment_1.png');?>" alt="">
+                                        <?php 
+
+                                        $commentAuthorID = $comment->comment_author_id;
+                                        
+                                        echo get_avatar($commentAuthorID);
+                                        
+                                        ?>
                                     </div>
                                     <div class="desc">
                                         <p class="comment">
-                                            Multiply sea night grass fourth day sea lesser rule open subdue female fill which them Blessed, give fill lesser bearing multiply sea night grass fourth day sea lesser
+                                            <?php echo $comment->comment_content; ?>
                                         </p>
                                         <div class="d-flex justify-content-between">
                                             <div class="d-flex align-items-center">
                                                 <h5>
-                                       <a href="#">Emilly Blunt</a>
+                                       <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author; ?></a>
                                     </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
+                                                <p class="date"><?php echo $comment->comment_date; ?> </p>
                                             </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
+                                           
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div><?php } ?>
+
+                        
+
+
                         <div class="comment-list">
                             <div class="single-comment justify-content-between d-flex">
                                 <div class="user justify-content-between d-flex">
@@ -277,6 +295,9 @@ the_post();
                             </div>
                         </div>
                     </div>
+
+
+
 
                     <!-- Reply -->
                     <div class="comment-form">
