@@ -61,6 +61,22 @@ if (!function_exists('hotspot_loadAssets')) {
         //     'https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap'
         // );
 
+        wp_enqueue_script(
+            'three', // nom du script
+            'https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js',
+            [],
+            THEME_VERSION,
+            true
+        );
+
+        wp_enqueue_script(
+            'vanta', // nom du script
+            'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js',
+            [],
+            THEME_VERSION,
+            true
+        );
+
         $javascripts = [
             "assets/js/jquery-1.12.1.min.js",
             "assets/js/popper.min.js",
@@ -91,13 +107,7 @@ if (!function_exists('hotspot_loadAssets')) {
             );
         }
 
-        // wp_enqueue_script(
-        //     'google-map', // nom du script
-        //     'https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA',
-        //     [],
-        //     THEME_VERSION,
-        //     true
-        // );
+        
     }
 }
 

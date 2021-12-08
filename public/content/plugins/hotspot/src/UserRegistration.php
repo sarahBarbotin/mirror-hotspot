@@ -171,10 +171,10 @@ class UserRegistration
 
     public function loadAssets()
     {
-        wp_enqueue_style(
-            'login-form-css',
-            get_theme_file_uri('assets/css/user-registration.css')
-        );
+        // wp_enqueue_style(
+        //     'login-form-css',
+        //     get_theme_file_uri('assets/css/user-registration.css')
+        // );
     }
 
     // function hotspot_loadAssets()
