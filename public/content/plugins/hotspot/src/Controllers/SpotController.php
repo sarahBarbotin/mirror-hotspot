@@ -2,6 +2,7 @@
 
 namespace Hotspot\Controllers;
 
+
 use Hotspot\Models\SurferEventModel;
 use WP_Query;
 
@@ -15,3 +16,4 @@ class SpotController extends CoreController
     }
 
 }
+
