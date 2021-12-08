@@ -1,41 +1,49 @@
+
+<?php
+
+    // Récupération des taxonomies
+    $taxonomies = get_terms();
+
+    $levels = get_terms(array('level'));
+    $departements = get_terms(array('departement'));
+    $eventDisciplines = get_terms(array('event_discipline'));
+?>
+
+<!-- Niveau -->
 <aside class="single_sidebar_widget post_category_widget">
-    <h4 class="widget_title">Category</h4>
+    <h4 class="widget_title">Niveau(event et spot)</h4>
     <ul class="list cat-list">
+
+<?php foreach ($levels as $level){ ?>
+
         <li>
             <a href="#" class="d-flex">
-                <p>Resaurant food</p>
-                <p>(37)</p>
+                <p><?php echo $level->name; ?></p>
             </a>
         </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Travel news</p>
-                <p>(10)</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Modern technology</p>
-                <p>(03)</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Product</p>
-                <p>(11)</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Inspiration</p>
-                <p>21</p>
-            </a>
-        </li>
-        <li>
-            <a href="#" class="d-flex">
-                <p>Health Care (21)</p>
-                <p>09</p>
-            </a>
-        </li>
+        
+        <?php } ?>
+        
     </ul>
-</aside>
+</aside>   
+
+<!-- Département -->
+<aside class="single_sidebar_widget post_category_widget">
+    <h4 class="widget_title">Départements(event et spot)</h4>
+    <ul class="list cat-list">
+
+<?php foreach ($departements as $departement){ ?>
+
+        <li>
+            <a href="#" class="d-flex">
+                <p><?php echo $departement->name; ?></p>
+            </a>
+        </li>
+        
+        <?php } ?>
+        
+    </ul>
+</aside>  
+
+
+

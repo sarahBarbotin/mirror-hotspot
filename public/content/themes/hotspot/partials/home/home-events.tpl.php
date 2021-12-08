@@ -1,4 +1,4 @@
-    <!--top place start-->
+ <!--top place start-->
     <section class="event_part section_padding">
         <div class="container">
             <div class="row">
