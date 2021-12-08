@@ -1,3 +1,4 @@
+<?php /* Template Name: Page contact */ ?>
 <!doctype html>
 <html lang="<?=get_bloginfo('language');?>">
 

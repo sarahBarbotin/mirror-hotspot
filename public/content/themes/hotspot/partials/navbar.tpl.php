@@ -19,7 +19,8 @@
                                     <a class="nav-link" href="<?=get_home_url();?>">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">About</a>
+                                    <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'about'
+                                    ) ); ?>">About</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Events</a>
@@ -28,7 +29,8 @@
                                     <a class="nav-link" href="<?=get_post_type_archive_link('spot');?>">Spots</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Contact</a>
+                                    <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'contact'
+                                    ) ); ?>">Contact</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Search</a>

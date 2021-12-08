@@ -1,3 +1,5 @@
+<?php /* Template Name: Page about */ ?>
+
 <!doctype html>
 <html lang="<?=get_bloginfo('language');?>">
 
