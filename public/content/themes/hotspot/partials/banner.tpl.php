@@ -5,7 +5,9 @@
             <div class="col-lg-12">
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item text-left">
-                        <h2>Titre à dynamiser</h2>';
+                        <h2>
+                            <?=get_the_title()?>
+                        </h2>';
                         <p>home . blog</p>
                     </div>
                 </div>

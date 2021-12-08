@@ -25,7 +25,7 @@
                                     <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Events</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?=get_post_type_archive_link('spot');?>">Spots</a>
+                                    <a class="nav-link" href="<?=get_post_type_archive_link('spots');?>">Spots</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html">Contact</a>

@@ -50,6 +50,16 @@ $router->map(
     'surfer-update-form'
 );
 
+$router->map(
+    'GET,POST',
+    '/surfer/spot-form/',
+    function() {
+        $surferController = new SurferController();
+        $surferController->updateForm();
+    },
+    'spot-form'
+);
+
 
 
 
