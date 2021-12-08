@@ -91,6 +91,25 @@ if (!function_exists('hotspot_loadAssets')) {
             );
         }
 
+        // Map
+
+        //? css dans le header.php pour le moment
+        // Load the theme stylesheets
+        // function theme_styles_map()  
+        // { 
+        //     wp_register_style( 'leafletcss', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css',array(), '3.3.1', true );
+
+
+        //     wp_enqueue_style('leafletcss');
+        //     wp_style_add_data('leafletcss',array( 'integrity', 'crossorigin' ) , array( 'sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==', 'anonymous' ));
+
+        // }
+        // add_action('wp_enqueue_scripts', 'theme_styles_map');
+
+        wp_register_script('leafletjs', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array(), '3.3.1', true); // jQuery v3
+        wp_enqueue_script('leafletjs');
+        wp_script_add_data( 'leafletjs', array( 'integrity', 'crossorigin' ) , array( 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', 'anonymous' ) );
+
         // wp_enqueue_script(
         //     'google-map', // nom du script
         //     'https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA',

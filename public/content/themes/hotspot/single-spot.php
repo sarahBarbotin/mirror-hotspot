@@ -32,7 +32,10 @@ the_post();
 
     <?php
         get_template_part('partials/spots/detail-single-spot.tpl');
+        get_template_part('partials/map.tpl');
     ?>
+
+
 
 
     <!-- Footer start -->
