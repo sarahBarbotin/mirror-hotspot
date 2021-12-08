@@ -2208,6 +2208,11 @@ ul {
 /* line 4, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
 .main_menu .navbar-brand {
   padding-top: 0rem;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 150px;
+
 }
 
 @media (max-width: 575px) {
@@ -5562,5 +5567,3 @@ h6 {
 .switch-wrap {
   margin-bottom: 10px;
 }
-
-/*# sourceMappingURL=../css/style.map */
