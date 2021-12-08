@@ -28,7 +28,7 @@
                                                         <?= get_the_excerpt(); ?>
                                
                                                         </p>
-                                                        <p>date: <span><?= date("d/m/Y", strtotime($post->date)); ?></span> </p>
+                                                        <p>Date: <span><?= date("d/m/Y", strtotime($post->date)); ?></span> </p>
                                                         <p>Disciplines : 
                                                             <?php 
                                                                 $disciplines = wp_get_post_terms( $post->ID, 'event_discipline' );
@@ -54,7 +54,7 @@
                                                                 }
                                                             ?>
                                                         </p>
-                                                        <a href="#" class="btn_1">Je participe (coder la fonction)</a>
+                                                        <a href="<?= get_the_permalink() ?>" class="btn_1">Voir l'évènement</a>
                                                     </div>
                                                 </div>
                                             </div>
