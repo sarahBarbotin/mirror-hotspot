@@ -249,6 +249,11 @@ dump($commenter);
 
 
                     <!-- Reply -->
+                    <?php
+                        if ( comments_open() || get_comments_number() ) {
+                            comments_template();
+                        }
+                    ?>
                     <div class="comment-form">
                         <h4>Leave a Reply</h4>
                         <form class="form-contact comment_form" action="#" id="commentForm">
