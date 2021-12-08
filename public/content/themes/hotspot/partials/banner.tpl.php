@@ -6,9 +6,18 @@
                 <div class="breadcrumb_iner">
                     <div class="breadcrumb_iner_item text-left">
                         <h2>
-                            <?=get_the_title()?>
+                            <?php                            
+                            if(is_post_type_archive( 'event' )) {
+                                echo ("Liste des évènement");
+                            } elseif (is_post_type_archive( 'spot' )) {
+                                echo ("Liste des spots");
+                            } else {
+                                echo (get_the_title());
+                            }                           
+                           ?>
+                            
                         </h2>';
-                        <p>home . blog</p>
+                        <p class="breadcrumbs"><?php get_breadcrumb(); ?></p>
                     </div>
                 </div>
             </div>
@@ -16,4 +25,3 @@
     </div>
 </section>
 <!-- breadcrumb start-->
-                            }

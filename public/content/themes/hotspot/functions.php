@@ -105,3 +105,42 @@ add_action(
     'wp_enqueue_scripts', // event pour charger nos assets
     'hotspot_loadAssets'
 );
+
+/**
+ * Generate breadcrumbs
+ * @author CodexWorld
+ * @authorURL www.codexworld.com
+ */
+function get_breadcrumb() {
+    echo '<a href="'.home_url().'" rel="nofollow">Home</a>';
+    if (is_category() || is_single()) {
+        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+        the_category(' &bull; ');
+            if (is_single()) {
+                if (get_post_type(get_the_ID()) === 'event') {
+                    echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+                    echo ("Liste des évènements");
+                }
+                elseif (get_post_type(get_the_ID()) === 'post') {
+                    echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+                    echo ("Liste des spots");
+                }
+                echo " &nbsp;&nbsp;&#187;&nbsp;&nbsp; ";
+                the_title();
+            }
+    } elseif (is_post_type_archive( 'event' )) {
+        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+        echo ("Liste des évènement");
+    } elseif (is_post_type_archive( 'spot' )) {
+        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+        echo ("Liste des spots");
+    }  elseif (is_page()) {
+        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
+        echo the_title();
+    }  elseif (is_search()) {
+        echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;Search Results for... ";
+        echo '"<em>';
+        echo the_search_query();
+        echo '</em>"';
+    }
+}
