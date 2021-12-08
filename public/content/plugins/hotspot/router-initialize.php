@@ -4,7 +4,9 @@
 // déclaration du router. Nous allons avoir besoin de ce router dans de nombreux fichier. Ce n'est pas propre mais pour des raisons de simplicité de code ; nous déclarons ce router comme étant une variable globale
 
 use Hotspot\Controllers\SurferController;
+use Hotspot\Controllers\SpotController;
 use Hotspot\Controllers\TestController;
+
 global $router;
 
 
@@ -20,10 +22,10 @@ $router->setBasePath($baseURI);
 
 $router->map(
     'GET', // surveille les appels HTTP de type GET
-    '/surfer/dashboard/', // url a surveiller
+    '/surfer/my-profile/', // url a surveiller
     function() {
         $surferController = new SurferController();
-        $surferController->getProfile();
+        $surferController->home();
     },
     'surfer-home'
 );
@@ -40,26 +42,19 @@ $router->map(
 );
 
 
-$router->map(
-    'GET,POST',
-    '/surfer/update-form/',
-    function() {
-        $surferController = new SurferController();
-        $surferController->updateForm();
-    },
-    'surfer-update-form'
-);
+// ===========================================================
+// Routes pour la création de spot
+// ===========================================================
 
 $router->map(
     'GET,POST',
     '/surfer/spot-form/',
     function() {
-        $surferController = new SurferController();
-        $surferController->updateForm();
+        $surferController = new SpotController();
+        $surferController->home();
     },
     'spot-form'
 );
-
 
 
 

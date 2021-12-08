@@ -1,12 +1,23 @@
 <?php
+
+// Images thumbnail
 $articleId = get_the_id();
 $hasImage = has_post_thumbnail($articleId);
-if ($hasImage) {
+if($hasImage) {
     $imageURL = get_the_post_thumbnail_url();
-} else {
+}
+else {
     $imageURL = 'https://picsum.photos/300/200?random=1';
 }
+
+// Taxonomies
+$taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
+
+$fields = get_fields();
+
+
 ?>
+
 <section class="blog_area single-post-area my-5">
     <div class="container">
         <div class="row justify-content-center">
@@ -102,87 +113,7 @@ if ($hasImage) {
                         </div>
                     </div>
 
-                    
-                    <!-- Comments -->
-                    <?php
-                        // Arguments for the query
-                        $args = array();
-
-                        // The comment query
-                        $comments_query = new WP_Comment_Query;
-                        $comments = $comments_query->query($args);
-
-                        
-                    ?>
-                    <div class="comments-area">
-                        <h4>05 Comments</h4>
-                        <div class="comment-list">
-                            <div class="single-comment justify-content-between d-flex">
-                                <div class="user justify-content-between d-flex">
-                                    <div class="thumb">
-                                        <img src="<?php echo get_theme_file_uri('assets/img/comment/comment_1.png'); ?>" alt="">
-                                    </div>
-                                    <div class="desc">
-                                        <p class="comment">
-                                            <?php 
-                                                // The comment loop
-                                                if (!empty($comments)) {
-                                                    foreach ($comments as $comment) {
-                                                        echo $comment->comment_content;
-                                                    }
-                                                } else {
-                                                    echo 'No comments found.';
-                                                } 
-                                            ?>
-                                        </p>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="d-flex align-items-center">
-                                                <h5>
-                                                    <a href="#">Emilly Blunt</a>
-                                                </h5>
-                                                <p class="date">December 4, 2017 at 3:12 pm </p>
-                                            </div>
-                                            <div class="reply-btn">
-                                                <a href="#" class="btn-reply text-uppercase">reply</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Reply -->
-                    <div class="comment-form">
-                        <h4>Leave a Reply</h4>
-                        <form class="form-contact comment_form" action="#" id="commentForm">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="button button-contactForm btn_1">Send Message</button>
-                            </div>
-                        </form>
-                    </div>
+                  
 
                 </div>
             </div>

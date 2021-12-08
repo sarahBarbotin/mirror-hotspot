@@ -23,6 +23,11 @@ class SurferController extends CoreController
         return $profile;
     }
 
+    public function home()
+    {
+        $this->show('views/surfer-home.view');
+    }
+
     public function confirmDeleteAccount()
     {
 
