@@ -7,18 +7,18 @@
                     <h4>Découvrir plus</h4>
                     <ul>
                         <li><a href="#">Mentions Légales</a></li>
-                        <li><a href="#">Logo</a></li>
                         <li><a href="#">About</a></li>
                     </ul>
+                    <a class="navbar-brand" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png'); ?>" alt="logo"> </a>
 
                 </div>
             </div>
-            
+
             <div class="col-sm-6 col-md-3">
                 <div class="single-footer-widget footer_icon">
                     <h4>Contact Us</h4>
                     <p>4156, New garden, New York, USA
-                            +880 362 352 783</p>
+                        +880 362 352 783</p>
                     <span>contact@martine.com</span>
                     <div class="social-icons">
                         <a href="#"><i class="ti-facebook"></i></a>
@@ -34,9 +34,13 @@
         <div class="row justify-content-center">
             <div class="col-lg-12">
                 <div class="copyright_part_text text-center">
-                    <p class="footer-text m-0"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    <p class="footer-text m-0">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;<script>
+                            document.write(new Date().getFullYear());
+                        </script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                 </div>
             </div>
         </div>
