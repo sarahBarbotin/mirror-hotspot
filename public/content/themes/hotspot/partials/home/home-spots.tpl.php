@@ -51,7 +51,7 @@ $the_query = new WP_Query( $args ); ?>
                         <?php if(!empty($taxonomies)) {
                                 foreach($taxonomies as $taxonomy) {
                                     echo '<div class="place_btn">'. $taxonomy->name;
-                                    echo '</div>';
+                                    echo '</div> ';
                                 }
                             } ?>
                             
