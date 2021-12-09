@@ -47,8 +47,10 @@ if(!empty(get_field('latitude'))){
                 let popupElement = document.querySelector( ".leaflet-popup-content-wrapper .leaflet-popup-content" );
                 let popupText = popupElement.innerText;
                     //1.2 isoler latitude et longitude
-                    let filtering = popupText.match(/\d|\.|\-/g).join('');
-                    console.log(filtering);
+                    // let filtering = popupText.match(/\d|\.|\-/g).join('');
+                    let filtering = popupText.match(/\(.*?\)/g).map(x => x.replace(/[()]/g, ""));
+                    let filtering2 = filtering.join(/\s*,\s*/);
+                    console.log(filtering2);
 
                 //2 récup inpu
                 let longitudeInputElement = document.querySelector( "#longitude" );
