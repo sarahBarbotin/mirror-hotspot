@@ -21,9 +21,10 @@
                             <div class="form-group d-flex justify-content-around">
                                 <label for="levelid">Difficulté du spot:</label>
                                 <select name="addSpot[levelId]" id="levelId">
-                                    <option value="1">Débutant</option>
-                                    <option value="2">Intermédiaire</option>
-                                    <option value="3">Expert</option>
+                                    <?php $levelTerms = get_terms(['taxonomy' => 'level', 'hide_empty' => false,]); ?>
+                                    <?php foreach ($levelTerms as $level) {
+                                        echo '<option value="' . $level->term_id . '">' . $level->name . '</option>';
+                                    } ?>
                                 </select>
                             </div>
                         </div>
@@ -42,12 +43,18 @@
                                 <input class="form-control" name="addSpot[zipcode]" id="zipcode" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Code postal'" placeholder='Code postal' min="01000" max="99999">
                             </div>
                         </div>
-                        <!-- TODO Département = menu déroulant des départements existants -->
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <input class="form-control" name="addSpot[departementId]" id="departementId" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Departement'" placeholder='Departement'>
+                            <div class="form-group d-flex justify-content-around">
+                                <label for="departementid">Département :</label>
+                                <select name="addSpot[departementId]" id="departementid">
+                                    <?php $departementTerms = get_terms(['taxonomy' => 'departement', 'hide_empty' => false]); ?>
+                                    <?php foreach ($departementTerms as $departement) {
+                                        $zipcode = get_field('zipcode', $departement);
+                                        echo '<option value="' . $departement->term_id . '">' . $zipcode . ' - ' . $departement->name . '</option>';
+                                    } ?>
+                                </select>
                             </div>
-                        </div>
+                        </div>                                   
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <input class="form-control" name="picture_upload" id="picture_upload" type="file" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Photo du spot'" placeholder='Photo du spot' accept=".png, .jpeg, .jpg">
@@ -70,20 +77,19 @@
                         </div>
                         <div class="col-sm-12">
                             <?php
-                                get_template_part('partials/map.tpl');
+                            get_template_part('partials/map.tpl');
                             ?>
                         </div>
-                        
+
                         <div class="form-group mt-3">
                             <button type="submit" class="button button-contactForm btn_1">Créez votre spot</button>
                         </div>
                     </div>
-                    
+
                 </form>
             </div>
         </div>
     </div>
 </section>
-
 <?php wp_reset_postdata(); ?>
 <?php endif; ?>
