@@ -33,15 +33,15 @@
                 <div class="col-sm-4 mb-2">Niveaux acceptés : </div>
                 <div class="col-sm-8 pr-sm-2 form-group">
                     <div>
-                        <input type="checkbox" id="debutant" name="debutant" checked>
+                        <input type="checkbox" id="debutant" name="debutant">
                         <label for="debutant">Débutant</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="intermediaire" name="intermediaire" checked>
+                        <input type="checkbox" id="intermediaire" name="intermediaire">
                         <label for="intermediaire">Intermédiaire</label>
                     </div>
                     <div>
-                        <input type="checkbox" id="expert" name="expert" checked>
+                        <input type="checkbox" id="expert" name="expert">
                         <label for="expert">Expert</label>
                     </div>
                 </div>
@@ -50,19 +50,19 @@
                 <div class="col-sm-2 mb-2">Disciplines : </div>
                 <div class="col-sm-8 pr-sm-2 form-group d-sm-flex flex-wrap">
                     <div class="col-sm-4">
-                        <input type="checkbox" id="libre" name="libre" checked>
+                        <input type="checkbox" id="libre" name="libre">
                         <label for="libre">Libre</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="checkbox" id="surf" name="surf" checked>
+                        <input type="checkbox" id="surf" name="surf">
                         <label for="surf">Surf</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="checkbox" id="paddle" name="paddle" checked>
+                        <input type="checkbox" id="paddle" name="paddle">
                         <label for="paddle">Paddle</label>
                     </div>
                     <div class="col-sm-4">
-                        <input type="checkbox" id="wake" name="wake" checked>
+                        <input type="checkbox" id="wake" name="wake">
                         <label for="wake">Wake</label>
                     </div>
                 </div>

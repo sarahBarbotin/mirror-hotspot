@@ -20,6 +20,7 @@
                                 
                                 
                                 $userID = get_current_user_id();
+                                
                                 $surferProfile = new WP_Query(
                                     ['post_type' => 'surfer-profile',
                                     'author' => $userID]

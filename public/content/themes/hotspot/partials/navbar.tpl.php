@@ -55,6 +55,7 @@
                                     ['post_type' => 'surfer-profile',
                                     'author' => $userID]
                                 );
+
                                 echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
                                 echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
 
