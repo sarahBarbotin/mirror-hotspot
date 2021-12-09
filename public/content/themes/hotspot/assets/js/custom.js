@@ -1,6 +1,23 @@
 (function ($) {
   "use strict";
 
+  console.log('custom.js loaded');
+
+  VANTA.WAVES({
+    el: ".banner_part",
+    mouseControls: false,
+    touchControls: true,
+    gyroControls: false,
+    minHeight: 200.00,
+    minWidth: 200.00,
+    scale: 1.00,
+    scaleMobile: 1.00,
+    shininess: 103.00,
+    waveHeight: 40.00,
+    waveSpeed: 1.25,
+    zoom: 0.65
+  })
+
   var review = $('.client_review_slider');
   if (review.length) {
     review.owlCarousel({
@@ -65,34 +82,34 @@
       }
     });
   }
-  
+
   var nc_select = $('.nc_select');
-  if(nc_select.length){
+  if (nc_select.length) {
     nc_select.niceSelect();
   }
 
   $('#datepicker_1').datepicker();
-  $('#datepicker_2').datepicker();  
+  $('#datepicker_2').datepicker();
   $('#datepicker_3').datepicker();
-  $('#datepicker_4').datepicker();  
+  $('#datepicker_4').datepicker();
   $('#datepicker_5').datepicker();
   $('#datepicker_6').datepicker();
 
-  $('.gallery_img').magnificPopup({
-    type: 'image',
-    gallery:{
-      enabled:true
-    }
-  });
+  // $('.gallery_img').magnificPopup({
+  //   type: 'image',
+  //   gallery:{
+  //     enabled:true
+  //   }
+  // });
 
-  $('.popup-youtube, .popup-vimeo').magnificPopup({
-    // disableOn: 700,
-    type: 'iframe',
-    mainClass: 'mfp-fade',
-    removalDelay: 160,
-    preloader: false,
-    fixedContentPos: false
-  });
+  // $('.popup-youtube, .popup-vimeo').magnificPopup({
+  //   // disableOn: 700,
+  //   type: 'iframe',
+  //   mainClass: 'mfp-fade',
+  //   removalDelay: 160,
+  //   preloader: false,
+  //   fixedContentPos: false
+  // });
 
   // menu fixed js code
   $(window).scroll(function () {
@@ -104,12 +121,14 @@
     }
   });
 
+  
 
- //------- Mailchimp js --------//  
-function mailChimp() {
-  $('#mc_embed_signup').find('form').ajaxChimp();
-}
-mailChimp();
+
+  //------- Mailchimp js --------//  
+  function mailChimp() {
+    $('#mc_embed_signup').find('form').ajaxChimp();
+  }
+  mailChimp();
 
 
 }(jQuery));

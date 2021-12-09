@@ -4,6 +4,9 @@
 // déclaration du router. Nous allons avoir besoin de ce router dans de nombreux fichier. Ce n'est pas propre mais pour des raisons de simplicité de code ; nous déclarons ce router comme étant une variable globale
 
 use Hotspot\Controllers\SurferController;
+use Hotspot\Controllers\SpotController;
+use Hotspot\Controllers\TestController;
+
 global $router;
 
 
@@ -19,7 +22,7 @@ $router->setBasePath($baseURI);
 
 $router->map(
     'GET', // surveille les appels HTTP de type GET
-    '/surfer/dashboard/', // url a surveiller
+    '/surfer/my-profile/', // url a surveiller
     function() {
         $surferController = new SurferController();
         $surferController->home();
@@ -27,15 +30,6 @@ $router->map(
     'surfer-home'
 );
 
-$router->map(
-    'GET',
-    '/surfer/skills/',
-    function() {
-        $surferController = new SurferController();
-        $surferController->skills();
-    },
-    'surfer-skills'
-);
 
 $router->map(
     'GET',
@@ -48,15 +42,31 @@ $router->map(
 );
 
 
+// ===========================================================
+// Routes pour la création de spot
+// ===========================================================
+
 $router->map(
     'GET,POST',
-    '/surfer/update-form/',
+    '/surfer/spot-form/',
     function() {
-        $surferController = new SurferController();
-        $surferController->updateForm();
+        $surferController = new SpotController();
+        $surferController->home();
     },
-    'surfer-update-form'
+    'spot-form'
 );
 
 
 
+// ===========================================================
+// Routes pour tester nos modèles
+// ===========================================================
+$router->map(
+    'GET',
+    '/model-tests/test/',
+    function() {
+        $testController = new TestController();
+        $testController->test();
+    },
+    'model-tests-test'
+);

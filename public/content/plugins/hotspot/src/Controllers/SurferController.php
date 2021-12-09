@@ -2,16 +2,19 @@
 
 namespace Hotspot\Controllers;
 
+use Hotspot\Models\SurferEventModel;
 use WP_Query;
 
 class SurferController extends CoreController
 {
 
+
+
     public function getProfile()
     {
         $query = new WP_Query([
             'author' => get_current_user_id(),
-            'post_type' => 'surfer-profile'
+            'post_type' => 'surfer'
 
         ]);
 
@@ -23,21 +26,6 @@ class SurferController extends CoreController
     public function home()
     {
         $this->show('views/surfer-home.view');
-    }
-
-    public function skills()
-    {
-        // récupération de l'utilisateur courant
-        $currentUser = wp_get_current_user();
-        $userId = $currentUser->ID;
-
-        // nous devons récupérer toutes les lignes correspondant au niveau de maitrise de l'utilisateur courant
-        $developerTechnologyModel = new DeveloperTechnologyModel();
-        $technologiesLevels = $developerTechnologyModel->getByDeveloperId($userId);
-
-        $this->show('views/surfer-skills.view', [
-            'technologiesLevels' => $technologiesLevels
-        ]);
     }
 
     public function confirmDeleteAccount()
@@ -82,65 +70,33 @@ class SurferController extends CoreController
         }
     }
 
-    public function updateSkills()
-    {
-
-        // Récupération des données envoyées depuis le formulaire de selectection des niveaux de maitrise des différentes technologies
-
-        // TODO vérifier la validité des données envoyées dans $technologiesLevels
-        $technologiesLevels = $_POST['technologiesLevels'];
-
-        // récupération de l'utilisateur courant
-        $currentUser = wp_get_current_user();
-        $userId = $currentUser->ID;
-
-        // nous devons supprimer toutes les lignes de la table developer_technology pour l'utilisateur courant
-        $surferEventModel = new SurferEventModel();
-        $surferEventModel->deleteByDeveloperId($userId);
-
-        // pour chaque technologies, association de la technologie à l'utilisateur
-
-        foreach($technologiesLevels as $termId => $level) {
-            $surferEventModel->insert(
-                $userId,
-                $termId,
-                $level
-            );
-        }
-
-        // redirection vers la page de gestion des compétences
-        global $router;
-        $skillURL = $router->generate('surfer-skills');
-
-        header('Location: ' . $skillURL);
-    }
-
-    public function participateToProject($projectId)
+    public function participateToEvent($eventId)
     {
         // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
 
-        $model = new ProjectDeveloperModel();
+        $model = new SurferEventModel();
         $user = wp_get_current_user();
         $userId = $user->ID;
+        
 
         $model->insert(
-            $projectId,
-            $userId
+            $userId,
+            $eventId
         );
 
-        $url = get_post_type_archive_link('project');
+        $url = get_post_type_archive_link('event');
         header('Location: ' . $url);
     }
 
-    public function leaveProject($projectId)
+    public function leaveEvent($eventId)
     {
-        $model = new ProjectDeveloperModel();
+        $model = new SurferEventModel();
         $user = wp_get_current_user();
         $userId = $user->ID;
 
-        $model->delete($projectId, $userId);
+        $model->delete($eventId, $userId);
 
-        $url = get_post_type_archive_link('project');
+        $url = get_post_type_archive_link('event');
         header('Location: ' . $url);
     }
 }

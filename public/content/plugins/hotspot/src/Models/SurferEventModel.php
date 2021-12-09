@@ -3,6 +3,12 @@ namespace Hotspot\Models;
 
 class SurferEventModel extends CoreModel
 {
+    public function getTableName()
+    {
+        $tablePrefix = $this->wpdb->prefix;
+        $tableName = $tablePrefix.'surfer_event_participation';
+        return $tableName;
+    }
 
     public function createTable()
     {
@@ -27,8 +33,6 @@ class SurferEventModel extends CoreModel
 
         $primaryKeySQL = 'ALTER TABLE `' . $tableName . '` ADD PRIMARY KEY `surfer_id_event_id` (`surfer_id`, `event_id`)';
         $this->wpdb->query($primaryKeySQL);
-
-
     }
 
     public function dropTable()
@@ -39,5 +43,68 @@ class SurferEventModel extends CoreModel
         $sql = 'DROP TABLE `' . $tableName . '`';
         $this->wpdb->query($sql);
     }
-}
 
+    public function insert($eventId, $surferId)
+    {
+        $data = [
+            'surfer_id' => $surferId,
+            'event_id' => $eventId,
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+
+        return $this->wpdb->insert(
+            $this->getTableName(),
+            $data
+        );
+    }
+
+    public function getEventsBySurferId($surferId)
+    {
+        $sql = "
+            SELECT * FROM `" . $this->getTableName() . "`
+            WHERE
+                surfer_id = %d
+        ";
+
+        $preparedStatement = $this->wpdb->prepare(
+            $sql,
+            [
+                $surferId
+            ]
+        );
+        $rows = $this->wpdb->get_results($preparedStatement);
+
+        return $rows;
+    }
+
+    public function getSurfersByEventId($eventId)
+    {
+        $sql = "
+            SELECT * FROM `" . $this->getTableName() . "`
+            WHERE
+                event_id = %d
+        ";
+
+        $preparedStatement = $this->wpdb->prepare(
+            $sql,
+            [
+                $eventId
+            ]
+        );
+        $rows = $this->wpdb->get_results($preparedStatement);
+        return $rows;
+    }
+
+    public function delete($eventId, $surferId)
+    {
+        $conditions = [
+            'surfer_id' => $surferId,
+            'event_id' => $eventId
+        ];
+
+        $this->wpdb->delete(
+            $this->getTableName(),
+            $conditions
+        );
+    }
+}

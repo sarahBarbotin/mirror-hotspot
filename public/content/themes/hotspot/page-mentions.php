@@ -1,3 +1,5 @@
+<?php /* Template Name: Page mentions */ ?>
+
 <!doctype html>
 <html lang="<?=get_bloginfo('language');?>">
 
@@ -20,11 +22,10 @@
     ?>
     <!-- Header end -->
 
-    <!-- Spots List -->
-    <?php
-        get_template_part('partials/spots/spots-list.tpl');
-    ?>
 
+    <?php
+        get_template_part('partials/content/who-we-are.tpl');
+    ?>
 
 
     <!-- Footer start -->

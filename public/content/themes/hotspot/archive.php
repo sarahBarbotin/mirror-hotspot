@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<?=get_bloginfo('language');?>">
+<html lang="<?= get_bloginfo('language'); ?>">
 
 <head>
     <!-- Required meta tags -->
@@ -15,13 +15,13 @@
 
     <!-- Header start-->
     <?php
-        get_template_part('partials/navbar.tpl');
+    get_template_part('partials/navbar.tpl');
     ?>
 
     <?php
-        get_template_part('partials/banner.tpl');
+    get_template_part('partials/banner.tpl');
     ?>
-    
+
     <!-- Header end -->
 
     <!--================Blog Area =================-->
@@ -29,13 +29,13 @@
         <div class="container">
             <div class="row">
 
-            <!-- Event list left col -->
+                <!-- Event list left col -->
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
 
                         <!-- Liste -->
                         <?php
-                            get_template_part('partials/events/events-list.tpl');
+                        get_template_part('partials/events/events-list.tpl');
                         ?>
 
                         <!-- Pagination -->
@@ -44,46 +44,54 @@
                         ?>
 
                     </div>
-                </div>   
-            <!-- end left col -->
+                </div>
+                <!-- end left col -->
 
-            <!-- Aside (right col) -->
+                <!-- Aside (right col) -->
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
-                        
-                    <?php
-                    get_template_part('partials/aside/searchbar.tpl');
-                    ?>
 
-                    <?php
-                    get_template_part('partials/aside/categories.tpl');
-                    ?>
+                        <?php
+                        get_template_part('partials/aside/searchbar.tpl');
+                        ?>
 
-                    <?php
-                    get_template_part('partials/aside/recent-events.tpl');
-                    ?>
-                     
-                    <?php
-                    get_template_part('partials/aside/tag-cloud.tpl');
-                    ?>
+                        <?php
+                        get_template_part('partials/aside/categories.tpl');
+                      
+                        get_template_part('partials/aside/categories-discipline.tpl');
+                        ?>
 
-                    <?php
-                    get_template_part('partials/aside/widget-few-spots.tpl');
-                    ?>
+                        <?php
+                        get_template_part('partials/aside/recent-events.tpl');
+                        ?>
+
+                        <?php
+                        get_template_part('partials/aside/tag-cloud.tpl');
+                        ?>
+
+                        <?php
+                        get_template_part('partials/aside/widget-few-spots.tpl');
+                        ?>
 
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <section class="contact-section mx-sm-4">
+        <?php
+        get_template_part('partials/events/event-form.tpl');
+        ?>
+    </section>
     <!--================Blog Area =================-->
 
     <!-- Footer start -->
     <?php
-        get_template_part('partials/footer.tpl');
+    get_template_part('partials/footer.tpl');
     ?>
     <!-- Footer end -->
-    
+
     <?php
     get_footer();
     ?>
