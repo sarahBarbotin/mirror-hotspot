@@ -267,7 +267,7 @@ function handleAddSpotForm() {
                     
                 }
             } else {
-                foreach ($errorMessage as $message) {
+                foreach ($errorMessages as $message) {
                     echo "<div class='container alert alert-danger' role='alert'>$message</div>";
                   }
             }
