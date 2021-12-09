@@ -1,12 +1,8 @@
 <?php
 
-$fields = get_fields();
-
-
-
-if(!empty($fields['latitude'])){
-    $latitude = $fields['latitude'];
-    $longitude = $fields['longitude'];
+if(!empty(get_field('latitude'))){
+    $latitude = get_field('latitude');
+    $longitude = get_field('longitude');
 }else{
     $latitude = 51.505;
     $longitude = -0.09;
@@ -44,18 +40,29 @@ if(!empty($fields['latitude'])){
                     .setContent("You clicked the map at " + e.latlng.toString())
                     .openOn(map);
 
-                    //quand on clique, affiche en console les coordonnées du clic
-                    // console.log(e.latlng);
+                
+                // LATLONG PICKER
+
+                //1 récup latlong (élément du dom)
+                let popupElement = document.querySelector( ".leaflet-popup-content-wrapper .leaflet-popup-content" );
+                let popupText = popupElement.innerText;
+                    //1.2 isoler latitude et longitude
+                    let filtering = popupText.match(/\d|\.|\-/g).join('');
+                    console.log(filtering);
+
+                //2 récup inpu
+                let longitudeInputElement = document.querySelector( "#longitude" );
+                let latitudeInputElement = document.querySelector( "#latitude" );
+                //3 mettre latlong dans input (+value)
+            
+            
+                    
             }
 
             map.on('click', onMapClick);
 
-            // LATLONG PICKER
-
-            //1 récup latlong (élément du dom)
-                //1.2 isoler latitude et longitude
-            //2 récup inpu
-            //3 mettre latlong dans input (+value)
+           
+            
         }       
     </script>
     <!-- </div> -->

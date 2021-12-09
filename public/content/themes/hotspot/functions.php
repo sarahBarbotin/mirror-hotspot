@@ -225,10 +225,6 @@ function handleAddSpotForm() {
                         'post_type' => 'spot',
                         'post_content' => $description,
                         'post_status' => 'publish',
-                        'tax_input' => array(
-                            'level' => $levelId,
-                            'departement' => $departementId,
-                        ),
                         'meta_input'   => array(
                             'city' => $city,
                             'address'   => $address,
@@ -238,6 +234,8 @@ function handleAddSpotForm() {
                         ),
                     ];
                 $postId = wp_insert_post($data);
+                wp_set_object_terms( $postId, array( $levelId ), 'level' );
+                wp_set_object_terms( $postId, array( $departementId ), 'departement' );
 
                 if(!empty($_FILES)){
                     require_once( ABSPATH . 'wp-admin/includes/post.php' );
@@ -253,22 +251,26 @@ function handleAddSpotForm() {
     
                     if (is_wp_error($attachment_id)) {
                         // There was an error uploading the image.
-                        echo "Error adding file";
+                        $errorMessages[] = "Error adding file";
+
+                        foreach ($errorMessages as $message) {
+                            echo "<div class='container alert alert-danger' role='alert'>$message</div>";
+                          }
+                        
                     } else {
                         // The image was uploaded successfully!
                         // lier l'image et le nouveau post en thumbnail
-                        // echo "File added successfully with ID: " . $attachment_id . "<br>";
-                        // echo wp_get_attachment_image($attachment_id, array(800, 600)) . "<br>"; 
-
-                    // $attachment_id = media_handle_upload( 'file', $postId );
-                    set_post_thumbnail( $postId, $attachment_id );
+                        
+                        set_post_thumbnail( $postId, $attachment_id );
                     }
                     
                     
                 }
             } else {
                 foreach ($errorMessages as $message) {
-                    echo "<div class='container alert alert-danger' role='alert'>$message</div>";
+
+                    echo "<br/><div class='container alert alert-danger' role='alert'>$message</div>";
+
                   }
             }
 
