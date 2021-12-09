@@ -47,9 +47,10 @@
                                 <div class="form-group d-flex justify-content-around">
                                     <label for="levelid">Difficulté du spot:</label>
                                     <select name="addSpot[levelId]" id="levelId">
-                                        <option value="1">Débutant</option>
-                                        <option value="2">Intermédiaire</option>
-                                        <option value="3">Expert</option>
+                                        <?php $levelTerms = get_terms(['taxonomy' => 'level', 'hide_empty' => false]); ?>
+                                        <?php foreach ($levelTerms as $level) {
+                                            echo '<option value="'. $level->term_id .'">'. $level->name .'</option>';
+                                        } ?>
                                     </select>
                                 </div>
                             </div>

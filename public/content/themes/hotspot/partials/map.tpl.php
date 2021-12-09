@@ -2,8 +2,7 @@
 
 $fields = get_fields();
 
-//dump($fields);
-// dump(get_field('city'))
+
 
 if(!empty($fields['latitude'])){
     $latitude = $fields['latitude'];
