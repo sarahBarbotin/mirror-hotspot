@@ -47,9 +47,13 @@
                                 <div class="form-group d-flex justify-content-around">
                                     <label for="levelid">Difficulté du spot:</label>
                                     <select name="addSpot[levelId]" id="levelId">
-                                        <option value="7">Débutant</option>
-                                        <option value="8">Intermédiaire</option>
-                                        <option value="9">Expert</option>
+
+
+                                        <?php $levelTerms = get_terms(['taxonomy' => 'level', 'hide_empty' => false]); ?>
+                                        <?php foreach ($levelTerms as $level) {
+                                            echo '<option value="'. $level->term_id .'">'. $level->name .'</option>';
+                                        } ?>
+
                                     </select>
                                 </div>
                             </div>
@@ -106,14 +110,6 @@
                             <button type="submit" class="button button-contactForm btn_1">Créez votre spot</button>
                         </div>
                     </form>
-                </div>
-
-                
-                
-                <div class="col-lg-4">
-                    
-                        <img src="http://localhost/projet-hotspot/public/content/themes/hotspot/assets/img/single_place_1.png" alt="#">
-                    
                 </div>
             </div>
         </div>

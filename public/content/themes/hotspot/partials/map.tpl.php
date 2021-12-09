@@ -1,8 +1,5 @@
 <?php
 
-
-// dump(get_field('latitude'));
-
 if(!empty(get_field('latitude'))){
     $latitude = get_field('latitude');
     $longitude = get_field('longitude');
