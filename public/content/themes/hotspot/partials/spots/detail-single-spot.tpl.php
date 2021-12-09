@@ -76,45 +76,15 @@ $fields = get_fields();
                         <div class="col-lg-6">
                             <div class="d-none d-sm-block">
                                 <div id="map" style="height: 480px;"></div>
-                                <script>
-                                    function initMap() {
-                                        var uluru = {
-                                            lat: -25.363,
-                                            lng: 131.044
-                                        };
-                                        var grayStyles = [{
-                                            featureType: "all",
-                                            stylers: [{
-                                                saturation: -90
-                                            }, {
-                                                lightness: 50
-                                            }]
-                                        }, {
-                                            elementType: 'labels.text.fill',
-                                            stylers: [{
-                                                color: '#ccdee9'
-                                            }]
-                                        }];
-                                        var map = new google.maps.Map(document.getElementById('map'), {
-                                            center: {
-                                                lat: -31.197,
-                                                lng: 150.744
-                                            },
-                                            zoom: 9,
-                                            styles: grayStyles,
-                                            scrollwheel: false
-                                        });
-                                    }
-                                </script>
-                                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpfS1oRGreGSBU5HHjMmQ3o5NLw7VdJ6I&callback=initMap">
-                                </script>
+
+
 
                             </div>
                         </div>
                     </div>
 
                   
-
+                    <?php wp_reset_postdata(); ?>
                 </div>
             </div>
         </div>

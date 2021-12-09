@@ -25,7 +25,7 @@ $comments = get_comments(['post_id'=>$articleId]);
 * Comment author information fetched from the comment cookies.
 */
 $commenter = wp_get_current_commenter();
-dump($commenter);
+//dump($commenter);
 
 ?>
 
@@ -96,38 +96,10 @@ dump($commenter);
                                     </div>
                                 
                                 </div>
-                                <div class="d-none d-sm-block">
-                                    <div id="map" style="height: 480px; background-color:aqua;"></div>
-                                    <script>
-                                        function initMap() {
-                                            var uluru = {
-                                                lat: -25.363,
-                                                lng: 131.044
-                                            };
-                                            var grayStyles = [{
-                                                featureType: "all",
-                                                stylers: [{
-                                                    saturation: -90
-                                                }, {
-                                                    lightness: 50
-                                                }]
-                                            }, {
-                                                elementType: 'labels.text.fill',
-                                                stylers: [{
-                                                    color: '#ccdee9'
-                                                }]
-                                            }];
-                                            var map = new google.maps.Map(document.getElementById('map'), {
-                                                center: {
-                                                    lat: -31.197,
-                                                    lng: 150.744
-                                                },
-                                                zoom: 9,
-                                                styles: grayStyles,
-                                                scrollwheel: false
-                                            });
-                                        }
-                                    </script>
+
+                                <?php get_template_part('partials/map.tpl');?>
+
+
                                 </div>
                             </div>
                         </div>
@@ -199,7 +171,16 @@ dump($commenter);
                     <!-- Author -->
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <div><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></div>
+                            <div><?php 
+
+                            //TODO Aller chercher le profil de l'auteur et pas WPuser
+                            // $userID = get_current_user_id();
+                            // $surferProfile = new WP_Query(
+                            //     ['post_type' => 'surfer-profile',
+                            //     'author' => $userID]
+                            // );
+                            
+                            echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></div>
                             <div class="media-body">
                                 <a href="#">
                                     <h4><?= get_the_author(); ?></h4>
@@ -249,6 +230,11 @@ dump($commenter);
 
 
                     <!-- Reply -->
+                    <?php
+                        if ( comments_open() || get_comments_number() ) {
+                            comments_template();
+                        }
+                    ?>
                     <div class="comment-form">
                         <h4>Leave a Reply</h4>
                         <form class="form-contact comment_form" action="#" id="commentForm">
