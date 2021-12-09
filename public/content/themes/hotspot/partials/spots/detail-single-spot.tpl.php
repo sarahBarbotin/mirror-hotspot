@@ -14,6 +14,7 @@ else {
 $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
 
 $fields = get_fields();
+// dump($fields);
 
 
 ?>
@@ -33,26 +34,37 @@ $fields = get_fields();
                                         <a href="#">
                                             <h4><?= get_the_title() ?></h4>
                                         </a>
-                                        <p><i class="fas fa-swimmer"></i>
+                                        <p><i class="fas fa-dumpster-fire"></i>
                                             <?php
                                             $taxonomies = wp_get_post_terms($post->ID, ['level']);
                                             if (!empty($taxonomies)) {
                                                 foreach ($taxonomies as $taxonomy) {
                                                     echo $taxonomy->name;
                                                 }
+                                            }else{
+                                                echo "-";
                                             }
                                             ?>
                                         </p>
                                         <p><i class="fas fa-map-pin"></i>
                                             <?php
-                                            $surferCity = get_field('city');
-                                            echo $surferCity;
+                                            if (!empty(get_field('city'))) {
+                                                $surferCity = get_field('city');
+                                                echo $surferCity;
+                                            }else{
+                                                echo "-";
+                                            }
                                             ?>
+                                            
                                         </p>
                                         <p><i class="fas fa-map-marker-alt"></i>
                                             <?php
-                                            $surferZipcode = get_field('zipcode');
-                                            echo $surferZipcode;
+                                            if (!empty(get_field('zipcode'))) {
+                                                $surferZipcode = get_field('zipcode');
+                                                echo $surferZipcode;
+                                            }else{
+                                                echo "-";
+                                            }
                                             ?>
                                         </p>
                                         <p><i class="fas fa-swimmer"></i>
@@ -62,6 +74,8 @@ $fields = get_fields();
                                                 foreach ($taxonomies as $taxonomy) {
                                                     echo $taxonomy->name;
                                                 }
+                                            }else{
+                                                echo "-";
                                             }
                                             ?>
                                         </p>
@@ -73,18 +87,9 @@ $fields = get_fields();
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="d-none d-sm-block">
-                                <div id="map" style="height: 480px;"></div>
-
-
-
-                            </div>
-                        </div>
-                    </div>
-
+                        
                   
-                    <?php wp_reset_postdata(); ?>
+                    <!-- <?php // wp_reset_postdata(); ?> -->
                 </div>
             </div>
         </div>
