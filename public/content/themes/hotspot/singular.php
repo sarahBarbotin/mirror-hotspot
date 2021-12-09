@@ -171,7 +171,16 @@ $commenter = wp_get_current_commenter();
                     <!-- Author -->
                     <div class="blog-author">
                         <div class="media align-items-center">
-                            <div><?php echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></div>
+                            <div><?php 
+
+                            //TODO Aller chercher le profil de l'auteur et pas WPuser
+                            // $userID = get_current_user_id();
+                            // $surferProfile = new WP_Query(
+                            //     ['post_type' => 'surfer-profile',
+                            //     'author' => $userID]
+                            // );
+                            
+                            echo get_avatar( get_the_author_meta( 'ID' ), 32 ); ?></div>
                             <div class="media-body">
                                 <a href="#">
                                     <h4><?= get_the_author(); ?></h4>

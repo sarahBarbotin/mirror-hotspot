@@ -84,7 +84,7 @@ $fields = get_fields();
                     </div>
 
                   
-
+                    <?php wp_reset_postdata(); ?>
                 </div>
             </div>
         </div>

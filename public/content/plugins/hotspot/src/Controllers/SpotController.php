@@ -15,5 +15,6 @@ class SpotController extends CoreController
         $this->show('views/spot-form.view');
     }
 
+    
 }
 

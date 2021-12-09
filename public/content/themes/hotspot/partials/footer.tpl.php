@@ -6,8 +6,10 @@
                 <div class="single-footer-widget">
                     <h4>Découvrir plus</h4>
                     <ul>
-                        <li><a href="#">Mentions Légales</a></li>
-                        <li><a href="#">About</a></li>
+                        <li><a href="<?= get_permalink( get_page_by_title( 'mentions'
+                                    ) ); ?>">Mentions Légales</a></li>
+                        <li><a href="<?= get_permalink( get_page_by_title( 'about'
+                                    ) ); ?>">About</a></li>
                     </ul>
                     <a class="navbar-brand" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png'); ?>" alt="logo"> </a>
 

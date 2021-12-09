@@ -19,7 +19,19 @@
     get_template_part('partials/banner.tpl');
     ?>
 
+<?php
+
+echo get_post_type_archive_link('spot'). '<br/>';
+echo get_post_type_archive_link('event'). '<br/>';
+
+echo 'http://localhost'.$_SERVER['REQUEST_URI'] . '<br/>';
+
+
+?>
+
     <!-- ================ contact section start ================= -->
+
+
     <section class="contact-section">
         <div class="container">
             <div class="row">
@@ -27,17 +39,20 @@
                     <h2 class="contact-title">Créez votre spot!</h2>
                 </div>
                 <div class="col-lg-8">
-                    <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
+                    <form class="form-contact contact_form" action="#" method="post" id="addSpotForm" novalidate="novalidate" enctype="multipart/form-data">
+
+                    <?php wp_nonce_field('jean', 'coucou'); ?>
+
                         <div class="row align-items-center ">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="name" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom du spot'" placeholder='Nom du spot'>
+                                    <input class="form-control" name="addSpot[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom du spot'" placeholder='Nom du spot'>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group d-flex justify-content-around">
-                                    <label for="level">Difficulté du spot:</label>
-                                    <select name="level" id="level">
+                                    <label for="levelid">Difficulté du spot:</label>
+                                    <select name="addSpot[levelId]" id="levelId">
                                         <option value="1">Débutant</option>
                                         <option value="2">Intermédiaire</option>
                                         <option value="3">Expert</option>
@@ -46,34 +61,26 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="address" id="address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adresse'" placeholder='Adresse'>
+                                    <input class="form-control" name="addSpot[address]" id="address" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Adresse'" placeholder='Adresse'>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="city" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ville'" placeholder='Ville'>
+                                    <input class="form-control" name="addSpot[city]" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ville'" placeholder='Ville'>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="zipcode" id="zipcode" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Code postal'" placeholder='Code postal' min="01000" max="99999">
+                                    <input class="form-control" name="addSpot[zipcode]" id="zipcode" type="number" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Code postal'" placeholder='Code postal' min="01000" max="99999">
                                 </div>
                             </div>
+                            <!-- TODO Dépratement = menu déroulant des départements existants -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input class="form-control" name="departement" id="departement" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Departement'" placeholder='Departement'>
+                                    <input class="form-control" name="addSpot[departementId]" id="departementId" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Departement'" placeholder='Departement'>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="latitude" id="latitude" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Latitude'" placeholder='Latitude'>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="longitude" id="longitude" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Longitude'" placeholder='Longitude'>
-                                </div>
-                            </div>
+                            
 
                             <div class="col-sm-6">
                                 <div class="form-group">
@@ -82,24 +89,37 @@
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <textarea class="form-control" name="description" id="description" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" placeholder='Description' rows="8"></textarea>
+                                    <textarea class="form-control" name="addSpot[description]" id="description" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'" placeholder='Description' rows="8"></textarea>
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <?php
+                                get_template_part('partials/map.tpl');
+                            ?>
+                        </div>
+                        <div class="col-sm-6">
+                                <div class="form-group mt-3">
+                                    <input class="form-control" name="addSpot[latitude]" id="latitude" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Latitude'" placeholder='Latitude'>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <input class="form-control" name="addSpot[longitude]" id="longitude" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Longitude'" placeholder='Longitude'>
+                                </div>
+                            </div>
                         <div class="form-group mt-3">
                             <button type="submit" class="button button-contactForm btn_1">Créez votre spot</button>
                         </div>
                     </form>
                 </div>
 
-                <?php
-                    get_template_part('partials/map.tpl');
-                ?>
+                
                 
                 <div class="col-lg-4">
-                <div class="about_img">
+                    
                         <img src="http://localhost/projet-hotspot/public/content/themes/hotspot/assets/img/single_place_1.png" alt="#">
-                    </div>
+                    
                 </div>
             </div>
         </div>

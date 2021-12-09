@@ -2,6 +2,9 @@
 
 $fields = get_fields();
 
+dump($fields);
+// dump(get_field('city'))
+
 if(!empty($fields['latitude'])){
     $latitude = $fields['latitude'];
     $longitude = $fields['longitude'];
@@ -51,7 +54,10 @@ if(!empty($fields['latitude'])){
             // LATLONG PICKER
 
             //1 récup latlong (élément du dom)
+                //1.2 isoler latitude et longitude
             //2 récup inpu
             //3 mettre latlong dans input (+value)
         }       
     </script>
+    <!-- </div> -->
+</div>
