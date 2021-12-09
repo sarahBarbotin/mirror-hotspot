@@ -4,7 +4,7 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <div class="about_img">
-                    <img src="img/about_img.png" alt="#">
+                    <img src="<?php echo get_theme_file_uri('assets/img/about_img.png');?>" alt="#">
                 </div>
             </div>
             <div class="col-lg-6">

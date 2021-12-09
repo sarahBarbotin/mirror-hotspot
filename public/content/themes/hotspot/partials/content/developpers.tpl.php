@@ -13,28 +13,28 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
-                    <img src="img/services_1.png" alt="">
+                    <img src="<?php echo get_theme_file_uri('assets/img/services_1.png');?>" alt="">
                     <h3> <a href="#"> Transportation</a></h3>
                     <p>All transportation cost we bear</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
-                    <img src="img/services_2.png" alt="">
+                    <img src="<?php echo get_theme_file_uri('assets/img/services_2.png');?>" alt="">
                     <h3> <a href="#"> Guidence</a></h3>
                     <p>We offer the best guidence for you</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
-                    <img src="img/services_3.png" alt="">
+                    <img src="<?php echo get_theme_file_uri('assets/img/services_3.png');?>" alt="">
                     <h3> <a href="#"> Accomodation</a></h3>
                     <p>Luxarious and comfortable</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
-                    <img src="img/services_4.png" alt="">
+                    <img src="<?php echo get_theme_file_uri('assets/img/services_4.png');?>" alt="">
                     <h3> <a href="#"> Discover world</a></h3>
                     <p>Best tour plan for your next tour</p>
                 </div>
