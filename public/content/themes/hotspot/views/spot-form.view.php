@@ -17,17 +17,11 @@
     <?php
     get_template_part('partials/navbar.tpl');
     get_template_part('partials/banner.tpl');
-    ?>
-
-<?php
-
-echo get_post_type_archive_link('spot'). '<br/>';
-echo get_post_type_archive_link('event'). '<br/>';
-
-echo 'http://localhost'.$_SERVER['REQUEST_URI'] . '<br/>';
-
-
+    // echo get_post_type_archive_link('spot'). '<br/>';
+    // echo get_post_type_archive_link('event'). '<br/>';
+    // echo 'http://localhost'.$_SERVER['REQUEST_URI'] . '<br/>';
 ?>
+
 
     <!-- ================ contact section start ================= -->
 
