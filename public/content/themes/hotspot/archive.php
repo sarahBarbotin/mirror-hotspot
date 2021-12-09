@@ -43,6 +43,13 @@
                         get_template_part('partials/pagination.tpl');
                         ?>
 
+                        <!-- Event Form -->
+
+                        <?php
+                        get_template_part('partials/events/event-form.tpl');
+                        ?>
+
+
                     </div>
                 </div>
                 <!-- end left col -->
@@ -57,7 +64,7 @@
 
                         <?php
                         get_template_part('partials/aside/categories.tpl');
-                      
+
                         get_template_part('partials/aside/categories-discipline.tpl');
                         ?>
 
@@ -79,11 +86,7 @@
         </div>
     </section>
 
-    <section class="contact-section mx-sm-4">
-        <?php
-        get_template_part('partials/events/event-form.tpl');
-        ?>
-    </section>
+
     <!--================Blog Area =================-->
 
     <!-- Footer start -->
