@@ -30,7 +30,7 @@ if(!empty(get_field('latitude'))){
 
             // marqueur +popup
             var marker = L.marker([<?php echo $latitude .','.$longitude ?>]).addTo(map);
-            marker.bindPopup("<b><?php echo get_the_title(); ?></b><br>I am a popup.").openPopup();
+            marker.bindPopup("<b><?php echo get_the_title(); ?></b>").openPopup();
 
             // quand on clique, affiche latitude longitude
             var popup = L.popup();
@@ -49,16 +49,21 @@ if(!empty(get_field('latitude'))){
                     //1.2 isoler latitude et longitude
                     // let filtering = popupText.match(/\d|\.|\-/g).join('');
                     let filtering = popupText.match(/\(.*?\)/g).map(x => x.replace(/[()]/g, ""));
-                    let filtering2 = filtering.join(/\s*,\s*/);
-                    console.log(filtering2);
+                    let latlng = filtering.join(/\s*,\s*/);
+                    // console.log(latlng);
+
+                    let latitude = latlng.slice(0,latlng.indexOf(','));
+                    let longitude = latlng.slice(latlng.indexOf(','));
+                    longitude = longitude.substring(1);
+                    // console.log(longitude);
 
                 //2 récup inpu
                 let longitudeInputElement = document.querySelector( "#longitude" );
                 let latitudeInputElement = document.querySelector( "#latitude" );
                 //3 mettre latlong dans input (+value)
+                longitudeInputElement.value = longitude;
+                latitudeInputElement.value = latitude;
             
-            
-                    
             }
 
             map.on('click', onMapClick);
