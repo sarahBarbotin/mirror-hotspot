@@ -18,6 +18,11 @@
  * @package WordPress
  */
 
+// JWT AUTH CONFIGURATION
+define("JWT_AUTH_SECRET_KEY", "1672966366ce77fd3fff178cafe499be3f00e892dcfc246cfefe4dba0261a9e76d80e1ce");
+define("JWT_AUTH_CORS_ENABLE", true);
+
+// =================================
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define( 'DB_NAME', 'hotspot' );
@@ -48,14 +53,14 @@ define( 'DB_COLLATE', '' );
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '(HtxU3ElG=6V)MkJ_.:`+o-btj8I-y6`J(uNT1tB3<.Ygp7!+|vGi@5%rrJPta/&');
-define('SECURE_AUTH_KEY',  'z{O.v{q)E#YZ|&&+aGr:3c(Pq1}K7G1Rh)sdS-LOs!2Th]r/+4TPzA{K/DTt$Jx6');
-define('LOGGED_IN_KEY',    'p+@j|OYSW/%TmZ`Z#| Pmt.!to<CasS`u0A*:fG5XC/Y/ VZ$Pem/ZECa6k4;!n`');
-define('NONCE_KEY',        '+4{+#6{o@#){e7k9`bQb_*-:`Gw3_6<XFyb+TQu jpVF1-)B$SS;s$DKV`6-s&}@');
-define('AUTH_SALT',        'dkx~ex[i3iUATi]>@`KrtO*mIIs21CG*uhYZo!Wyc!&ZA],GbGgg=u/uhgHa%-Ng');
-define('SECURE_AUTH_SALT', '!3S@e LC2Y+|Xl Dc/oK%X(9IzE*l(a^l$+cI`ESJH!LW.TZf9AH4%taL=9pk%OE');
-define('LOGGED_IN_SALT',   'BmouiTACG-u7wUji_/+/27;.|7|J&hh/tr4+zU=BV3#}e:4gr7d|:bP2E>.,>pYv');
-define('NONCE_SALT',       'h+iuWD?yKMe<T0H*d0BXS&7Uq0Uo^a)1wtVrI&T{t!VATqI+;Di>2qDZ]pmN-@WG');
+define( 'AUTH_KEY',         '$2y$10$1kuddj2ngs.WppBjM1aGz.oCOppELCWKn1iNjcnIM6ody/8FuaiLq' );
+define( 'SECURE_AUTH_KEY',  '$2y$10$B7t.Um0rTH3BYKCON6viruNoixvl5Ue/m7WwVrGlLNngW8s/VjXKa' );
+define( 'LOGGED_IN_KEY',    '$2y$10$qFu6EzmthPJnE7ys8qFYr.2jsn0yNprS5n/pEJK0VYVCeQo6wn1we' );
+define( 'NONCE_KEY',        '$2y$10$W5XruLas5Du6heXBvC6X8eJsyYZM4GS03zrp4QFzHUgOzPgCDQFmy' );
+define( 'AUTH_SALT',        '$2y$10$GM4F39xxPxBhXS5e0OGGIOf9ds18XUxDakcHJc2JjjogVcfvVFkB.' );
+define( 'SECURE_AUTH_SALT', '$2y$10$XBSCDdsv2jZX.w677G214.itDHl/PCo2qvmmp4o3mPhHMswKqCNtu' );
+define( 'LOGGED_IN_SALT',   '$2y$10$lwZ57Rkoab2zFTpU28XSXOr0Q0p.RvHLLSD.LbW6ElE6.S0Pm51Um' );
+define( 'NONCE_SALT',       '$2y$10$C8OI73jjCuUap.Ob0yrgKuK3HOVJMMEAZxIDNmxOaSFulVDRWmXfW' );
 
 /**#@-*/
 
@@ -82,28 +87,24 @@ $table_prefix = 'hs_';
 define( 'WP_DEBUG', true );
 
 /* Add any custom values between this line and the "stop editing" line. */
-// Configuration de la home de notre site ; attention très importan !
-define('WP_HOME', rtrim ( 'http://localhost/projet-hotspot/public', '/' ));
 
-// pas besoin de toucher à cette ligne
+
+
+
+
+define('WP_HOME', rtrim ( 'http://ec2-52-90-172-148.compute-1.amazonaws.com/projet-hotspot/public/', '/' ));
 define('WP_SITEURL', WP_HOME . '/wp');
-
-//pas besoin de toucher à cette ligne
 define('WP_CONTENT_URL', WP_HOME . '/content');
-
-// pas besoin de toucher à cette ligne
 define('WP_CONTENT_DIR', __DIR__ . '/content');
-
-// STEP WP INSTALL  Autorisation d'installation de thèmes et plugin via l'interface d'admin de wordpress
 define('FS_METHOD','direct');
-
-
-/* That's all, stop editing! Happy publishing. */
+/* That\'s all, stop editing! Happy publishing. */
 
 /** Absolute path to the WordPress directory. */
 if ( ! defined( 'ABSPATH' ) ) {
 	define( 'ABSPATH', __DIR__ . '/' );
 }
+
+define( 'UPLOADS', 'wp-content/uploads' );
 
 /** Sets up WordPress vars and included files. */
 require_once ABSPATH . 'wp-settings.php';
