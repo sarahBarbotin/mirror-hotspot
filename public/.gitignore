@@ -12,7 +12,7 @@ composer.lock
 
 wp
 
-wp-config.php
+#wp-config.php
 wp-config.php.bak
 
 content/*
