@@ -14,7 +14,7 @@ $the_query = new WP_Query($args); ?>
             <div class="col-xl-6">
                 <div class="section_tittle text-center">
                     <h2>Spots</h2>
-                    <p>Retrouvez une sélection des spots de surfs les plus agréables créés par les surfers eux-même</p>
+                    <p>Retrouvez une sélection des spots de surfs les plus agréables créés par les surfers eux-mêmes</p>
                 </div>
             </div>
         </div>
@@ -180,6 +180,7 @@ $the_query = new WP_Query($args); ?>
             </section>
             <?php wp_reset_postdata(); ?>
         <?php endif; ?>
+
     </div>
 </section>
 <!-- spot list css end -->

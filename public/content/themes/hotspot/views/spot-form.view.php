@@ -108,14 +108,6 @@
                         </div>
                     </form>
                 </div>
-
-                
-                
-                <div class="col-lg-4">
-                    
-                        <img src="http://localhost/projet-hotspot/public/content/themes/hotspot/assets/img/single_place_1.png" alt="#">
-                    
-                </div>
             </div>
         </div>
     </section>
