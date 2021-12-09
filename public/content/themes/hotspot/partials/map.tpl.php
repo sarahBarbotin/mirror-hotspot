@@ -1,13 +1,11 @@
 <?php
 
-$fields = get_fields();
 
-dump($fields);
-// dump(get_field('city'))
+// dump(get_field('latitude'));
 
-if(!empty($fields['latitude'])){
-    $latitude = $fields['latitude'];
-    $longitude = $fields['longitude'];
+if(!empty(get_field('latitude'))){
+    $latitude = get_field('latitude');
+    $longitude = get_field('longitude');
 }else{
     $latitude = 51.505;
     $longitude = -0.09;

@@ -47,9 +47,9 @@
                                 <div class="form-group d-flex justify-content-around">
                                     <label for="levelid">Difficulté du spot:</label>
                                     <select name="addSpot[levelId]" id="levelId">
-                                        <option value="1">Débutant</option>
-                                        <option value="2">Intermédiaire</option>
-                                        <option value="3">Expert</option>
+                                        <option value="7">Débutant</option>
+                                        <option value="8">Intermédiaire</option>
+                                        <option value="9">Expert</option>
                                     </select>
                                 </div>
                             </div>
