@@ -81,7 +81,9 @@
 
     <section class="mx-sm-4">
         <?php
-        get_template_part('partials/events/event-form.tpl');
+        if (is_user_logged_in()) {
+            get_template_part('partials/events/event-form.tpl');
+        }
         ?>
     </section>
     <!--================Blog Area =================-->
