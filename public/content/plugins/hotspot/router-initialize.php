@@ -43,22 +43,6 @@ $router->map(
 
 
 // ===========================================================
-// Routes pour la création de spot
-// ===========================================================
-
-$router->map(
-    'GET,POST',
-    '/surfer/spot-form/',
-    function() {
-        $surferController = new SpotController();
-        $surferController->home();
-    },
-    'spot-form'
-);
-
-
-
-// ===========================================================
 // Routes pour tester nos modèles
 // ===========================================================
 $router->map(

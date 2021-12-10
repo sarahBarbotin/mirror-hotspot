@@ -15,7 +15,7 @@ else {
 $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
 
 $fields = get_fields();
-//dump($fields);
+// dump($fields);
 
 // Commentaires
 $postCommentCount = get_comments_number($post->ID);
