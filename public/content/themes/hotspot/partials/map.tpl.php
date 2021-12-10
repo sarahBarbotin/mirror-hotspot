@@ -46,21 +46,22 @@ if(!empty(get_field('latitude'))){
                 //1 récup latlong (élément du dom)
                 let popupElement = document.querySelector( ".leaflet-popup-content-wrapper .leaflet-popup-content" );
                 let popupText = popupElement.innerText;
-                    //1.2 isoler latitude et longitude
-                    // let filtering = popupText.match(/\d|\.|\-/g).join('');
-                    let filtering = popupText.match(/\(.*?\)/g).map(x => x.replace(/[()]/g, ""));
-                    let latlng = filtering.join(/\s*,\s*/);
-                    // console.log(latlng);
+                //2 isoler latitude et longitude en variables
 
-                    let latitude = latlng.slice(0,latlng.indexOf(','));
-                    let longitude = latlng.slice(latlng.indexOf(','));
-                    longitude = longitude.substring(1);
-                    // console.log(longitude);
+                // let filtering = popupText.match(/\d|\.|\-/g).join('');
+                let filtering = popupText.match(/\(.*?\)/g).map(x => x.replace(/[()]/g, ""));
+                let latlng = filtering.join(/\s*,\s*/);
+                // console.log(latlng);
 
-                //2 récup inpu
+                let latitude = latlng.slice(0,latlng.indexOf(','));
+                let longitude = latlng.slice(latlng.indexOf(','));
+                longitude = longitude.substring(1);
+                // console.log(longitude);
+
+                //3 récup inpu
                 let longitudeInputElement = document.querySelector( "#longitude" );
                 let latitudeInputElement = document.querySelector( "#latitude" );
-                //3 mettre latlong dans input (+value)
+                //4 mettre latlong dans input (value)
                 longitudeInputElement.value = longitude;
                 latitudeInputElement.value = latitude;
             
