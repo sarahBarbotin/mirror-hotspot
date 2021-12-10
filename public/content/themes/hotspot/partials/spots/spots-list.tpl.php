@@ -74,7 +74,7 @@ $the_query = new WP_Query($args); ?>
                             </div> -->
                                 </div>
                                 <div class="details_icon text-right">
-                                    <a href="<?php echo  get_the_permalink(); ?>"><i class="ti-face-smile"></i></a>
+                                    <a href="<?php echo  get_the_permalink(); ?>"><i class="fas fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
