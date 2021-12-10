@@ -86,6 +86,7 @@ $the_query = new WP_Query($args); ?>
 
         </div>
         <?php
+        get_template_part('partials/pagination.tpl');
         get_template_part('partials/spots/spot-form.tpl');
         ?>
 
