@@ -67,8 +67,9 @@ if(!empty(get_field('latitude'))){
             
             }
 
-            map.on('click', onMapClick);
-
+            
+                map.on('click', onMapClick);
+            
            
             
         }       

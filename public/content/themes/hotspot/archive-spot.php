@@ -32,7 +32,7 @@
                 <!-- Spots List -->
                 <?php
                     get_template_part('partials/spots/spots-list.tpl');
-                    get_template_part('partials/pagination.tpl');
+                    
                 ?>
 
                     </div>
