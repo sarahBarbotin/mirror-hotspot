@@ -91,11 +91,11 @@ $commenter = wp_get_current_commenter();
                                         }
                                     } ?></li>
                                 <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
-                                                                            $date = get_field('date');
-                                                                            echo $date;
-                                                                        } else {
-                                                                            echo "-";
-                                                                        } ?></li>
+                                                                                                                $date = get_field('date');
+                                                                                                                echo $date;
+                                    } else {
+                                        echo "-";
+                                    } ?></li>
                             </ul>
                             <!-- excert -->
                             <p class="excert">

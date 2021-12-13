@@ -10,7 +10,7 @@
                 <div class=" col-sm-12 d-flex justify-content-between">
                     <?php $spotQuery = new WP_Query(['post_type' => 'spot']) ?>
                     <select id="spotEvent" name="addEvent[spotEvent]" class="nice-select nc-select">
-                        <option selected disabled>Choisissez un Spot</option>
+                        <option selected disabled>Choisissez un Spot *</option>
                         <?php if ($spotQuery->have_posts()) {
                             while ($spotQuery->have_posts()) {
                                 $spotQuery->the_post();
@@ -28,14 +28,14 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="name">Donnez un nom à votre Event :</label>
+                    <label for="name">Donnez un nom à votre Event *</label>
                     <input class="form-control" name="addEvent[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom de votre Event'" placeholder='Nom de votre Event'>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="form_group">
-                    <label for="datepicker_1">Choisissez la date de votre Event :</label>
-                    <input id="datepicker_1" name="addEvent[date]" placeholder="Choisir une date">
+                    <label for="datepicker_1">Choisissez la date de votre Event *</label>
+                    <input id="datepicker_1" name="addEvent[date]" type="date">
                 </div>
             </div>
             <div class="col-sm-6 mb-sm-4">
