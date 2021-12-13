@@ -20,8 +20,10 @@ if ($eventList->have_posts()) {
                 <?php
                 $articleId = get_the_id();
                 $hasImage = has_post_thumbnail($articleId);
+                //dump($hasImage);
                 if ($hasImage) {
                     $imageURL = get_the_post_thumbnail_url();
+                //dump($imageURL);   
                 } else {
                     $imageURL = 'https://picsum.photos/300/200?random=1';
                 }

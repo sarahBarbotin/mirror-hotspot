@@ -1,4 +1,4 @@
-    <form class="form-contact contact_form" action="" method="post" id="addEventForm" novalidate="novalidate">
+    <form class="form-contact contact_form" action="#" method="post" id="addEventForm" novalidate="novalidate" enctype="multipart/form-data">
 
     <?php wp_nonce_field('marie', 'lol'); ?>
         <div class="row">
@@ -41,7 +41,7 @@
             <div class="col-sm-6 mb-sm-4">
                 <div class="form_group">
                     <label for="picture_upload">Choisissez une image pour illustrer votre Event :</label>
-                    <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image">
+                    <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
                 </div>
             </div>
             <div class="col-sm-12"></div>

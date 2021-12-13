@@ -15,10 +15,6 @@ class SpotController extends CoreController
         );
     }
 
-    public function home()
-    {
-        $this->show('views/spot-form.view');
-    }
 
     function handleAddSpotForm() {
         if (isset($_POST['addSpot'])) {
