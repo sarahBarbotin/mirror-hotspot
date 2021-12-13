@@ -75,7 +75,7 @@ class SpotController extends CoreController
                         require_once( ABSPATH . 'wp-admin/includes/post.php' );
                         require_once( ABSPATH . 'wp-admin/includes/image.php' );
                         require_once( ABSPATH . 'wp-admin/includes/file.php' );
-                        require_once( ABSPATH . 'wp-admin/inhttps://prod.liveshare.vsengsaas.visualstudio.com/join?E481C8C240D07FA50D0D12E4BC05421F8C47cludes/media.php' );
+                        require_once( ABSPATH . 'wp-admin/includes/media.php' );
                     
                         // upload image dans la librairie
                         $file = $_FILES['picture_upload'];
