@@ -21,12 +21,13 @@ class EventController extends CoreController
                 dump($_POST);
                 extract($_POST['addEvent']);
 
-                dump($discipline);
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
                 $date =  preg_replace("([^0-9/])", "", $date);
                 $description = filter_var($description, FILTER_SANITIZE_STRING);
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
-                $spotEvent = filter_var($spotEvent, FILTER_VALIDATE_INT);
+                if (isset($spotEvent)) {
+                    $spotEvent = filter_var($spotEvent, FILTER_VALIDATE_INT);
+                }
 
                 // TODO filtrage du tableau $disciplines
                 // $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);               

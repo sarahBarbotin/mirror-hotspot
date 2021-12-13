@@ -17,13 +17,23 @@
 
                             while ($homeEvents->have_posts()) {
                                 $homeEvents->the_post();
-                        ?>                                
+                        ?> 
+                        <?php $spotId = get_field('spot_id'); ?>
+                        <!-- Vérification gardée par sécurité -->
+                        <?php if(isset($spotId)) {
+                            $spot = get_post($spotId);
+                         } 
+                        
+                        $authorProfileQuery = new WP_Query ([
+                            'post_type' => 'surfer-profile',
+                            'author' => get_the_author_meta('ID')
+                        ]) ?>
                                         <div class="single_event_slider">
                                             <div class="row justify-content-end">
                                                 <div class="col-lg-6 col-md-6">
                                                     <div class="event_slider_content">
-                                                        <h5><?= get_the_title() ?></h5>
-                                                        <h2>Nom du spot (à coder)</h2>
+                                                        <h5><a href="<?= get_the_permalink() ?>"><?= get_the_title() ?></a></h5>
+                                                        <h2><?= $spot->post_title ?></h2>
                                                         <p>
                                                         <?= get_the_excerpt(); ?>
                                
@@ -41,7 +51,8 @@
                                                                 }
                                                             ?>
                                                         </p>
-                                                        <p>Organisé par: <span> <?= get_the_author(); ?></span> </p>
+                                                        <p>Organisé par: <a href="<?=$authorProfileQuery->posts[0]->guid ?>"> <?= $authorProfileQuery->posts[0]->post_title ?></a> </p>
+                                                        
                                                         <p>Niveaux acceptés : 
                                                             <?php 
                                                                 $levels = wp_get_post_terms( $post->ID, 'level' );
