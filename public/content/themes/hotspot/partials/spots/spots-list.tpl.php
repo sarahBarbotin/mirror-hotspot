@@ -38,9 +38,7 @@ $the_query = new WP_Query($args);
                     // Récupération des taxonomies
                     $taxonomies = wp_get_post_terms($post->ID, ['level', 'departement']);
 
-                    //dump($the_query);
-                    $fields = get_fields();
-                    $city=get_post_field('city');
+                    $city = get_post_field('city');
                     // dump($fields);
                     // dump($city);
                     ?>
