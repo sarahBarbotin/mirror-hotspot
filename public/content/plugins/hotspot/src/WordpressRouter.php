@@ -9,8 +9,7 @@ class WordpressRouter
     protected $customRoutes = [
         //'surfer-home' => 'surfer/dashboard/',
         'model-tests' => 'model-tests/.*',
-        'surfer-all' => 'surfer/.*',
-        'add-spot' => 'spot/'
+        'surfer-all' => 'surfer/.*'
     ];
 
     public function __construct()

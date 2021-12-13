@@ -23,7 +23,6 @@ class EventController extends CoreController
 
                 dump($discipline);
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
-                // $date = filter_var($date, FILTER_SANITIZE_STRING);
                 $date =  preg_replace("([^0-9/])", "", $date);
                 $description = filter_var($description, FILTER_SANITIZE_STRING);
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
