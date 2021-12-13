@@ -5,6 +5,7 @@
 
 use Hotspot\Controllers\SurferController;
 use Hotspot\Controllers\SpotController;
+use Hotspot\Controllers\EventController;
 use Hotspot\Controllers\TestController;
 
 global $router;
@@ -41,6 +42,26 @@ $router->map(
     'surfer-confirm-delete-account'
 );
 
+$router->map(
+    'GET',
+    '/surfer/event-update-form/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->update($eventId);
+    },
+    'event-update-form'
+);
+
+$router->map(
+    'POST',
+    '/surfer/event-update-form/[i:eventId]/',
+    function() {
+        $eventController = new EventController();
+        $eventController->handleUpdateEventForm();
+    },
+    'event-update-post'
+);
+
 
 // ===========================================================
 // Routes pour tester nos modèles
@@ -53,4 +74,29 @@ $router->map(
         $testController->test();
     },
     'model-tests-test'
+);
+
+//Participation
+$router->map(
+    'GET',
+    '/surfer/event/participate/[i:eventId]/',
+    function($eventId) {
+
+        $userController = new SurferController();
+        $userController->participateToEvent($eventId);
+
+    },
+    'surfer-event-participate'
+);
+
+$router->map(
+    'GET',
+    '/surfer/event/leave/[i:eventId]/',
+    function($eventId) {
+
+        $userController = new SurferController();
+        $userController->leaveEvent($eventId);
+
+    },
+    'surfer-event-leave'
 );

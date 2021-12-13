@@ -44,10 +44,10 @@ class SurferEventModel extends CoreModel
         $this->wpdb->query($sql);
     }
 
-    public function insert($eventId, $surferId)
+    public function insert($userId, $eventId)
     {
         $data = [
-            'surfer_id' => $surferId,
+            'surfer_id' => $userId,
             'event_id' => $eventId,
             'created_at' => date('Y-m-d H:i:s')
         ];
@@ -106,5 +106,53 @@ class SurferEventModel extends CoreModel
             $this->getTableName(),
             $conditions
         );
+    }
+
+    public function updateDateByEventIdAndSurferId($eventId, $surferId)
+    {
+        // équivalent du WHERE
+        $conditions = [
+            'event_id' => $eventId,
+            'surfer_id' => $surferId
+        ];
+
+        // champs à mettre à jour
+        $data = [
+            'updated_at' => date('Y-m-d H:i:s')
+        ];
+
+        $this->wpdb->update(
+            $this->getTableName(),
+            $data,
+            $conditions
+        );
+    }
+
+    public function isParticipating($surferId, $eventId)
+    {
+        $tablePrefix = $this->wpdb->prefix;
+        $tableName = $tablePrefix.'surfer_event_participation';
+
+        $sql = "
+            SELECT * FROM `" . $tableName . "`
+            WHERE
+                surfer_id = %d
+            AND
+                event_id = %d
+        ";
+
+        $preparedStatement = $this->wpdb->prepare(
+            $sql,
+            [
+                $surferId,
+                $eventId
+            ]
+        );
+        $rows = $this->wpdb->get_results($preparedStatement);
+        if (!empty($rows)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

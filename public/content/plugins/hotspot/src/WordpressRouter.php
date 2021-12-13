@@ -9,6 +9,7 @@ class WordpressRouter
     protected $customRoutes = [
         //'surfer-home' => 'surfer/dashboard/',
         'model-tests' => 'model-tests/.*',
+        'surfer-event-update-form' => 'surfer/event-update-form/[i:id]',
         'surfer-all' => 'surfer/.*'
     ];
 

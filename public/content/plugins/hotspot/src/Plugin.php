@@ -11,6 +11,7 @@ use Hotspot\CustomTaxonomy\Departement;
 use Hotspot\CustomTaxonomy\EventDiscipline;
 use Hotspot\Controllers\SpotController;
 use Hotspot\Controllers\EventController;
+use Hotspot\Controllers\SurferController;
 
 class Plugin
 {
@@ -102,6 +103,10 @@ class Plugin
     */
     protected $eventController;
 
+    /**
+    * @var SurferController
+    */
+    protected $surferController;
 
     // ===========================================================
     // Classes du modèle
@@ -155,6 +160,8 @@ class Plugin
 
         // Gestion des formulaires d'event
         $this->eventController = new EventController();
+
+        $this->surferController = new SurferController();
 
         // chargement du router wordpress
         $this->wordpressRouter = new WordpressRouter();
