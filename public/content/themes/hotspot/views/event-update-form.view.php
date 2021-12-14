@@ -1,8 +1,9 @@
 <?php
 global $router;
+
+// CPT id
 $eventId = $router->match()['params']['eventId'];
 $eventCPTObject = get_post($eventId);
-dump($eventCPTObject);
 $eventTitle = $eventCPTObject->post_title;
 $eventContent = $eventCPTObject->post_content;
 
@@ -12,24 +13,12 @@ if ($hasImage) {
 } else {
     $imageURL = 'https://picsum.photos/300/200?random=1';
 }
-dump($imageURL);
+
 // Taxonomies
 $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline']);
 
-// Commentaires
-$postCommentCount = get_comments_number($eventId);
-$comments = get_comments(['post_id' => $eventId]);
-
-/*
-* Comment author information fetched from the comment cookies.
-*/
-$commenter = wp_get_current_commenter();
-
-
-
-
-$updateEventsURL = $router->generate('event-update-post');
 ?>
+
 <!--================================================================================-->
 
 <!DOCTYPE html>
@@ -53,13 +42,20 @@ $updateEventsURL = $router->generate('event-update-post');
 <!--================================================================================-->
 
 
-<form class="form-contact contact_form" action="<?= $updateEventsURL; ?>" method="post" id="updateEventForm" novalidate="novalidate" enctype="multipart/form-data">
+<form class="form-contact contact_form" action="#" method="post" id="updateEventForm" novalidate="novalidate" enctype="multipart/form-data">
 
-    <?php wp_nonce_field('mariee', 'lole'); ?>
+    <?php wp_nonce_field('updateEventToken', 'updateEventForm'); ?>
     <div class="row">
         <div class="col-12">
             <h2 class="contact-title">Modifiez votre Event</h2>
         </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label for="name">Nom de votre Event :</label>
+                <input class="form-control" name="updateEvent[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $eventTitle ?>'" placeholder='<?= $eventTitle ?>' value="<?= $eventTitle ?>">
+            </div>
+        </div>
+        
         <div class="col-sm-12 d-flex">
             <div class="col-sm-2">Spot :</div>
             <div class=" col-sm-12 d-flex justify-content-between">
@@ -87,12 +83,7 @@ $updateEventsURL = $router->generate('event-update-post');
             </div>
         </div>
     </div>
-    <div class="col-sm-6">
-        <div class="form-group">
-            <label for="name">Nom de votre Event :</label>
-            <input class="form-control" name="updateEvent[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $eventTitle ?>'" placeholder='<?= $eventTitle ?>' value="<?= $eventTitle ?>">
-        </div>
-    </div>
+    
     <div class="col-sm-4">
         <div class="form_group">
             <label for="datepicker_1">La date de votre Event :</label>
@@ -102,10 +93,10 @@ $updateEventsURL = $router->generate('event-update-post');
     <div class="col-sm-6 mb-sm-4">
         <div class="form_group">
             <label for="picture_upload">Modifiez ou gardez l'image ci-dessous :</label>
-            <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg" value="<?= $imageURL ?>">
-            <picture style="width:100%;max-width:100px;height:auto;">
+            <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
+            <figure style="width:100%;max-width:100px;height:auto;">
                 <img src="<?= $imageURL ?>" alt="" class="img-fluid">
-            </picture>
+            </figure>
         </div>
     </div>
     <div class="col-sm-12"></div>
@@ -141,13 +132,15 @@ $updateEventsURL = $router->generate('event-update-post');
 
             <?php
             foreach ($disciplineQuery as $discipline) {
-                foreach ($eventDisciplines as $eventDiscipline) {
-                    if ($eventDiscipline->term_id == $discipline->term_id) {
-                        echo '<div class="col-sm-4">
+                if (!empty($eventDisciplines)) {
+                    foreach ($eventDisciplines as $eventDiscipline) {
+                        if ($eventDiscipline->term_id == $discipline->term_id) {
+                            echo '<div class="col-sm-4">
                                     <input type="checkbox" id="discipline-' . $discipline->term_id . '" name="updateEvent[discipline][]" value="' . $discipline->name . '" checked>
                                     <label for="discipline-' . $discipline->term_id . '">' . $discipline->name . '</label>
                                 </div>';
-                        continue 2;
+                            continue 2;
+                        }
                     }
                 }
                 echo '<div class="col-sm-4">

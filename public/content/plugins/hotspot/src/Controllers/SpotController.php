@@ -104,7 +104,7 @@ class SpotController extends CoreController
                       }
                 }
     
-                
+                unset($_FILES);
              }
         }
         

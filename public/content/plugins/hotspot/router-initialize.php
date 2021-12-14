@@ -55,9 +55,9 @@ $router->map(
 $router->map(
     'POST',
     '/surfer/event-update-form/[i:eventId]/',
-    function() {
+    function($eventId) {
         $eventController = new EventController();
-        $eventController->handleUpdateEventForm();
+        $eventController->handleUpdateEventForm($eventId);
     },
     'event-update-post'
 );
