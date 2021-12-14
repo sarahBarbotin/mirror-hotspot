@@ -1,9 +1,10 @@
 <?php
- the_post();
+global $router;
+$eventId = $router->match()['params']['eventId'];
+$eventObject = get_post($eventId);
+dump($eventObject);
 
- // Images thumbnail
-$articleId = get_the_id();
-$hasImage = has_post_thumbnail($articleId);
+$hasImage = has_post_thumbnail($eventId);
 if($hasImage) {
     $imageURL = get_the_post_thumbnail_url();
 }
@@ -11,7 +12,7 @@ else {
     $imageURL = 'https://picsum.photos/300/200?random=1';
 }
 
-//$spotId = get_field("spot_id", $articleId); 
+//$spotId = get_field("spot_id", $eventId); 
 //dump($spotId);
 
 // Taxonomies
@@ -19,7 +20,7 @@ $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_disci
 
 // Commentaires
 $postCommentCount = get_comments_number($post->ID);
-$comments = get_comments(['post_id'=>$articleId]);
+$comments = get_comments(['post_id'=>$eventId]);
 
 /*
 * Comment author information fetched from the comment cookies.
@@ -28,7 +29,7 @@ $commenter = wp_get_current_commenter();
 
 
 
-global $router;
+
     $updateEventsURL = $router->generate('event-update-form');
 ?>
 <!--================================================================================-->
@@ -70,7 +71,7 @@ global $router;
                     <?php if ($spotQuery->have_posts()) {
                         while ($spotQuery->have_posts()) {
                             $spotQuery->the_post();
-                            $spotId = get_field("spot_id", $articleId); 
+                            $spotId = get_field("spot_id", $eventId); 
                              //dump($spotId);                          
                             echo ($spotId == get_the_ID() ? '<option value="' .get_the_ID(). ' selected>' . get_the_title() . '</option>' : '<option value="' .get_the_ID(). '>' . get_the_title() . '</option>');
                             
