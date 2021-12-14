@@ -23,7 +23,7 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
 
 <!DOCTYPE html>
 <html lang="<?= get_bloginfo('language'); ?>">
-
+<body>
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -159,7 +159,7 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
 
 <!--================================================================================-->
 <?php
-get_footer();
+   get_footer();
 ?>
 </body>
 

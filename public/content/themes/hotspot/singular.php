@@ -3,6 +3,8 @@ the_post();
 
 use Hotspot\Models\SurferEventModel;
 
+global $router;
+
 $userId = get_current_user_id();
 // Images thumbnail
 $articleId = get_the_id();
@@ -70,7 +72,6 @@ $commenter = wp_get_current_commenter();
                             <!-- Title -->
                             <h2><?= get_the_title() ?></h2>
                             <?php
-                            global $router;
                             $updateEventUrl = $router->generate(
                                 'event-update-form',
                                 [
@@ -91,8 +92,8 @@ $commenter = wp_get_current_commenter();
                                         }
                                     } ?></li>
                                 <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
-                                                                                                                $date = get_field('date');
-                                                                                                                echo $date;
+                                        $date = get_field('date');
+                                        echo $date;
                                     } else {
                                         echo "-";
                                     } ?></li>
@@ -134,9 +135,19 @@ $commenter = wp_get_current_commenter();
                             <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                                <?php if ($participation === false) {
+                                <?php 
+                                if (get_the_author_meta('ID') == $userId) {
 
-                                global $router;
+                                    $url = $router->generate(
+                                        'event-confirm-delete',
+                                        [
+                                            'eventId' => $articleId
+                                        ]
+                                    );
+
+                                    echo '<a href="'.$url.'" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
+                                    } elseif ($participation === false) {
+
                                     $url = $router->generate(
                                         'surfer-event-participate',
                                         [
@@ -147,7 +158,6 @@ $commenter = wp_get_current_commenter();
                                     echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
                                 } elseif ($participation === true) {
 
-                                    global $router;
                                     $url = $router->generate(
                                         'surfer-event-leave',
                                         [
@@ -156,7 +166,8 @@ $commenter = wp_get_current_commenter();
                                     );
 
                                     echo '<a href="'.$url.'" class="genric-btn success circle mr-5 leave">Quitter</a>';
-                                }
+                                } 
+
                                 ?>
 
                             </div>

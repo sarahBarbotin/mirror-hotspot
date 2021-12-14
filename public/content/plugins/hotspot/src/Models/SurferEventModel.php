@@ -108,6 +108,18 @@ class SurferEventModel extends CoreModel
         );
     }
 
+    public function deleteByEventId($eventId)
+    {
+        $conditions = [
+            'event_id' => $eventId
+        ];
+
+        $this->wpdb->delete(
+            $this->getTableName(),
+            $conditions
+        );
+    }
+
     public function updateDateByEventIdAndSurferId($eventId, $surferId)
     {
         // équivalent du WHERE

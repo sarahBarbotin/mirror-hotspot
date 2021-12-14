@@ -62,6 +62,26 @@ $router->map(
     'event-update-post'
 );
 
+$router->map(
+    'GET',
+    '/surfer/event-confirm-delete/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->handleEventConfirmDelete($eventId);
+    },
+    'event-confirm-delete'
+);
+
+$router->map(
+    'POST',
+    '/surfer/event-confirm-delete/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->handleEventDelete($eventId);
+    },
+    'event-delete-post'
+);
+
 
 // ===========================================================
 // Routes pour tester nos modèles

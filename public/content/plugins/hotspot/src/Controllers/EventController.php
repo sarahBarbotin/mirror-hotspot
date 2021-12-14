@@ -1,6 +1,8 @@
 <?php
 
 namespace Hotspot\Controllers;
+
+use Hotspot\Models\SurferEventModel;
 use WP_Query;
 
 
@@ -14,7 +16,7 @@ class EventController extends CoreController
         );
     }
 
-    function handleAddEventForm()
+    public  function handleAddEventForm()
     {
         if (isset($_POST['addEvent'])) {
 
@@ -39,9 +41,9 @@ class EventController extends CoreController
                 if (empty($name)) {
                     $errorMessages[] = "Vous n'avez pas donné de nom à votre Event";
                 }
-                if (empty($date) || $date === false) {
-                    $errorMessages[] = 'Veuillez renseigner la date de votre Event';
-                }
+                // if (empty($date) || $date === false) {
+                //     $errorMessages[] = 'Veuillez renseigner la date de votre Event';
+                // }
 
                 if (empty($spotEvent) || $spotEvent === false) {
                     $errorMessages[] = 'Veuillez renseigner le spot de votre Event';
@@ -99,6 +101,10 @@ class EventController extends CoreController
                     }
                 }
 
+                // Adding user's participation to the event
+                $surferEventModel = new SurferEventModel;
+                $surferEventModel->insert(get_current_user_id(), $postId);
+
                 unset($_FILES);
             }
         }
@@ -124,7 +130,7 @@ class EventController extends CoreController
     );
     }
 
-    function handleUpdateEventForm($eventId)
+    public function handleUpdateEventForm($eventId)
     {
         if (isset($_POST['updateEventForm'])) {
 
@@ -219,4 +225,35 @@ class EventController extends CoreController
 
         
     }
+
+    public function handleEventConfirmDelete($eventId) 
+    {
+        $this->show('views/event-confirm-delete.view', 
+        ['eventId' => $eventId]
+    );
+    }
+
+    public function handleEventDelete($eventId)
+    {
+
+            if ($eventId) {
+                $deleted = wp_delete_post($eventId, true);
+
+                if ($deleted) {
+                    $surferEventModel = new SurferEventModel();
+                    $surferEventModel->deleteByEventId($eventId);
+            
+                    wp_redirect(get_post_type_archive_link('event'), 302);
+                    exit();
+                } else {
+                    echo 'erreur lors de la suppression de l\'événement';
+                }
+            } else {
+                get_permalink(get_page_by_title('404'));
+                exit();
+            }
+        
+    }
+
+    
 }
