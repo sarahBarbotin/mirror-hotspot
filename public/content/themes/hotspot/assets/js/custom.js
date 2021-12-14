@@ -2,6 +2,7 @@
   "use strict";
 
   console.log('custom.js loaded');
+  
 
   VANTA.WAVES({
     el: ".banner_part",
@@ -89,11 +90,11 @@
   }
 
   $('#datepicker_1').datepicker();
-  $('#datepicker_2').datepicker();
-  $('#datepicker_3').datepicker();
-  $('#datepicker_4').datepicker();
-  $('#datepicker_5').datepicker();
-  $('#datepicker_6').datepicker();
+  // $('#datepicker_2').datepicker();
+  // $('#datepicker_3').datepicker();
+  // $('#datepicker_4').datepicker();
+  // $('#datepicker_5').datepicker();
+  // $('#datepicker_6').datepicker();
 
   // $('.gallery_img').magnificPopup({
   //   type: 'image',
@@ -125,10 +126,10 @@
 
 
   //------- Mailchimp js --------//  
-  function mailChimp() {
-    $('#mc_embed_signup').find('form').ajaxChimp();
-  }
-  mailChimp();
+  // function mailChimp() {
+  //   $('#mc_embed_signup').find('form').ajaxChimp();
+  // }
+  // mailChimp();
 
 
 }(jQuery));
