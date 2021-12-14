@@ -73,7 +73,7 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
                             if ($spotId == get_the_ID()) {
                                 echo '<option value="' . get_the_ID() . '" selected>' . get_the_title() . '</option>';
                             } else {
-                                echo '<option>' . get_the_title() . '</option>';
+                                echo '<option value="' . get_the_ID() . '">' . get_the_title() . '</option>';
                             }
                         }
                     }

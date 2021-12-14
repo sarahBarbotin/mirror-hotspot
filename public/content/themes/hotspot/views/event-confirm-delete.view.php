@@ -40,16 +40,14 @@ $authorId = $event->post_author;
                 <?php 
                     if ($authorId == $userId) {
 
-                        // $url = $router->generate(
-                        //     'event-delete-post',
-                        //     [
-                        //         'eventId' => $eventId
-                        //     ]
-                        // );
                         echo 'Etes-vous certain de vouloir supprimer cet événement? Toute suppression est irréversible</br>';                        
                         echo '<form method="POST" id="event_delete_button" action="#">';
                         echo '<button type="submit" for="event_delete_button" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</button>';
                         echo '</form>';
+
+                    }
+                    else {
+                        echo 'Vous n\'avez pas les droits nécessaires pour accéder à ce contenu</br>';
                     }
                 ?>
                     

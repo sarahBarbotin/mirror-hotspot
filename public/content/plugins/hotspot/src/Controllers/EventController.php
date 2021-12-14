@@ -135,7 +135,6 @@ class EventController extends CoreController
         if (isset($_POST['updateEventForm'])) {
 
             if (wp_verify_nonce($_POST['updateEventForm'], 'updateEventToken')) {
-                // dump($_POST);
                 extract($_POST['updateEvent']);
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -145,7 +144,7 @@ class EventController extends CoreController
                 if (isset($spotEvent)) {
                     $spotEvent = filter_var($spotEvent, FILTER_VALIDATE_INT);
                 }
-
+                
                 // TODO filtrage du tableau $disciplines
                 // $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);
 
@@ -169,7 +168,7 @@ class EventController extends CoreController
                 if (!empty($spotEvent)) {
                     $data['meta_input']['spot_id'] = $spotEvent;
                 }
-                    
+                
                     
                 $postId = wp_insert_post($data);
                 //dump($postId);
@@ -228,10 +227,17 @@ class EventController extends CoreController
 
     public function handleEventConfirmDelete($eventId) 
     {
-        $this->show('views/event-confirm-delete.view', 
-        ['eventId' => $eventId]
-    );
+        if (!$this->isConnected()) {
+            get_permalink(get_page_by_title('404'));
+            exit();
+        } else {
+            $this->show(
+                'views/event-confirm-delete.view',
+                ['eventId' => $eventId]
+            );
+        }
     }
+    
 
     public function handleEventDelete($eventId)
     {

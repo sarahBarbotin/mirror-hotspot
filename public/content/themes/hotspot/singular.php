@@ -1,11 +1,11 @@
 <?php
 the_post();
-
 use Hotspot\Models\SurferEventModel;
-
 global $router;
 
+//get user id
 $userId = get_current_user_id();
+
 // Images thumbnail
 $articleId = get_the_id();
 $hasImage = has_post_thumbnail($articleId);
@@ -15,10 +15,19 @@ if ($hasImage) {
     $imageURL = 'https://picsum.photos/300/200?random=1';
 }
 
+//get spot datas of current event
+$spotId = get_post_field('spot_id');
+$spot = get_post($spotId);
+$spotCity = get_post_field('city', $spotId);
+$spotDepartement = wp_get_post_terms($spotId, 'departement');
+dump($spotDepartement);
+
+// binding participation between the current user/surfer and the event
 $surferEventModel = new SurferEventModel();
 $participation = $surferEventModel->isParticipating($userId, $articleId);
+
 // Taxonomies
-$taxonomies = wp_get_post_terms($post->ID, ['level', 'departement', 'event_discipline']);
+$taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
 
 // Commentaires
 $postCommentCount = get_comments_number($post->ID);
@@ -28,7 +37,6 @@ $comments = get_comments(['post_id' => $articleId]);
 * Comment author information fetched from the comment cookies.
 */
 $commenter = wp_get_current_commenter();
-//dump($commenter);
 
 ?>
 
@@ -79,7 +87,6 @@ $commenter = wp_get_current_commenter();
                                 ]
                             );
 
-                            echo $updateEventUrl;
                             
                             echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
                             ?>
@@ -108,17 +115,27 @@ $commenter = wp_get_current_commenter();
                                 <div class="quotes">
                                     <div class="col-lg-6">
 
-                                        <h3><a href="#">Spot</a></h3>
+                                        <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
 
-                                        <i class="ti-direction"></i>Paris
+                                        <i class="ti-direction"></i>
+                                        <?php 
+                                        if (!empty($spotCity)) {
+                                            echo $spotCity;
+                                        }
+                                        ?>
                                         <br />
-                                        <i class="ti-location-pin"></i>Charente-Maritime
+                                        <i class="ti-location-pin"></i>
+                                            <?php 
+                                            if (!empty($spotDepartement)) {
+                                                echo ($spotDepartement[0]->name);
+                                            }
+                                            ?>
 
                                     </div>
 
                                 </div>
 
-                                <?php get_template_part('partials/map.tpl'); ?>
+                                <?php get_template_part('partials/map.tpl', null, ['spotId' => $spotId]); ?>
 
 
                             </div>
