@@ -14,6 +14,11 @@ class EventController extends CoreController
             'template_redirect',
             [$this, 'handleAddEventForm']
         );
+
+        add_action(
+            'template_redirect',
+            [$this, 'handleAddComment']
+        );
     }
 
     public  function handleAddEventForm()
@@ -261,5 +266,31 @@ class EventController extends CoreController
         
     }
 
+    public function handleAddComment()
+    {
+        if (isset($_POST['addComment'])) {
+
+            $postId = get_the_id();
+            $userId = get_current_user_id();
+
+            extract($_POST['addComment']);
+
+            $content = filter_var($content, FILTER_SANITIZE_STRING);
+
+            if (!empty($content)) {
+                $data = ['comment_content' => $content,
+                    'comment_post_ID' => $postId,
+                    'user_id' => $userId];
+            
+                $commentId = wp_insert_comment($data);
+            }
+
+
+            if (isset($commentId)) {
+                wp_redirect(get_permalink($postId), 302);
+                exit();
+            }
+        }
+    }
     
 }
