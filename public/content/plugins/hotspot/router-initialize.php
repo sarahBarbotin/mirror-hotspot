@@ -82,6 +82,16 @@ $router->map(
     'event-delete-post'
 );
 
+// $router->map(
+//     'POST',
+//     '/event/[a:eventName]/',
+//     function($eventId) {
+//         $eventController = new EventController();
+//         $eventController->handleAddComment($eventName);
+//     },
+//     'event-add-comment'
+// );
+
 
 // ===========================================================
 // Routes pour tester nos modèles
