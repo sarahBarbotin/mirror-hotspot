@@ -3,15 +3,17 @@
 if(!empty(get_field('latitude'))){
     $latitude = get_field('latitude');
     $longitude = get_field('longitude');
-}else{
+}
+elseif(is_singular('event')) {
+    $latitude = get_post_field('latitude', $args['spotId']);
+    $longitude = get_post_field('longitude', $args['spotId']);
+}
+else {
     $latitude = 51.505;
     $longitude = -0.09;
 }  
 
-if(is_singular('event')) {
-    $latitude = get_post_field('latitude', $args['spotId']);
-    $longitude = get_post_field('longitude', $args['spotId']);
-}
+
 ?>
 
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="<?=get_bloginfo('language');?>">
+<html lang="<?= get_bloginfo('language'); ?>">
 
 <head>
     <!-- Required meta tags -->
@@ -14,8 +14,8 @@
 <body>
     <!-- Header start-->
     <?php
-        get_template_part('partials/navbar.tpl');
-        get_template_part('partials/banner.tpl');
+    get_template_part('partials/navbar.tpl');
+    get_template_part('partials/banner.tpl');
 
     ?>
     <!-- Header end -->
@@ -29,15 +29,15 @@
                 <!-- list left col -->
                 <div class="col-lg-8 mb-5 mb-lg-0">
                     <div class="blog_left_sidebar">
-                <!-- Spots List -->
-                <?php
-                    get_template_part('partials/spots/spots-list.tpl');
-                    
-                ?>
+                        <!-- Spots List -->
+                        <?php
+                        get_template_part('partials/spots/spots-list.tpl');
+                        
+                        ?>
 
                     </div>
                 </div>
-             
+
                 <!-- end left col -->
 
                 <!-- Aside (right col) -->
@@ -56,10 +56,10 @@
     </section>
     <!-- Footer start -->
     <?php
-        get_template_part('partials/footer.tpl');
+    get_template_part('partials/footer.tpl');
     ?>
     <!-- Footer end -->
-    
+
     <?php
     get_footer();
     ?>

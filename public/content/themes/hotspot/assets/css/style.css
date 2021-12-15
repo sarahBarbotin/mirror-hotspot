@@ -1387,6 +1387,15 @@ ul {
   box-shadow: none;
 }
 
+/* search input */
+.search-form {
+  display:flex;
+  align-items:center;
+}
+.search-input {
+  max-width: 150px;
+}
+
 /* line 735, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
 .blog_right_sidebar .newsletter_widget .input-group button {
   background: #fff;

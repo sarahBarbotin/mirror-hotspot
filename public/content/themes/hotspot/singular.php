@@ -8,6 +8,7 @@ global $router;
 //get user id
 $userId = get_current_user_id();
 
+
 // Images thumbnail
 $articleId = get_the_id();
 $hasImage = has_post_thumbnail($articleId);
@@ -68,68 +69,69 @@ $commenter = wp_get_current_commenter();
     <!--================EVENT Area =================-->
 
     <div class="container">
-        <section class="blog_area single-post-area section_padding">
-            <div class="container">
-                <div class="row">
-                    <div class="posts-list">
-                        <div class="single-post">
-                            <div class="feature-img">
-                                <!-- Image -->
-                                <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
-                            </div>
-                            <div class="blog_details">
-                                <!-- Title -->
-                                <h2><?= get_the_title() ?></h2>
-                                <?php
-                                $updateEventUrl = $router->generate(
-                                    'event-update-form',
-                                    [
-                                        'eventId' => $articleId
-                                    ]
-                                );
+    <section class="blog_area single-post-area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <!-- Image -->
+                            <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
+                        </div>
+                        <div class="blog_details">
+                            <!-- Title -->
+                            <h2><?= get_the_title() ?></h2>
 
+                            <?php
+                            $updateEventUrl = $router->generate(
+                                'event-update-form',
+                                [
+                                    'eventId' => $articleId
+                                ]
+                            );
 
-                                echo '<a href="' . $updateEventUrl . '" class="button button-contactForm btn_1"> Editer </a>';
-                                ?>
-                                <!-- Tags & nb comments-->
-                                <ul class="blog-info-link mt-3 mb-4">
-                                    <li><i class="far fa-user"></i>
-                                        <?php if (!empty($taxonomies)) {
-                                            foreach ($taxonomies as $taxonomy) {
-                                                echo $taxonomy->name . ' ';
-                                            }
-                                        } ?></li>
-                                    
-                                    <li><i class="ti ti-announcement"></i>
-                                        <?php if (!empty(get_field('date'))) {
-                                            $date = get_field('date');
-                                            echo($date);
-                                            // dd(date("d/m/Y", strtotime(get_field('date'))));
-                                        } else {
-                                            echo "-";
-                                        } ?></li>
-                                </ul>
-                                <!-- excert -->
-                                <p class="excert">
-                                    <?= get_the_content(); ?>
-                                </p>
+                            
+                                echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
+                            
 
-                                <!-- spot map -->
-                                <div class="quote-wrapper">
-                                    <div class="quotes">
-                                        <div class="col-lg-6">
+                            ?>
+                            <!-- Tags & nb comments-->
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><i class="far fa-user"></i>
+                                    <?php if (!empty($taxonomies)) {
+                                        foreach ($taxonomies as $taxonomy) {
+                                            echo $taxonomy->name . ' ';
+                                        }
+                                    } ?></li>
+                                <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
+                                        $date = get_field('date');
+                                        echo $date;
+                                    } else {
+                                        echo "-";
+                                    } ?></li>
+                            </ul>
+                            <!-- excert -->
+                            <p class="excert">
+                                <?= get_the_content(); ?>
+                            </p>
 
-                                            <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
+                            <!-- spot map -->
+                            <div class="quote-wrapper">
+                                <div class="quotes">
+                                    <div class="col-lg-6">
 
-                                            <i class="ti-direction"></i>
-                                            <?php
-                                            if (!empty($spotCity)) {
-                                                echo $spotCity;
-                                            }
-                                            ?>
-                                            <br />
-                                            <i class="ti-location-pin"></i>
-                                            <?php
+                                        <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
+
+                                        <i class="ti-direction"></i>
+                                        <?php 
+                                        if (!empty($spotCity)) {
+                                            echo $spotCity;
+                                        }
+                                        ?>
+                                        <br />
+                                        <i class="ti-location-pin"></i>
+                                            <?php 
+
                                             if (!empty($spotDepartement)) {
                                                 echo ($spotDepartement[0]->name);
                                             }

@@ -33,7 +33,7 @@ class Event
                     'thumbnail',
                     'editor',
                     'author',
-                    'comments'
+                    'comments',
                 ],
                 // ACL : Access Control List
                 'capability_type' => 'event',
