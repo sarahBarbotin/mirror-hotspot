@@ -1,13 +1,13 @@
 <!-- hotel list css start-->
-
 <?php
+
 $args = array(
     'post_type' => 'spot',
-    'posts_per_page' => 9
+    'posts_per_page' => 5,
 );
+
 $the_query = new WP_Query($args); 
 ?>
-
 
 <section class="top_place section_padding">
     <div class="container">
@@ -19,6 +19,7 @@ $the_query = new WP_Query($args);
                 </div>
             </div>
         </div>
+        
         <div class="row">
 
             <?php if ($the_query->have_posts()) : ?>
@@ -39,8 +40,7 @@ $the_query = new WP_Query($args);
                     $taxonomies = wp_get_post_terms($post->ID, ['level', 'departement']);
 
                     $city = get_post_field('city');
-                    // dump($fields);
-                    // dump($city);
+                    
                     ?>
 
 
@@ -58,22 +58,18 @@ $the_query = new WP_Query($args);
                                         }
                                     } ?>
                                     <h3><?php the_title(); ?></h3>
-                                    <p><?php
+                                    <p>
+                                        <?php
                                         if (!empty($city)) {
 
                                             echo $city;
+
                                         } else {
+
                                             echo '-';
                                         }
-                                        ?> </p>
-                                    <!-- <div class="place_review">
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <span>(210 review)</span>
-                            </div> -->
+                                        ?> 
+                                    </p>
                                 </div>
                                 <div class="details_icon text-right">
                                     <a href="<?php echo  get_the_permalink(); ?>"><i class="fas fa-arrow-right"></i></a>
@@ -82,14 +78,16 @@ $the_query = new WP_Query($args);
                         </div>
                     </div>
 
+
                 <?php endwhile; ?>
 
             <?php endif; ?>
 
         </div>
+
         <?php
-        get_template_part('partials/pagination.tpl');
-        get_template_part('partials/spots/spot-form.tpl');
+            get_template_part('partials/pagination.tpl');
+            get_template_part('partials/spots/spot-form.tpl');
         ?>
 
     </div>

@@ -15,8 +15,7 @@
                                 echo (get_the_title());
                             }                           
                            ?>
-                            
-                        </h2>';
+                        </h2>
                         <p class="breadcrumbs"><?php get_breadcrumb(); ?></p>
                     </div>
                 </div>

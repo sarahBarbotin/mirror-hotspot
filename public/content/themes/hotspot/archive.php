@@ -80,9 +80,13 @@
     </section>
 
     <section class="contact-section mx-sm-4">
+    <div class="container">
+            <div class="row">
         <?php
         get_template_part('partials/events/event-form.tpl');
         ?>
+            </div>
+    </div>
     </section>
     <!--================Blog Area =================-->
 

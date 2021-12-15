@@ -18,34 +18,34 @@
                             }
                         } ?>
                     </select>
-                    <div>ou</div>
+                    <div>ou
                     <a class="btn_1" href="<?=get_post_type_archive_link('spot');?>/#spotForm" target="_blank">
                         Créez votre spot
                     </a>
-                   
+                    </div>
                     </div>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
                     <label for="name">Donnez un nom à votre Event *</label>
                     <input class="form-control" name="addEvent[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nom de votre Event'" placeholder='Nom de votre Event'>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-12">
                 <div class="form_group">
                     <label for="datepicker">Choisissez la date de votre Event *</label>
                     <input id="datepicker" name="addEvent[date]" type="date">
                 </div>
             </div>
-            <div class="col-sm-6 mb-sm-4">
+            <div class="col-sm-12 mb-sm-4">
                 <div class="form_group">
                     <label for="picture_upload">Choisissez une image pour illustrer votre Event :</label>
                     <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
                 </div>
             </div>
             <div class="col-sm-12"></div>
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
                     <label for="description">Décrivez votre Event :</label>
                     <textarea class="form-control w-100" name="addEvent[description]" id="description" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description de votre Event'" placeholder='Description de votre Event'></textarea>
@@ -62,21 +62,9 @@
                         echo '<option value="' . $level->term_id . '">' . $level->name . '</option>';
                     } ?>
                 </select>
-                    <!-- <div>
-                        <input type="checkbox" id="debutant" name="addEvent[debutant]">
-                        <label for="debutant">Débutant</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="intermediaire" name="addEvent[intermediaire]">
-                        <label for="intermediaire">Intermédiaire</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" id="expert" name="addEvent[expert]">
-                        <label for="expert">Expert</label>
-                    </div> -->
                 </div>
             </div>
-            <div class="col-sm-8 d-sm-flex">
+            <div class="col-sm-12 d-sm-flex">
                 <div class="col-sm-2 mb-2">Disciplines : </div>
                 <div class="col-sm-8 pr-sm-2 form-group d-sm-flex flex-wrap">
                     <?php $disciplineQuery = get_terms(['taxonomy' => 'event_discipline', 'hide_empty' => false]) ?>

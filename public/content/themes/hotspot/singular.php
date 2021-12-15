@@ -6,6 +6,7 @@ global $router;
 //get user id
 $userId = get_current_user_id();
 
+
 // Images thumbnail
 $articleId = get_the_id();
 $hasImage = has_post_thumbnail($articleId);
@@ -20,7 +21,6 @@ $spotId = get_post_field('spot_id');
 $spot = get_post($spotId);
 $spotCity = get_post_field('city', $spotId);
 $spotDepartement = wp_get_post_terms($spotId, 'departement');
-dump($spotDepartement);
 
 // binding participation between the current user/surfer and the event
 $surferEventModel = new SurferEventModel();
@@ -79,6 +79,7 @@ $commenter = wp_get_current_commenter();
                         <div class="blog_details">
                             <!-- Title -->
                             <h2><?= get_the_title() ?></h2>
+
                             <?php
                             $updateEventUrl = $router->generate(
                                 'event-update-form',
@@ -88,7 +89,9 @@ $commenter = wp_get_current_commenter();
                             );
 
                             
-                            echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
+                                echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
+                            
+
                             ?>
                             <!-- Tags & nb comments-->
                             <ul class="blog-info-link mt-3 mb-4">
