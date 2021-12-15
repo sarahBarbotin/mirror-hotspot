@@ -8,6 +8,14 @@ use WP_Query;
 class SurferController extends CoreController
 {
 
+    public function __construct()
+    {
+        add_action(
+            'template_redirect',
+            [$this, 'handleUpdateSurferProfileForm']
+        );
+
+    }
 
 
     public function getProfile()
@@ -63,6 +71,7 @@ class SurferController extends CoreController
 
 
             $profile = $this->getProfile();
+            //
 
             $this->show('views/surfer-update-form.view', [
                 'profile' => $profile
@@ -74,8 +83,10 @@ class SurferController extends CoreController
     {
         if (isset($_POST['updateSurferProfileForm'])) {
 
+
             if (wp_verify_nonce($_POST['updateSurferForm'], 'updateSurferProfileToken')) {
                 extract($_POST['updateSurferProfile']);
+
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
                 $content = filter_var($content, FILTER_SANITIZE_STRING);
@@ -105,8 +116,6 @@ class SurferController extends CoreController
                 }
                     
                 $postId = wp_insert_post($data);
-
-
 
 
                 //dump($postId);

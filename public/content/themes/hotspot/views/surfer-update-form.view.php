@@ -51,6 +51,8 @@ if ($hasImage) {
                     <!-- Author -->
 
 <form class="form-contact contact_form" action="#" method="post" id="updateSurferProfileForm" novalidate="novalidate" enctype="multipart/form-data">
+<!-- <form class="form-contact contact_form" action="#" method="post" id="updateEventForm" novalidate="novalidate" enctype="multipart/form-data"> -->
+
 
     <?php wp_nonce_field('updateSurferProfileToken', 'updateSurferForm'); ?>
 
@@ -124,7 +126,10 @@ if ($hasImage) {
                     </div>
                 </div>
         <button type="submit" class="btn_1">Modifier mon profil</button>
-</form>    
+        <!-- <div class="form_btn col-sm-8 d-flex justify-content-center mt-4">
+        <button type="submit" class="btn_1">Modifier l'Evènement</button>
+    </div> -->
+
                 <?php
                     // $updateSurferUrl = $router->generate(
                     //     'surfer-profile-update-form',
@@ -142,7 +147,7 @@ if ($hasImage) {
         </div>
     </div>
 </section>
-
+</form>
 
 <?php get_template_part('partials/footer.tpl'); ?>
 <?php get_footer();?>
