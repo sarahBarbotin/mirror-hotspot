@@ -1,6 +1,8 @@
 <?php
 the_post();
+
 use Hotspot\Models\SurferEventModel;
+
 global $router;
 
 //get user id
@@ -129,84 +131,85 @@ $commenter = wp_get_current_commenter();
                                         <br />
                                         <i class="ti-location-pin"></i>
                                             <?php 
+
                                             if (!empty($spotDepartement)) {
                                                 echo ($spotDepartement[0]->name);
                                             }
                                             ?>
 
+                                        </div>
+
                                     </div>
 
+                                    <?php get_template_part('partials/map.tpl', null, ['spotId' => $spotId]); ?>
+
+
                                 </div>
-
-                                <?php get_template_part('partials/map.tpl', null, ['spotId' => $spotId]); ?>
-
-
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="navigation-top">
-                    <div class="d-sm-flex justify-content-between text-center">
+                    <div class="navigation-top">
+                        <div class="d-sm-flex justify-content-between text-center">
 
-                        <!-- participation -->
-                        <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
+                            <!-- participation -->
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
 
-                        <div class="col-sm-4 text-center my-2 my-sm-0">
-                            <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
-                                <?php 
-                                if (get_the_author_meta('ID') == $userId) {
+                                <div class="col-sm-4 text-center my-2 my-sm-0">
+                                    <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
+                                    <?php
+                                    if (get_the_author_meta('ID') == $userId) {
 
-                                    $url = $router->generate(
-                                        'event-confirm-delete',
-                                        [
-                                            'eventId' => $articleId
-                                        ]
-                                    );
+                                        $url = $router->generate(
+                                            'event-confirm-delete',
+                                            [
+                                                'eventId' => $articleId
+                                            ]
+                                        );
 
-                                    echo '<a href="'.$url.'" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
+                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
                                     } elseif ($participation === false) {
 
-                                    $url = $router->generate(
-                                        'surfer-event-participate',
-                                        [
-                                            'eventId' => $articleId
-                                        ]
-                                    );
+                                        $url = $router->generate(
+                                            'surfer-event-participate',
+                                            [
+                                                'eventId' => $articleId
+                                            ]
+                                        );
 
-                                    echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
-                                } elseif ($participation === true) {
+                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
+                                    } elseif ($participation === true) {
 
-                                    $url = $router->generate(
-                                        'surfer-event-leave',
-                                        [
-                                            'eventId' => $articleId
-                                        ]
-                                    );
+                                        $url = $router->generate(
+                                            'surfer-event-leave',
+                                            [
+                                                'eventId' => $articleId
+                                            ]
+                                        );
 
-                                    echo '<a href="'.$url.'" class="genric-btn success circle mr-5 leave">Quitter</a>';
-                                } 
+                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Quitter</a>';
+                                    }
 
-                                ?>
+                                    ?>
 
-                            </div>
+                                </div>
 
 
 
-                            <!-- SOCIAL MEDIA -->
+                                <!-- SOCIAL MEDIA -->
 
-                            <!-- <ul class="social-icons">
+                                <!-- <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
                                 <li><a href="#"><i class="fab fa-behance"></i></a></li>
                             </ul> -->
-                        </div>
+                            </div>
 
-                        <!-- NAVIGATION -->
+                            <!-- NAVIGATION -->
 
-                        <!-- <div class="navigation-area">
+                            <!-- <div class="navigation-area">
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                                     <div class="thumb">
@@ -247,95 +250,91 @@ $commenter = wp_get_current_commenter();
                             </div>
                         </div> -->
 
-                    </div>
+                        </div>
 
-                    <!-- Author -->
-                    <div class="blog-author">
-                        <div class="media align-items-center">
-                            <div>
-                                <?php
+                        <!-- Author -->
+                        <div class="blog-author">
+                            <div class="media align-items-center">
+                                <div>
+                                    <?php
 
-                                //TODO Aller chercher le profil de l'auteur et pas WPuser
-                                // $userID = get_current_user_id();
-                                // $surferProfile = new WP_Query(
-                                //     ['post_type' => 'surfer-profile',
-                                //     'author' => $userID]
-                                // );
+                                    //TODO Aller chercher le profil de l'auteur et pas WPuser
+                                    // $userID = get_current_user_id();
+                                    // $surferProfile = new WP_Query(
+                                    //     ['post_type' => 'surfer-profile',
+                                    //     'author' => $userID]
+                                    // );
 
-                                $authorProfileQuery = new WP_Query([
-                                    'post_type' => 'surfer-profile',
-                                    'author' => get_the_author_meta('ID')
-                                ]);
-                                //echo get_avatar( get_the_author_meta( 'ID' ), 32 );
+                                    $authorProfileQuery = new WP_Query([
+                                        'post_type' => 'surfer-profile',
+                                        'author' => get_the_author_meta('ID')
+                                    ]);
+                                    //echo get_avatar( get_the_author_meta( 'ID' ), 32 );
 
-                                ?>
-                            </div>
-                            <div class="media-body">
-                                <a href="<?= $authorProfileQuery->posts[0]->guid; ?>">
-                                    <h4>
-                                        <?= $authorProfileQuery->posts[0]->post_title; ?>
-                                    </h4>
-                                </a>
-                                <p>
-                                    <?= $authorProfileQuery->posts[0]->post_content; ?></p>
+                                    ?>
+                                </div>
+                                <div class="media-body">
+                                    <a href="<?= $authorProfileQuery->posts[0]->guid; ?>">
+                                        <h4>
+                                            <?= $authorProfileQuery->posts[0]->post_title; ?>
+                                        </h4>
+                                    </a>
+                                    <p>
+                                        <?= $authorProfileQuery->posts[0]->post_content; ?></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Comments -->
-                    <div class="comments-area">
+                        <!-- Comments -->
+                        <div class="comments-area">
 
-                        <h4><?php echo $postCommentCount ?> Comments</h4>
+                            <h4><?php echo $postCommentCount ?> Comments</h4>
 
-                        <?php foreach ($comments as $comment) { ?>
-                            <div class="comment-list">
-                                <div class="single-comment justify-content-between d-flex">
-                                    <div class="user justify-content-between d-flex">
-                                        <div class="thumb">
-                                            <?php
+                            <?php foreach ($comments as $comment) { ?>
+                                <div class="comment-list">
+                                    <div class="single-comment justify-content-between d-flex">
+                                        <div class="user justify-content-between d-flex">
+                                            <div class="thumb">
+                                                <?php
 
-                                            $commentAuthorID = $comment->comment_author_id;
+                                                $commentAuthorID = $comment->comment_author_id;
 
-                                            echo get_avatar($commentAuthorID);
+                                                echo get_avatar($commentAuthorID);
 
-                                            ?>
-                                        </div>
-                                        <div class="desc">
-                                            <p class="comment">
-                                                <?php echo $comment->comment_content; ?>
-                                            </p>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="d-flex align-items-center">
-                                                    <h5>
-                                                        <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author; ?></a>
-                                                    </h5>
-                                                    <p class="date"><?php echo $comment->comment_date; ?> </p>
+                                                ?>
+                                            </div>
+                                            <div class="desc">
+                                                <p class="comment">
+                                                    <?php echo $comment->comment_content; ?>
+                                                </p>
+                                                <div class="d-flex justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <h5>
+                                                            <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author; ?></a>
+                                                        </h5>
+                                                        <p class="date"><?php echo $comment->comment_date; ?> </p>
+                                                    </div>
+
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php } ?>
+                            <?php } ?>
 
 
-                        <!-- Reply -->
-                        <?php
-                        if (comments_open() || get_comments_number()) {
-                            comments_template();
-                        }
-                        ?>
-                        <div class="comment-form">
-                            <h4>Leave a Reply</h4>
-                            <form class="form-contact comment_form" action="#" id="commentForm">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <textarea class="form-control w-100" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
+                            <!-- Reply -->
+
+                            <div class="comment-form">
+                                <h4>Laissez un commentaire</h4>
+                                <form class="form-contact comment_form" action="#" method="POST" id="commentForm">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <!-- <div class="col-sm-6">
+                                        <!-- <div class="col-sm-6">
                                     <div class="form-group">
                                         <input class="form-control" name="name" id="name" type="text" placeholder="Name">
                                     </div>
@@ -350,17 +349,17 @@ $commenter = wp_get_current_commenter();
                                         <input class="form-control" name="website" id="website" type="text" placeholder="Website">
                                     </div>
                                 </div> -->
-                                </div>
-                                <div class="form-group mt-2">
-                                    <button type="submit" class="button button-contactForm btn_1">Send Message</button>
-                                </div>
-                            </form>
+                                    </div>
+                                    <div class="form-group mt-2">
+                                        <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
+                        <!-- a lot of asides -->
                     </div>
-                    <!-- a lot of asides -->
                 </div>
-            </div>
-    </section>
+        </section>
     </div>
     <!--================ Blog Area end =================-->
 

@@ -86,8 +86,8 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
     
     <div class="col-sm-4">
         <div class="form_group">
-            <label for="datepicker_1">La date de votre Event :</label>
-            <input id="datepicker_1" type="date" name="updateEvent[date]" value="">
+            <label>La date de votre Event :</label>
+            <input type="date" name="updateEvent[date]" value="">
         </div>
     </div>
     <div class="col-sm-6 mb-sm-4">
