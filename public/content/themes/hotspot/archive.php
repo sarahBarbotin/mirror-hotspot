@@ -59,18 +59,9 @@
                         get_template_part('partials/aside/categories.tpl');
                       
                         get_template_part('partials/aside/categories-discipline.tpl');
-                        ?>
-
-                        <?php
-                        get_template_part('partials/aside/recent-events.tpl');
-                        ?>
-
-                        <?php
-                        get_template_part('partials/aside/tag-cloud.tpl');
-                        ?>
-
-                        <?php
-                        get_template_part('partials/aside/widget-few-spots.tpl');
+                        // get_template_part('partials/aside/recent-events.tpl');
+                        // get_template_part('partials/aside/tag-cloud.tpl');
+                        // get_template_part('partials/aside/widget-few-spots.tpl');
                         ?>
 
                     </div>
