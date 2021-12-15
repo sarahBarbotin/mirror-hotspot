@@ -13,8 +13,8 @@ $the_query = new WP_Query( $args ); ?>
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="section_tittle text-center">
-                    <h2>Top Spots</h2>
-                    <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged.</p>
+                    <h2>Derniers Spots de surf</h2>
+                    <p>Découvrez les derniers spots de surf ajoutés par nos surfers inscrits. Ce sont les lieux sur lesquels se déroulent des évènements liés au surf :) </p>
                 </div>
             </div>
         </div>
@@ -90,7 +90,7 @@ $the_query = new WP_Query( $args ); ?>
             <?php endif; ?>
 
             
-            <a href="<?=get_post_type_archive_link('spot');?>" class="btn_1 text-cnter">Discover more</a>
+            <a href="<?=get_post_type_archive_link('spot');?>" class="btn_1 text-cnter">+ de spots de surf</a>
         </div>
     </div>
 </section>
