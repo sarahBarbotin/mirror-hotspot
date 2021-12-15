@@ -34,8 +34,8 @@
             </div>
             <div class="col-sm-4">
                 <div class="form_group">
-                    <label for="datepicker_1">Choisissez la date de votre Event *</label>
-                    <input id="datepicker_1" name="addEvent[date]" type="date">
+                    <label for="datepicker">Choisissez la date de votre Event *</label>
+                    <input id="datepicker" name="addEvent[date]" type="date">
                 </div>
             </div>
             <div class="col-sm-6 mb-sm-4">

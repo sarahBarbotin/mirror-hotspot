@@ -1,5 +1,10 @@
 <?php
 
+if(is_singular('event')) {
+    $latitude = get_post_field('latitude', $args['spotId']);
+    $longitude = get_post_field('longitude', $args['spotId']);
+}
+
 if(!empty(get_field('latitude'))){
     $latitude = get_field('latitude');
     $longitude = get_field('longitude');
@@ -8,10 +13,7 @@ if(!empty(get_field('latitude'))){
     $longitude = -0.09;
 }  
 
-if(is_singular('event')) {
-    $latitude = get_post_field('latitude', $args['spotId']);
-    $longitude = get_post_field('longitude', $args['spotId']);
-}
+
 ?>
 
 

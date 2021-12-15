@@ -3,58 +3,21 @@
 
   console.log('custom.js loaded');
   
-
-  // VANTA.WAVES({
-  //   el: ".banner_part",
-  //   mouseControls: false,
-  //   touchControls: true,
-  //   gyroControls: false,
-  //   minHeight: 200.00,
-  //   minWidth: 200.00,
-  //   scale: 1.00,
-  //   scaleMobile: 1.00,
-  //   shininess: 103.00,
-  //   waveHeight: 40.00,
-  //   waveSpeed: 1.25,
-  //   zoom: 0.65
-  // })
-
-  var review = $('.client_review_slider');
-  if (review.length) {
-    review.owlCarousel({
-      items: 3,
-      loop: true,
-      dots: false,
-      autoplay: true,
-      margin: 40,
-      autoplayHoverPause: true,
-      autoplayTimeout: 5000,
-      nav: true,
-      navText: [
-        '<i class="ti-angle-left"></i>',
-        '<i class="ti-angle-right"></i>'
-      ],
-      responsive: {
-        0: {
-          items: 1,
-          nav: false
-        },
-        576: {
-          items: 2,
-          nav: false
-        },
-        768: {
-          items: 2,
-          nav: false
-
-        },
-        991: {
-          items: 3,
-          nav: true
-        }
-      }
-    });
-  }
+  VANTA.WAVES({
+      el: ".banner_part",
+      mouseControls: false,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.00,
+      scaleMobile: 1.00,
+      shininess: 103.00,
+      waveHeight: 40.00,
+      waveSpeed: 1.25,
+      zoom: 0.65
+    })
+  
   var event = $('.event_slider');
   if (event.length) {
     event.owlCarousel({
@@ -82,35 +45,13 @@
         }
       }
     });
-  }
+  };
 
   var nc_select = $('.nc_select');
   if (nc_select.length) {
     nc_select.niceSelect();
-  }
+  };
 
-  $('#datepicker_1').datepicker();
-  // $('#datepicker_2').datepicker();
-  // $('#datepicker_3').datepicker();
-  // $('#datepicker_4').datepicker();
-  // $('#datepicker_5').datepicker();
-  // $('#datepicker_6').datepicker();
-
-  // $('.gallery_img').magnificPopup({
-  //   type: 'image',
-  //   gallery:{
-  //     enabled:true
-  //   }
-  // });
-
-  // $('.popup-youtube, .popup-vimeo').magnificPopup({
-  //   // disableOn: 700,
-  //   type: 'iframe',
-  //   mainClass: 'mfp-fade',
-  //   removalDelay: 160,
-  //   preloader: false,
-  //   fixedContentPos: false
-  // });
 
   // menu fixed js code
   $(window).scroll(function () {
@@ -122,14 +63,6 @@
     }
   });
 
-  
-
-
-  //------- Mailchimp js --------//  
-  // function mailChimp() {
-  //   $('#mc_embed_signup').find('form').ajaxChimp();
-  // }
-  // mailChimp();
 
 
 }(jQuery));

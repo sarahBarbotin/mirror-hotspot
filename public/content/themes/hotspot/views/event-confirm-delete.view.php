@@ -59,7 +59,12 @@ $authorId = $event->post_author;
 
 
 <!--================================================================================-->
-
+<!-- Footer start -->
+<?php
+        get_template_part('partials/footer.tpl');
+    ?>
+    <!-- Footer end -->
+    
 <?php get_footer(); ?>
 
 </body>

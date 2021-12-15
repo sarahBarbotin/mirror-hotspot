@@ -158,6 +158,13 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
 </form>
 
 <!--================================================================================-->
+
+<!-- Footer start -->
+<?php
+    get_template_part('partials/footer.tpl');
+?>
+<!-- Footer end -->
+
 <?php
    get_footer();
 ?>
