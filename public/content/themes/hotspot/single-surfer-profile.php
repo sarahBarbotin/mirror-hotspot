@@ -83,6 +83,19 @@ the_post();
                             </div>
                         </div>
                     </div>
+                    <?php
+                        $updateSurferUrl = $router->generate(
+                            'surfer-profile-update-form',
+                            [
+                                'surferId' => $articleId
+                            ]
+                        );
+
+                        
+                            echo '<a href="'.$updateSurferUrl.'" class="button button-contactForm btn_1"> Editer mon profil </a>';
+                        
+
+                    ?>
                 </div>
             </div>
         </div>

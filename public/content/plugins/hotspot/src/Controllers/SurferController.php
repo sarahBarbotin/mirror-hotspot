@@ -70,6 +70,96 @@ class SurferController extends CoreController
         }
     }
 
+    public function handleUpdateSurferProfileForm($surferId)
+    {
+        if (isset($_POST['updateSurferProfileForm'])) {
+
+            if (wp_verify_nonce($_POST['updateSurferForm'], 'updateSurferProfileToken')) {
+                extract($_POST['updateSurferProfile']);
+
+                $name = filter_var($name, FILTER_SANITIZE_STRING);
+                $content = filter_var($content, FILTER_SANITIZE_STRING);
+                $city = filter_var($city, FILTER_SANITIZE_STRING);
+                $surferProfileId = filter_var($surferProfileId, FILTER_VALIDATE_INT);
+                $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
+                
+                // $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);
+                dump($name);
+                die();
+                // Envoi du nouvel event
+                $data = [
+                        'ID' => $surferProfileId,
+                        'post_author' => get_current_user_id(),
+                        'post_type' => 'surfer-profile',
+                        'post_status' => 'publish',
+                        'meta_input'   => array(
+                            'city' => $city,
+                            'level'   => $levelId,
+                        ),
+                    ];
+                if (!empty($content)) {
+                    $data['post_content'] = $content;
+                }
+                if (!empty($name)) {
+                    $data['post_title'] = $name;
+                }
+                    
+                $postId = wp_insert_post($data);
+
+
+
+
+                //dump($postId);
+                // if (!empty($levelId)) {
+                //     wp_set_object_terms($postId, array($levelId), 'level');
+                // }
+
+                // if (!empty($_FILES)) {
+                //     require_once(ABSPATH . 'wp-admin/includes/post.php');
+                //     require_once(ABSPATH . 'wp-admin/includes/image.php');
+                //     require_once(ABSPATH . 'wp-admin/includes/file.php');
+                //     require_once(ABSPATH . 'wp-admin/includes/media.php');
+
+                //     // upload image dans la librairie
+                //     $file = $_FILES['picture_upload'];
+
+                //     $_FILES = array("upload_file" => $file);
+                //     $attachment_id = media_handle_upload("upload_file", $postId);
+
+                //     if (is_wp_error($attachment_id)) {
+                //         // There was an error uploading the image.
+                //         $errorMessages[] = "Error adding file";
+
+                //         foreach ($errorMessages as $message) {
+                //             echo "<div class='container alert alert-danger' role='alert'>$message</div>";
+                //         }
+                //     } else {
+                //         // The image was uploaded successfully!
+                //         // lier l'image et le nouveau post en thumbnail
+
+                //         set_post_thumbnail($postId, $attachment_id);
+                //     }
+                // } else {
+                //     foreach ($errorMessages as $message) {
+                //         echo "<br/><div class='container alert alert-danger' role='alert'>$message</div>";
+                //     }
+                // }
+
+                // empty the datas
+                unset($_FILES);
+                
+                // redirection toward the updated surfer profile
+                if ($postId) {
+                    wp_redirect(get_permalink($postId), 302);
+                    exit();
+                }
+            
+            }
+        }
+
+        
+    }
+
     public function participateToEvent($eventId)
     {
         // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer

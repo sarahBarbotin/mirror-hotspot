@@ -1,3 +1,30 @@
+<?php
+global $router;
+
+// CPT id
+$surferId = $router->match()['params']['surferId'];
+
+$authorProfileQuery = new WP_Query([
+    'post_type' => 'surfer-profile',
+    'author' => get_the_author_meta($surferId),
+]);
+$post = $authorProfileQuery->posts[0];
+$surferTitle = $post->post_title;
+$content = $post->post_content;
+$surferLevel = get_field('level');
+$departement = wp_get_post_terms($post->ID, 'departement');
+$city = get_post_field('city', $post->ID);
+
+
+$hasImage = has_post_thumbnail($post->ID);
+if ($hasImage) {
+    $imageURL = get_the_post_thumbnail_url($post->ID);
+} else {
+    $imageURL = 'https://picsum.photos/300/200?random=1';
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="<?=get_bloginfo('language');?>">
 <head>
@@ -16,12 +43,108 @@
 <!--================================================================================-->
 
 
-        TODO profil user
+<section class="blog_area single-post-area my-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 posts-list">
+                <div class="single-post">
+                    <!-- Author -->
+
+<form class="form-contact contact_form" action="#" method="post" id="updateSurferProfileForm" novalidate="novalidate" enctype="multipart/form-data">
+
+    <?php wp_nonce_field('updateSurferProfileToken', 'updateSurferForm'); ?>
+
+    <input id="surferProfileId" name="updateSurferProfile[surferProfileId]" type="hidden" value="<?= $post->ID ?>">
+
+                    <div class="blog-author">
+                        <div class="media align-items-center">
+                            <img src="<?= $imageURL; ?>" alt="">
+                            <div class="media-body">
+                                <a href="#">
+                                    <h4>
+                                    
+                                    <div class="form-group">
+                                        <input class="form-control" name="updateSurferProfile[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $surferTitle ?>'" placeholder='<?= $surferTitle ?>' value="<?= $surferTitle ?>">
+                                    </div>
+                                
+                                </h4>
+                                </a>
+                                <p><i class="fas fa-swimmer"></i>
+
+                                <select name="updateSurferProfile[levelId]" id="levelId"> 
+                                <?php 
+                                    if ($surferLevel == 1) {
+                                        echo '<option value="1" selected>Débutant</option>
+                                        <option value="2">Intermédiaire</option>
+                                        <option value="3">Expert</option>';
+                                    } elseif($surferLevel == 2) {
+                                        echo '<option value="1">Débutant</option>
+                                        <option value="2" selected>Intermédiaire</option>
+                                        <option value="3">Expert</option>';
+                                    }elseif($surferLevel == 3) {
+                                        echo '<option value="1">Débutant</option>
+                                        <option value="2">Intermédiaire</option>
+                                        <option value="3" selected>Expert</option>';
+                                    }else {
+                                        echo '<option value="1">Débutant</option>
+                                        <option value="2">Intermédiaire</option>
+                                        <option value="3">Expert</option>';
+                                    }
+                                ?>
+                                </select>
+                                </p>
+                                
+
+                                <a href="#">
+                                    <h4>
+                                    <!-- <i class="fas fa-map-marker-alt"></i> -->
+                                    <div class="form-group mt-3">
+                                        <input class="form-control" name="updateSurferProfile[city]" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $city ?>'" placeholder='<?= $city ?>' value="<?= $city ?>">
+                                    </div>
+                                
+                                </h4>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- profile description -->
+                    <div class="quote-wrapper">
+                        <div class="quotes">
+
+                            <a href="#">
+                                    <h4>
+                                    <!-- <i class="fas fa-map-marker-alt"></i> -->
+                                    <div class="form-group mt-3">
+                                        <input class="form-control" name="updateSurferProfile[content]" id="content" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $content ?>'" placeholder='<?= $content ?>' value="<?= $content ?>">
+                                    </div>
+                                
+                                </h4>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+        <button type="submit" class="btn_1">Modifier mon profil</button>
+</form>    
+                <?php
+                    // $updateSurferUrl = $router->generate(
+                    //     'surfer-profile-update-form',
+                    //     [
+                    //         'surferId' => $articleId
+                    //     ]
+                    // );
+
+                    
+                    //     echo '<a href="'.$updateSurferUrl.'" class="button button-contactForm btn_1"> Editer mon profil </a>';
+                    
+
+                ?>
+            </div>
+        </div>
+    </div>
+</section>
 
 
-
-<?php
-    get_footer();
-    ?>
+<?php get_template_part('partials/footer.tpl'); ?>
+<?php get_footer();?>
 </body>
 </html>

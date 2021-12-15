@@ -82,16 +82,6 @@ $router->map(
     'event-delete-post'
 );
 
-// $router->map(
-//     'POST',
-//     '/event/[a:eventName]/',
-//     function($eventId) {
-//         $eventController = new EventController();
-//         $eventController->handleAddComment($eventName);
-//     },
-//     'event-add-comment'
-// );
-
 
 // ===========================================================
 // Routes pour tester nos modèles
@@ -129,4 +119,25 @@ $router->map(
 
     },
     'surfer-event-leave'
+);
+
+// Profil User Update
+$router->map(
+    'GET',
+    '/surfer/surfer-profile-update-form/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->updateForm($surferId);
+    },
+    'surfer-profile-update-form'
+);
+
+$router->map(
+    'POST',
+    '/surfer/surfer-profile-update-form/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleUpdateSurferProfileForm($surferId);
+    },
+    'surfer-profile-update-post'
 );
