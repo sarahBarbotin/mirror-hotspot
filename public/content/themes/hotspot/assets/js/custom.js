@@ -4,20 +4,20 @@
   console.log('custom.js loaded');
   
 
-  VANTA.WAVES({
-    el: ".banner_part",
-    mouseControls: false,
-    touchControls: true,
-    gyroControls: false,
-    minHeight: 200.00,
-    minWidth: 200.00,
-    scale: 1.00,
-    scaleMobile: 1.00,
-    shininess: 103.00,
-    waveHeight: 40.00,
-    waveSpeed: 1.25,
-    zoom: 0.65
-  })
+  // VANTA.WAVES({
+  //   el: ".banner_part",
+  //   mouseControls: false,
+  //   touchControls: true,
+  //   gyroControls: false,
+  //   minHeight: 200.00,
+  //   minWidth: 200.00,
+  //   scale: 1.00,
+  //   scaleMobile: 1.00,
+  //   shininess: 103.00,
+  //   waveHeight: 40.00,
+  //   waveSpeed: 1.25,
+  //   zoom: 0.65
+  // })
 
   var review = $('.client_review_slider');
   if (review.length) {
