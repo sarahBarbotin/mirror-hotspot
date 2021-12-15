@@ -1,15 +1,44 @@
 <!-- Event list left col -->
 
 <?php
-$eventList = new WP_Query(
-    [
-        'post_type' => 'event',
-        'posts_per_page' => 10,
-        'order' => 'ASC',
-        'orderby' => 'meta_value',
-        'meta_key' => 'date'
-    ]
-);
+
+$taxonomyFilter = get_query_var('taxonomy');
+$termFilter = get_query_var('term');
+
+if (!empty($taxonomyFilter) && !empty($termFilter)) {
+    $eventList = new WP_Query(
+        [
+            'post_type' => 'event',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomyFilter,
+                    'terms' => $termFilter,
+                    'field' => 'slug',
+                )
+            ),
+            'posts_per_page' => 10,
+            'order' => 'ASC',
+            'orderby' => 'meta_value',
+            'meta_key' => 'date',
+        ],
+    );
+    
+} else {
+    $eventList = new WP_Query(
+        [
+            'post_type' => 'event',
+            'posts_per_page' => 10,
+            'order' => 'ASC',
+            'orderby' => 'meta_value',
+            'meta_key' => 'date'
+        ],
+    );
+}
+
+
+
+// dump($eventList);
+
 if ($eventList->have_posts()) {
     while ($eventList->have_posts()) {
         $eventList->the_post();

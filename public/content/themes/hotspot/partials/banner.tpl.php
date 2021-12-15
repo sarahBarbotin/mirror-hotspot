@@ -11,6 +11,8 @@
                                 echo ("Liste des évènement");
                             } elseif (is_post_type_archive( 'spot' )) {
                                 echo ("Liste des spots");
+                            } elseif (is_archive()) {
+                                echo (get_query_var('term'));
                             } else {
                                 echo (get_the_title());
                             }                           

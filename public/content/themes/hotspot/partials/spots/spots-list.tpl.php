@@ -1,12 +1,36 @@
 <!-- hotel list css start-->
 <?php
 
-$args = array(
-    'post_type' => 'spot',
-    'posts_per_page' => 5,
-);
+$taxonomyFilter = get_query_var('taxonomy');
+$termFilter = get_query_var('term');
 
-$the_query = new WP_Query($args); 
+if (!empty($taxonomyFilter) && !empty($termFilter)) {
+    $spotList = new WP_Query(
+        [
+            'post_type' => 'spot',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomyFilter,
+                    'terms' => $termFilter,
+                    'field' => 'slug',
+                )
+            ),
+            'posts_per_page' => 10,
+            'order' => 'ASC',
+            'orderby' => 'rand'
+        ],
+    );
+    
+} else {
+    $spotList = new WP_Query(
+        [
+            'post_type' => 'spot',
+            'posts_per_page' => 10,
+            'order' => 'ASC',
+            'orderby' => 'rand'
+        ],
+    );
+}
 ?>
 
 <section class="top_place section_padding">
@@ -22,8 +46,8 @@ $the_query = new WP_Query($args);
         
         <div class="row">
 
-            <?php if ($the_query->have_posts()) : ?>
-                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php if ($spotList->have_posts()) : ?>
+                <?php while ($spotList->have_posts()) : $spotList->the_post(); ?>
 
                     <?php
                     
