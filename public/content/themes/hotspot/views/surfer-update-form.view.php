@@ -151,16 +151,19 @@ if ($hasImage) {
         <button type="submit" class="btn_1">Modifier mon profil</button>
 
                 <?php
-                    // $updateSurferUrl = $router->generate(
-                    //     'surfer-profile-update-form',
-                    //     [
-                    //         'surferId' => $articleId
-                    //     ]
-                    // );
 
-                    
-                    //     echo '<a href="'.$updateSurferUrl.'" class="button button-contactForm btn_1"> Editer mon profil </a>';
-                    
+                dump($surferId);
+                dump(wp_get_current_user()->ID);
+                   
+                    $url = $router->generate(
+                        'surfer-confirm-delete',
+                        [
+                            'surferId' => $surferId
+                        ]
+                    );
+
+                    echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer mon compte </a>';
+                
 
                 ?>
             </div>

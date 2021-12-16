@@ -141,3 +141,24 @@ $router->map(
     },
     'surfer-profile-update-post'
 );
+
+// Profile user delete
+$router->map(
+    'GET',
+    '/surfer/surfer-confirm-delete/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleSurferConfirmDelete($surferId);
+    },
+    'surfer-confirm-delete'
+);
+
+$router->map(
+    'POST',
+    '/surfer/surfer-confirm-delete/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleSurferDelete($surferId);
+    },
+    'surfer-delete-post'
+);

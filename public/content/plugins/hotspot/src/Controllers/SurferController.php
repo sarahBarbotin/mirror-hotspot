@@ -8,16 +8,6 @@ use WP_Query;
 class SurferController extends CoreController
 {
 
-    public function __construct()
-    {
-        add_action(
-            'template_redirect',
-            [$this, 'handleUpdateSurferProfileForm']
-        );
-
-    }
-
-
     public function getProfile()
     {
         $query = new WP_Query([
@@ -196,5 +186,54 @@ class SurferController extends CoreController
 
         $url = get_post_type_archive_link('event');
         header('Location: ' . $url);
+    }
+
+    public function handleSurferConfirmDelete($surferId) 
+    {
+        if (!$this->isConnected()) {
+            get_permalink(get_page_by_title('404'));
+            exit();
+        } else {
+            $this->show(
+                'views/surfer-confirm-delete.view',
+                ['surferId' => $surferId]
+            );
+        }
+    }
+
+    public function handleSurferDelete($surferId)
+    {
+
+        //suppression CPT surfer-profile
+        if ($surferId) {
+
+            
+
+            $deletedProfile = wp_delete_post($surferId, true);
+
+            if ($deletedProfile) {
+
+                //suppression WP user
+                require_once( ABSPATH.'wp-admin/includes/user.php' );
+                // $current_user = wp_get_current_user();
+                // $deletedUser = wp_delete_user( $current_user->ID );
+                
+                //redirect
+                if($deletedUser){
+                    wp_redirect(get_home_url(), 302);
+                    exit();
+                }else {
+                    echo 'erreur lors de la suppression de l\'utilisateur';
+            }
+            } else {
+                echo 'erreur lors de la suppression du profil';
+            }
+        } else {
+            get_permalink(get_page_by_title('404'));
+            exit();
+        }
+
+        
+        
     }
 }
