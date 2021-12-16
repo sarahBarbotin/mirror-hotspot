@@ -9,7 +9,9 @@ use WP_Query;
 class CoreController
 {
 
-
+    public function __construct() {
+        
+    }
 
     public function isConnected()
     {

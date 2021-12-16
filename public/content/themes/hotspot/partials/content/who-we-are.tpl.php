@@ -9,11 +9,11 @@
             </div>
             <div class="col-lg-6">
                 <div class="about_text">
-                    <h5>Who we are</h5>
-                    <h2>We love to discover around the world</h2>
-                    <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged night yielding land creeping that seed appear were bearing.</p>
-                    <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged night yielding land creeping that seed appear were bearing.</p>
-                    <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged night yielding land creeping that seed appear were bearing.</p>
+                    <h5>Qui nous sommes</h5>
+                    <h2>Nous codons, vous surfez</h2>
+                    <p>Ce monsieur, qui profite d'un petit bain de vitamine D sucette à la bouche, c'est un monsieur qu'on connaît pas. Oui oui, il faisait partie du thème boostrap Martine à la base. On l'a gardé parce qu'il est swag.</p>
+                    <p>Il a l'air sportif, peut-être même qu'il surfe.</p>
+                    <p>Regardez-le, contempler l'infini et l'au-delà. Il a sa place ici je trouve, habillé de bleu, comme le ciel, la mer, et la Rosalie des Alpes. </p>
                 </div>
             </div>
         </div>

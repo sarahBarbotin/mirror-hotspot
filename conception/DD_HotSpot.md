@@ -23,6 +23,7 @@
 |description|TEXT|NULL|La description de l'événement|
 |picture|VARCHAR(128)|NULL|L'URL de l'image de l'événement|
 |date|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de l'événement|
+|spot_id|INT|FOREIGN KEY, NOT NULL, UNSIGNED|L'identifiant du spot de l'event|
 |created_at|TIMESTAMP|NOT NULL, DEFAULT CURRENT_TIMESTAMP|La date de création de l'événement|
 |updated_at|TIMESTAMP|NULL|La date de la dernière mise à jour de l'événement|
 

@@ -6,7 +6,7 @@ global $router;
 
 // STEP E9 ROUTER, lancement d'altorouter. Le code ci dessous est "copiable/collable" directement
 $match = $router->match();
-
+// dd($match);
 // Si le router à validé une route
 if($match) {
 

@@ -5,8 +5,8 @@
         <div class="row justify-content-center">
             <div class="col-xl-6">
                 <div class="section_tittle text-center">
-                    <h2>We offered best services</h2>
-                    <p>Waters make fish every without firmament saw had. Morning air subdue. Our. Air very one. Whales grass is fish whales winged.</p>
+                    <h2>L'équipe</h2>
+                    <p>Les eaux font du poisson à chaque firmament sans avait vu. Air du matin tamisé. L'air nous est dû. L'herbe des baleines est un poisson baleine ailée.</p>
                 </div>
             </div>
         </div>
@@ -14,29 +14,29 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
                     <img src="<?php echo get_theme_file_uri('assets/img/services_1.png');?>" alt="">
-                    <h3> <a href="#"> Transportation</a></h3>
-                    <p>All transportation cost we bear</p>
+                    <h3> <a href="#"> Cédric</a></h3>
+                    <p>Git & Scrum master</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
                     <img src="<?php echo get_theme_file_uri('assets/img/services_2.png');?>" alt="">
-                    <h3> <a href="#"> Guidence</a></h3>
-                    <p>We offer the best guidence for you</p>
+                    <h3> <a href="#"> Geoffrey</a></h3>
+                    <p>Lead Dev</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
                     <img src="<?php echo get_theme_file_uri('assets/img/services_3.png');?>" alt="">
-                    <h3> <a href="#"> Accomodation</a></h3>
-                    <p>Luxarious and comfortable</p>
+                    <h3> <a href="#"> Sarah</a></h3>
+                    <p>Product Owner</p>
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6">
                 <div class="single_ihotel_list">
                     <img src="<?php echo get_theme_file_uri('assets/img/services_4.png');?>" alt="">
-                    <h3> <a href="#"> Discover world</a></h3>
-                    <p>Best tour plan for your next tour</p>
+                    <h3> <a href="#"> Julien, Damien, Guillaume & la team</a></h3>
+                    <p>Wonder-télé-conseillers </p>
                 </div>
             </div>
         </div>

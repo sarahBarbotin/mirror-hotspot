@@ -36,7 +36,8 @@
         }
       }
     });
-  }
+  };
+
   var event = $('.event_slider');
   if (event.length) {
     event.owlCarousel({
@@ -64,12 +65,12 @@
         }
       }
     });
-  }
+  };
   
   var nc_select = $('.nc_select');
   if(nc_select.length){
     nc_select.niceSelect();
-  }
+  };
 
   $('#datepicker_1').datepicker();
   $('#datepicker_2').datepicker();  

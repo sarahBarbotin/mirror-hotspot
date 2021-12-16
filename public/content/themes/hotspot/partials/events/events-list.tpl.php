@@ -1,15 +1,49 @@
 <!-- Event list left col -->
 
 <?php
-$eventList = new WP_Query(
-    [
-        'post_type' => 'event',
-        'posts_per_page' => 10,
-        'order' => 'ASC',
-        'orderby' => 'meta_value',
-        'meta_key' => 'date'
-    ]
-);
+
+$taxonomyFilter = get_query_var('taxonomy');
+$termFilter = get_query_var('term');
+$pageFilter = get_query_var('paged');
+
+if (!empty($taxonomyFilter) && !empty($termFilter)) {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
+    $eventList = new WP_Query(
+        [
+            'post_type' => 'event',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomyFilter,
+                    'terms' => $termFilter,
+                    'field' => 'slug',
+                )
+            ),
+            'paged' => $paged,
+            'posts_per_page' => 6,
+            'order' => 'ASC',
+            'orderby' => 'meta_value',
+            'meta_key' => 'date',
+        ],
+    );
+    
+} else {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
+    $eventList = new WP_Query(
+        [
+            'post_type' => 'event',
+            'paged' => $paged,
+            'posts_per_page' => 6,
+            'order' => 'ASC',
+            'orderby' => 'meta_value',
+            'meta_key' => 'date'
+        ],
+    );
+}
+
+
+
 if ($eventList->have_posts()) {
     while ($eventList->have_posts()) {
         $eventList->the_post();
@@ -20,8 +54,10 @@ if ($eventList->have_posts()) {
                 <?php
                 $articleId = get_the_id();
                 $hasImage = has_post_thumbnail($articleId);
+                //dump($hasImage);
                 if ($hasImage) {
                     $imageURL = get_the_post_thumbnail_url();
+                //dump($imageURL);   
                 } else {
                     $imageURL = 'https://picsum.photos/300/200?random=1';
                 }
@@ -70,3 +106,11 @@ if ($eventList->have_posts()) {
 
 <?php }
 } ?>
+
+<?php if (function_exists('custom_pagination')) { $paginationLinks = custom_pagination($eventList->max_num_pages, "", $paged);}?> 
+                                        
+<?php wp_reset_postdata(); ?> 
+
+<?php
+    get_template_part('partials/pagination.tpl', null, ['pagination_links' => $paginationLinks]);
+?>
