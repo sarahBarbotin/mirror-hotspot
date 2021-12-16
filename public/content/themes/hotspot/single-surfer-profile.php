@@ -83,7 +83,9 @@ the_post();
                             </div>
                         </div>
                     </div>
+
                     <?php
+                    if(get_current_user_id() == get_the_author_meta( 'ID' )){
                         $updateSurferUrl = $router->generate(
                             'surfer-profile-update-form',
                             [
@@ -93,7 +95,7 @@ the_post();
 
                         
                             echo '<a href="'.$updateSurferUrl.'" class="button button-contactForm btn_1"> Editer mon profil </a>';
-                        
+                    }    
 
                     ?>
                 </div>

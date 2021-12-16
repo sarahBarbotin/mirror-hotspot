@@ -1,6 +1,8 @@
 <?php
 global $router;
 
+//TODO WP_QUERY dans le plugin
+
 // CPT id
 $surferId = $router->match()['params']['surferId'];
 
@@ -33,8 +35,7 @@ if ($hasImage) {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hotspot</title>
     <?php
-    use Hotspot\Models\SurferEventModel;
-    get_header();
+        get_header();
     ?>
 </head>
 
@@ -51,7 +52,6 @@ if ($hasImage) {
                     <!-- Author -->
 
 <form class="form-contact contact_form" action="#" method="post" id="updateSurferProfileForm" novalidate="novalidate" enctype="multipart/form-data">
-<!-- <form class="form-contact contact_form" action="#" method="post" id="updateEventForm" novalidate="novalidate" enctype="multipart/form-data"> -->
 
 
     <?php wp_nonce_field('updateSurferProfileToken', 'updateSurferForm'); ?>
@@ -106,6 +106,11 @@ if ($hasImage) {
                                 
                                 </h4>
                                 </a>
+
+                                <div class="form_group">
+                    <label for="picture_upload">Changez votre photo de profil :</label>
+                    <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
+                </div>
                             </div>
                         </div>
                     </div>
