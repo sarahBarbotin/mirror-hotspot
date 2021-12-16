@@ -287,7 +287,6 @@ $commenter = wp_get_current_commenter();
 
                         <!-- Comments -->
                         <div class="comments-area">
-
                             <h4><?php echo $postCommentCount ?> Comments</h4>
 
                             <?php foreach ($comments as $comment) { ?>
@@ -296,7 +295,7 @@ $commenter = wp_get_current_commenter();
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
                                                 <?php
-
+                                                
                                                 $commentAuthorID = $comment->comment_author_id;
 
                                                 echo get_avatar($commentAuthorID);
