@@ -207,16 +207,15 @@ class SurferController extends CoreController
         //suppression CPT surfer-profile
         if ($surferId) {
 
-            
+            $current_user = wp_get_current_user();
 
             $deletedProfile = wp_delete_post($surferId, true);
 
             if ($deletedProfile) {
 
                 //suppression WP user
-                require_once( ABSPATH.'wp-admin/includes/user.php' );
-                // $current_user = wp_get_current_user();
-                // $deletedUser = wp_delete_user( $current_user->ID );
+                require_once ABSPATH . '/wp-admin/includes/user.php';
+                $deletedUser = wp_delete_user( $current_user->ID , true);
                 
                 //redirect
                 if($deletedUser){

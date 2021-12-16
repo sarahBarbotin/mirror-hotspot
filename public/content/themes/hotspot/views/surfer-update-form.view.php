@@ -151,9 +151,6 @@ if ($hasImage) {
         <button type="submit" class="btn_1">Modifier mon profil</button>
 
                 <?php
-
-                dump($surferId);
-                dump(wp_get_current_user()->ID);
                    
                     $url = $router->generate(
                         'surfer-confirm-delete',
