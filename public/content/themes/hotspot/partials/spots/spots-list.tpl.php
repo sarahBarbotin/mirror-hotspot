@@ -3,8 +3,12 @@
 
 $taxonomyFilter = get_query_var('taxonomy');
 $termFilter = get_query_var('term');
+$pageFilter = get_query_var('paged');
+
 
 if (!empty($taxonomyFilter) && !empty($termFilter)) {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
     $spotList = new WP_Query(
         [
             'post_type' => 'spot',
@@ -15,23 +19,31 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
                     'field' => 'slug',
                 )
             ),
-            'posts_per_page' => 10,
+            'paged' => $paged,
+            'posts_per_page' => 6,
             'order' => 'ASC',
-            'orderby' => 'rand'
+            'orderby' => 'rand',
+            
         ],
+    
     );
     
+    
 } else {
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
     $spotList = new WP_Query(
         [
             'post_type' => 'spot',
-            'posts_per_page' => 10,
+            'paged' => $paged,
+            'posts_per_page' => 6,
             'order' => 'ASC',
-            'orderby' => 'rand'
+            'orderby' => 'rand',
+            
         ],
     );
 }
 ?>
+
 
 <section class="top_place section_padding">
     <div class="container">
@@ -104,13 +116,16 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
 
 
                 <?php endwhile; ?>
-
+                
             <?php endif; ?>
+            <?php if (function_exists('custom_pagination')) { $paginationLinks = custom_pagination($spotList->max_num_pages, "", $paged);}?> 
+                                        
+            <?php wp_reset_postdata(); ?> 
 
         </div>
 
         <?php
-            get_template_part('partials/pagination.tpl');
+            get_template_part('partials/pagination.tpl', null, ['pagination_links' => $paginationLinks]);
             get_template_part('partials/spots/spot-form.tpl');
         ?>
 
