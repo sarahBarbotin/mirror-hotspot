@@ -73,6 +73,12 @@ the_post();
                                         echo $surferCity; 
                                     ?>
                                     </p>
+                                    <p><i class="fas fa-home"></i>
+                                    <?php
+                                        $surferDepartement = wp_get_post_terms($articleId, 'departement');
+                                        echo $surferDepartement[0]->name; 
+                                    ?>
+                                    </p>
                                 </div>
                             </div>
                         </div>

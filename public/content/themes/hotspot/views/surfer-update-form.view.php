@@ -14,7 +14,7 @@ $post = $authorProfileQuery->posts[0];
 $surferTitle = $post->post_title;
 $content = $post->post_content;
 $surferLevel = get_field('level');
-$departement = wp_get_post_terms($post->ID, 'departement');
+$surferDepartement = wp_get_post_terms($post->ID, 'departement');
 $city = get_post_field('city', $post->ID);
 
 
@@ -94,6 +94,7 @@ if ($hasImage) {
                                     }
                                 ?>
                                 </select>
+
                                 </p>
                                 
 
@@ -106,6 +107,23 @@ if ($hasImage) {
                                 
                                 </h4>
                                 </a>
+
+                                <div class="col-sm-8 pr-sm-2 form-group">
+
+
+<select name="updateSurferProfile[departement]" id="departement">
+    <?php $departements = get_terms(['taxonomy' => 'departement', 'hide_empty' => false,]);?>
+    <?php foreach ($departements as $departement) {
+        if ($surferDepartement[0]->term_id == $departement->term_id) {
+            echo '<option value="' . $departement->term_id . '" selected>' . $departement->name . '</option>';
+        } else {
+            echo '<option value="' . $departement->term_id . '">' . $departement->name . '</option>';
+        }
+    } ?>
+
+    
+</select>
+</div>
 
                                 <div class="form_group">
                     <label for="picture_upload">Changez votre photo de profil :</label>
