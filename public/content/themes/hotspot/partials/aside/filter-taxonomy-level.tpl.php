@@ -2,6 +2,7 @@
 <?php
 
 $levels = get_terms(array('level'));
+$postType = get_query_var('post_type');
 
 ?>
 
@@ -14,7 +15,7 @@ $levels = get_terms(array('level'));
 
     <li>
         <p>
-            <a href="<?= get_term_link( $level, 'level' );?>" class="d-flex">
+            <a href="<?= add_query_arg('post_type', $postType, get_term_link( $level, 'level' ));?>" class="d-flex">
                 <?= $level->name; ?>
             </a>
         </p>

@@ -13,7 +13,7 @@
 <?php foreach ($departements as $departement){ ?>
 
     <li>
-        <a href="<?= get_term_link( $departement, 'departement' );?>" class="d-flex">
+        <a href="<?= add_query_arg('post_type', 'spot', get_term_link( $departement, 'departement' ));?>" class="d-flex">
             <p><?= $departement->name; ?></p>
         </a>
     </li>

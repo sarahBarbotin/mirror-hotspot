@@ -1531,7 +1531,8 @@ ul {
 }
 
 /* line 988, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
-.blog-pagination .page-link {
+.blog-pagination .page-link,
+.blog-pagination .page-numbers {
   font-size: 14px;
   position: relative;
   display: block;
@@ -1549,19 +1550,27 @@ ul {
 
 /* line 1005, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
 .blog-pagination .page-link i,
-.blog-pagination .page-link span {
+.blog-pagination .page-link span,
+.blog-pagination .page-numbers span,
+.blog-pagination .page-numbers i {
   font-size: 13px;
 }
 
 /* line 1017, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
-.blog-pagination .page-item.active .page-link {
+.blog-pagination .page-item.active .page-link,
+.blog-pagination .page-item.active .page-numbers,
+.blog-pagination .page-item .page-link.current,
+.blog-pagination .page-item .page-numbers.current
+ {
   background-color: #fbf9ff;
-  border-color: #f0e9ff;
+  border-color: #EBA63F;
   color: #888888;
 }
 
 /* line 1024, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
-.blog-pagination .page-item:last-child .page-link {
+.blog-pagination .page-item:last-child .page-link,
+.blog-pagination .page-item:last-child .page-numbers
+ {
   margin-right: 0;
 }
 
