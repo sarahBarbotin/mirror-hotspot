@@ -54,8 +54,10 @@
                         ?>
 
                         <?php
+
                         get_template_part('partials/aside/filter-taxonomy-level.tpl');
                         get_template_part('partials/aside/filter-taxonomy-discipline.tpl');
+
                         ?>
 
                     </div>
