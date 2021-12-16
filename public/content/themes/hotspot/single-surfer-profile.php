@@ -70,13 +70,21 @@ the_post();
                                     <p><i class="fas fa-map-marker-alt"></i>
                                     <?php
                                         $surferCity = get_field('city');
+                                        if (!empty($surferCity)){
                                         echo $surferCity; 
+                                        }else{
+                                            echo 'Ville non renseignée';
+                                        }
                                     ?>
                                     </p>
                                     <p><i class="fas fa-home"></i>
                                     <?php
                                         $surferDepartement = wp_get_post_terms($articleId, 'departement');
+                                        if(!empty($surferDepartement)){
                                         echo $surferDepartement[0]->name; 
+                                        }else{
+                                            echo 'Département non renseigné';
+                                        }
                                     ?>
                                     </p>
                                 </div>
@@ -85,7 +93,9 @@ the_post();
                         <!-- profile description -->
                         <div class="quote-wrapper">
                             <div class="quotes">
-                                <?= get_the_content(); ?>
+                                <?= 
+                                    get_the_content();
+                                 ?>
                             </div>
                         </div>
                     </div>

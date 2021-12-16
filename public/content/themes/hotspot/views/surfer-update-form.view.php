@@ -102,7 +102,7 @@ if ($hasImage) {
                                     <h4>
                                     <!-- <i class="fas fa-map-marker-alt"></i> -->
                                     <div class="form-group mt-3">
-                                        <input class="form-control" name="updateSurferProfile[city]" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $city ?>'" placeholder='<?= $city ?>' value="<?= $city ?>">
+                                        <input class="form-control" name="updateSurferProfile[city]" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $city ?>'" placeholder='<?php if(!empty($city)){echo $city;}else{echo 'Ville';} ?>' value="<?= $city ?>">
                                     </div>
                                 
                                 </h4>
@@ -111,19 +111,19 @@ if ($hasImage) {
                                 <div class="col-sm-8 pr-sm-2 form-group">
 
 
-<select name="updateSurferProfile[departement]" id="departement">
-    <?php $departements = get_terms(['taxonomy' => 'departement', 'hide_empty' => false,]);?>
-    <?php foreach ($departements as $departement) {
-        if ($surferDepartement[0]->term_id == $departement->term_id) {
-            echo '<option value="' . $departement->term_id . '" selected>' . $departement->name . '</option>';
-        } else {
-            echo '<option value="' . $departement->term_id . '">' . $departement->name . '</option>';
-        }
-    } ?>
+                                <select name="updateSurferProfile[departement]" id="departement">
+                                    <?php $departements = get_terms(['taxonomy' => 'departement', 'hide_empty' => false,]);?>
+                                    <?php foreach ($departements as $departement) {
+                                        if ($surferDepartement[0]->term_id == $departement->term_id) {
+                                            echo '<option value="' . $departement->term_id . '" selected>' . $departement->name . '</option>';
+                                        }else {
+                                            echo '<option value="' . $departement->term_id . '">' . $departement->name . '</option>';
+                                        }
+                                    } ?>
 
-    
-</select>
-</div>
+                                    
+                                </select>
+                                </div>
 
                                 <div class="form_group">
                     <label for="picture_upload">Changez votre photo de profil :</label>
@@ -140,7 +140,7 @@ if ($hasImage) {
                                     <h4>
                                     <!-- <i class="fas fa-map-marker-alt"></i> -->
                                     <div class="form-group mt-3">
-                                        <input class="form-control" name="updateSurferProfile[content]" id="content" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $content ?>'" placeholder='<?= $content ?>' value="<?= $content ?>">
+                                        <input class="form-control" name="updateSurferProfile[content]" id="content" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $content ?>'" placeholder='<?php if(!empty($content)){echo $content;}else {echo 'Description';}  ?>' value="<?= $content ?>">
                                     </div>
                                 
                                 </h4>

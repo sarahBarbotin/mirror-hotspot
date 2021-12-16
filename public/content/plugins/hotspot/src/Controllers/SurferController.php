@@ -94,6 +94,7 @@ class SurferController extends CoreController
                 $city = filter_var($city, FILTER_SANITIZE_STRING);
                 $surferProfileId = filter_var($surferProfileId, FILTER_VALIDATE_INT);
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
+                $departementId = filter_var($departement, FILTER_VALIDATE_INT);
                 
                 $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);
                 
@@ -117,9 +118,9 @@ class SurferController extends CoreController
                     
                 $postId = wp_insert_post($data);
 
-                // if (!empty($levelId)) {
-                //     wp_set_object_terms($postId, array($levelId), 'level');
-                // }
+                if (!empty($departementId)) {
+                    wp_set_object_terms($postId, array($departementId), 'departement');
+                }
 
                 if (!empty($_FILES)) {
                     require_once(ABSPATH . 'wp-admin/includes/post.php');
