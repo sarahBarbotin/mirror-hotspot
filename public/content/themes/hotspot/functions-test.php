@@ -56,22 +56,26 @@ if (!function_exists('hotspot_loadAssets')) {
             );
         }
 
-        wp_enqueue_script(
-            'three', // nom du script
-            'https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js',
-            [],
-            THEME_VERSION,
-            true
-        );
+        // wp_enqueue_style(
+        //     'google-font',
+        //     'https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap'
+        // );
 
-        wp_enqueue_script(
-            'vanta', // nom du script
-            'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js',
-            [],
-            THEME_VERSION,
-            true
-        );
+        // wp_enqueue_script(
+        //     'three', // nom du script
+        //     'https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js',
+        //     [],
+        //     THEME_VERSION,
+        //     true
+        // );
 
+        // wp_enqueue_script(
+        //     'vanta', // nom du script
+        //     'https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js',
+        //     [],
+        //     THEME_VERSION,
+        //     true
+        // );
 
         $javascripts = [
             "assets/js/jquery-1.12.1.min.js",
@@ -110,12 +114,27 @@ if (!function_exists('hotspot_loadAssets')) {
         //? css dans le header.php pour le moment
         // Load the theme stylesheets
         // function theme_styles_map()  
+        // { 
+        //     wp_register_style( 'leafletcss', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.css',array(), '3.3.1', true );
+
+
+        //     wp_enqueue_style('leafletcss');
+        //     wp_style_add_data('leafletcss',array( 'integrity', 'crossorigin' ) , array( 'sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==', 'anonymous' ));
+
+        // }
+        // add_action('wp_enqueue_scripts', 'theme_styles_map');
 
         wp_register_script('leafletjs', 'https://unpkg.com/leaflet@1.7.1/dist/leaflet.js', array(), '3.3.1', true); // jQuery v3
         wp_enqueue_script('leafletjs');
         wp_script_add_data( 'leafletjs', array( 'integrity', 'crossorigin' ) , array( 'sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==', 'anonymous' ) );
 
-        
+        // wp_enqueue_script(
+        //     'google-map', // nom du script
+        //     'https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA',
+        //     [],
+        //     THEME_VERSION,
+        //     true
+        // );
 
     }
 }
@@ -172,58 +191,4 @@ function get_breadcrumb() {
         echo the_search_query();
         echo '</em>"';
     }
-}
-
-
-//pagination
-function custom_pagination($numpages = '', $pagerange = '', $paged='') {
-
-    if (empty($pagerange)) {
-      $pagerange = 2;
-    }
-  
-    global $paged;
-
-    if (empty($paged)) {
-      $paged = 1;
-    }
-
-    if ($numpages == '') {
-      global $wp_query;
-      $numpages = $wp_query->max_num_pages;
-      if(!$numpages) {
-          $numpages = 1;
-      }
-
-    }
-  
-  
-    $pagination_args = array(
-      'base'            => get_pagenum_link(1) . '%_%',
-      'format'          => 'page/%#%',
-      'total'           => $numpages,
-      'current'         => $paged,
-      'show_all'        => False,
-      'end_size'        => 1,
-      'mid_size'        => $pagerange,
-      'prev_next'       => True,
-      'prev_text'       => __('«'),
-      'next_text'       => __('»'),
-      'type'            => 'array',
-      'add_args'        => false,
-      'add_fragment'    => ''
-    );
-  
-    $paginate_links = paginate_links($pagination_args);
-    return $paginate_links;
-  
-    if ($paginate_links) {
-         
-        echo "<nav class='blog-pagination justify-content-center d-flex mb-5'>";
-        echo "<span class='page-numbers page-num'>Page " . $paged . " sur " . $numpages . "</span> </br>";
-        echo $paginate_links;
-        echo "</nav>";
-        
-    }
-
 }

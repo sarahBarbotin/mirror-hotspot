@@ -368,6 +368,53 @@ class CustomFields
                 'description' => '',
                 'show_in_rest' => 0,
             ));
+
+            acf_add_local_field_group(array(
+                'key' => 'group_61b36db1bf3e7',
+                'title' => 'Event - Spot Relationship',
+                'fields' => array(
+                    array(
+                        'key' => 'field_61b36e13e3ff9',
+                        'label' => 'spot_id',
+                        'name' => 'spot_id',
+                        'type' => 'post_object',
+                        'instructions' => '',
+                        'required' => 1,
+                        'conditional_logic' => 0,
+                        'wrapper' => array(
+                            'width' => '',
+                            'class' => '',
+                            'id' => '',
+                        ),
+                        'post_type' => array(
+                            0 => 'spot',
+                        ),
+                        'taxonomy' => '',
+                        'allow_null' => 0,
+                        'multiple' => 0,
+                        'return_format' => 'object',
+                        'ui' => 1,
+                    ),
+                ),
+                'location' => array(
+                    array(
+                        array(
+                            'param' => 'post_type',
+                            'operator' => '==',
+                            'value' => 'event',
+                        ),
+                    ),
+                ),
+                'menu_order' => 0,
+                'position' => 'normal',
+                'style' => 'default',
+                'label_placement' => 'top',
+                'instruction_placement' => 'label',
+                'hide_on_screen' => '',
+                'active' => true,
+                'description' => '',
+                'show_in_rest' => 0,
+            ));
             
             endif;		
     }     

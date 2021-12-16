@@ -32,8 +32,10 @@
                                     <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'contact'
                                     ) ); ?>">Contact</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html">Search</a>
+                                <li class="nav-item search-form">
+                                    <span class="nav-item">
+                                        <?php get_search_form(); ?>
+                                    </span>
                                 </li>
                             </ul>
                         </div>

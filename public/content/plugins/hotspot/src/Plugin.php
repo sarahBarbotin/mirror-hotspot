@@ -9,6 +9,9 @@ use Hotspot\CustomPostType\SurferProfile;
 use Hotspot\CustomTaxonomy\Level;
 use Hotspot\CustomTaxonomy\Departement;
 use Hotspot\CustomTaxonomy\EventDiscipline;
+use Hotspot\Controllers\SpotController;
+use Hotspot\Controllers\EventController;
+use Hotspot\Controllers\SurferController;
 
 class Plugin
 {
@@ -72,24 +75,38 @@ class Plugin
      */
     protected $roleManager;
 
-        /**
+    /**
      * Configuration du router wordpress
      *
      * @var WordpressRouter
      */
     protected $wordpressRouter;
 
-     /**
-     * @var UserRegistration
-     */
+    /**
+    * @var UserRegistration
+    */
     protected $userRegistration;
 
-        /**
+    /**
      *
      * @var CustomFields
      */
     protected $customFields;
 
+    /**
+    * @var SpotController
+    */
+    protected $spotController;
+
+    /**
+    * @var EventController
+    */
+    protected $eventController;
+
+    /**
+    * @var SurferController
+    */
+    protected $surferController;
 
     // ===========================================================
     // Classes du modèle
@@ -105,18 +122,17 @@ class Plugin
 
 
 
-
-
     public function __construct()
     {
 
-        // nous demandons wordpress d'executer la méthode initialize lorsque l'event "init" (event de wordpress) se déclanchera
+        // nous demandons wordpress d'executer la méthode initialize lorsque l'event "init" (event de wordpress) se déclenchera
 
         add_action(
             'init',
             // équivalent en js objet.initialize();
             [$this, 'initialize']
         );
+
     }
 
     // cette méthode sera appellée lorsque le plugin oprofile sera chargé par wordpress
@@ -139,6 +155,14 @@ class Plugin
         // Gestion du formulaire d'inscription
         $this->userRegistration = new UserRegistration();
 
+        // Gestion du formulaire de création de spot
+        $this->spotController = new SpotController();
+
+        // Gestion des formulaires d'event
+        $this->eventController = new EventController();
+
+        $this->surferController = new SurferController();
+
         // chargement du router wordpress
         $this->wordpressRouter = new WordpressRouter();
 
@@ -147,7 +171,6 @@ class Plugin
 
         //instanciation d'un SurferEventModel
         $this->surferEventModel = new SurferEventModel;
-        
     }
 
     // déclenché à l'activation du plugin
@@ -172,4 +195,6 @@ class Plugin
     {
         $this->initialize();
     }
+
 }
+
