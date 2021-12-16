@@ -4,8 +4,11 @@
 
 $taxonomyFilter = get_query_var('taxonomy');
 $termFilter = get_query_var('term');
+$pageFilter = get_query_var('paged');
 
 if (!empty($taxonomyFilter) && !empty($termFilter)) {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
     $eventList = new WP_Query(
         [
             'post_type' => 'event',
@@ -16,7 +19,8 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
                     'field' => 'slug',
                 )
             ),
-            'posts_per_page' => 10,
+            'paged' => $paged,
+            'posts_per_page' => 6,
             'order' => 'ASC',
             'orderby' => 'meta_value',
             'meta_key' => 'date',
@@ -24,10 +28,13 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
     );
     
 } else {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
     $eventList = new WP_Query(
         [
             'post_type' => 'event',
-            'posts_per_page' => 10,
+            'paged' => $paged,
+            'posts_per_page' => 6,
             'order' => 'ASC',
             'orderby' => 'meta_value',
             'meta_key' => 'date'
@@ -36,8 +43,6 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
 }
 
 
-
-// dump($eventList);
 
 if ($eventList->have_posts()) {
     while ($eventList->have_posts()) {
@@ -101,3 +106,11 @@ if ($eventList->have_posts()) {
 
 <?php }
 } ?>
+
+<?php if (function_exists('custom_pagination')) { $paginationLinks = custom_pagination($eventList->max_num_pages, "", $paged);}?> 
+                                        
+<?php wp_reset_postdata(); ?> 
+
+<?php
+    get_template_part('partials/pagination.tpl', null, ['pagination_links' => $paginationLinks]);
+?>

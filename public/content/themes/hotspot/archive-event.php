@@ -32,9 +32,9 @@
                     <div class="blog_left_sidebar">
 
                         <!-- Liste -->
-                        <?php
-                        get_template_part('partials/events/events-list.tpl');
-                        ?>
+                        <?php 
+                            get_template_part('partials/events/events-list.tpl');
+                        ?>            
 
                         <!-- Pagination -->
                         <?php
