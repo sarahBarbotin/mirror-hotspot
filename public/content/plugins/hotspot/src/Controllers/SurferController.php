@@ -81,7 +81,8 @@ class SurferController extends CoreController
 
     public function handleUpdateSurferProfileForm($surferId)
     {
-        if (isset($_POST['updateSurferProfileForm'])) {
+        
+        if (isset($_POST['updateSurferProfile'])) {
 
 
             if (wp_verify_nonce($_POST['updateSurferForm'], 'updateSurferProfileToken')) {
@@ -95,8 +96,7 @@ class SurferController extends CoreController
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
                 
                 // $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);
-                dump($name);
-                die();
+                
                 // Envoi du nouvel event
                 $data = [
                         'ID' => $surferProfileId,

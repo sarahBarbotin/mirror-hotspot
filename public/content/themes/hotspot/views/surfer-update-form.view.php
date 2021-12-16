@@ -126,9 +126,6 @@ if ($hasImage) {
                     </div>
                 </div>
         <button type="submit" class="btn_1">Modifier mon profil</button>
-        <!-- <div class="form_btn col-sm-8 d-flex justify-content-center mt-4">
-        <button type="submit" class="btn_1">Modifier l'Evènement</button>
-    </div> -->
 
                 <?php
                     // $updateSurferUrl = $router->generate(
