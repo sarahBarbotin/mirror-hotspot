@@ -18,10 +18,10 @@
 
             <div class="col-sm-6 col-md-3">
                 <div class="single-footer-widget footer_icon">
-                    <h4>Contact Us</h4>
-                    <p>4156, New garden, New York, USA
+                    <h4>Contactez nous</h4>
+                    <p>99666, Chamelon, Wonderland
                         +880 362 352 783</p>
-                    <span>contact@martine.com</span>
+                    <span>suppot@hotspot.com</span>
                     <div class="social-icons">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>

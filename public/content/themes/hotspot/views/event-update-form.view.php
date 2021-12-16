@@ -31,8 +31,6 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
     <title>Hotspot</title>
     <?php
 
-    use Hotspot\Models\SurferEventModel;
-
     get_header();
     ?>
 </head>

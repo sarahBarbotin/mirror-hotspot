@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <!-- Header start-->
     <?php
     get_template_part('partials/navbar.tpl');
@@ -23,7 +22,6 @@
     ?>
 
     <!-- Header end -->
-
     <!--================Blog Area =================-->
     <section class="blog_area section_padding">
         <div class="container">
@@ -56,12 +54,10 @@
                         ?>
 
                         <?php
-                        get_template_part('partials/aside/categories.tpl');
-                      
-                        get_template_part('partials/aside/categories-discipline.tpl');
-                        // get_template_part('partials/aside/recent-events.tpl');
-                        // get_template_part('partials/aside/tag-cloud.tpl');
-                        // get_template_part('partials/aside/widget-few-spots.tpl');
+
+                        get_template_part('partials/aside/filter-taxonomy-level.tpl');
+                        get_template_part('partials/aside/filter-taxonomy-discipline.tpl');
+
                         ?>
 
                     </div>
