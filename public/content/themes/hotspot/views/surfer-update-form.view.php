@@ -51,12 +51,9 @@ if ($hasImage) {
                 <div class="single-post">
                     <!-- Author -->
 
-<form class="form-contact contact_form" action="#" method="post" id="updateSurferProfileForm" novalidate="novalidate" enctype="multipart/form-data">
+                    <form class="form-contact contact_form" action="#" method="post" id="updateSurferProfileForm" novalidate="novalidate" enctype="multipart/form-data">
 
-
-    <?php wp_nonce_field('updateSurferProfileToken', 'updateSurferForm'); ?>
-
-    <input id="surferProfileId" name="updateSurferProfile[surferProfileId]" type="hidden" value="<?= $post->ID ?>">
+                    <?php wp_nonce_field('updateSurferProfileToken', 'updateSurferForm'); ?>
 
                     <div class="blog-author">
                         <div class="media align-items-center">
@@ -64,15 +61,12 @@ if ($hasImage) {
                             <div class="media-body">
                                 <a href="#">
                                     <h4>
-                                    
                                     <div class="form-group">
                                         <input class="form-control" name="updateSurferProfile[name]" id="name" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $surferTitle ?>'" placeholder='<?= $surferTitle ?>' value="<?= $surferTitle ?>">
                                     </div>
-                                
-                                </h4>
+                                    </h4>
                                 </a>
                                 <p><i class="fas fa-swimmer"></i>
-
                                 <select name="updateSurferProfile[levelId]" id="levelId"> 
                                 <?php 
                                     if ($surferLevel == 1) {
@@ -94,23 +88,17 @@ if ($hasImage) {
                                     }
                                 ?>
                                 </select>
-
                                 </p>
-                                
-
                                 <a href="#">
                                     <h4>
                                     <!-- <i class="fas fa-map-marker-alt"></i> -->
                                     <div class="form-group mt-3">
                                         <input class="form-control" name="updateSurferProfile[city]" id="city" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $city ?>'" placeholder='<?php if(!empty($city)){echo $city;}else{echo 'Ville';} ?>' value="<?= $city ?>">
                                     </div>
-                                
                                 </h4>
                                 </a>
 
                                 <div class="col-sm-8 pr-sm-2 form-group">
-
-
                                 <select name="updateSurferProfile[departement]" id="departement">
                                     <?php $departements = get_terms(['taxonomy' => 'departement', 'hide_empty' => false,]);?>
                                     <?php foreach ($departements as $departement) {
@@ -120,22 +108,18 @@ if ($hasImage) {
                                             echo '<option value="' . $departement->term_id . '">' . $departement->name . '</option>';
                                         }
                                     } ?>
-
-                                    
                                 </select>
                                 </div>
-
-                                <div class="form_group">
-                    <label for="picture_upload">Changez votre photo de profil :</label>
-                    <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
-                </div>
-                            </div>
+                                    <div class="form_group">
+                                        <label for="picture_upload">Changez votre photo de profil :</label>
+                                        <input type="file" id="picture_upload" name="picture_upload" placeholder="Importez une image" accept=".png, .jpeg, .jpg">
+                                    </div>
+                                </div>
                         </div>
                     </div>
                     <!-- profile description -->
                     <div class="quote-wrapper">
                         <div class="quotes">
-
                             <a href="#">
                                     <h4>
                                     <!-- <i class="fas fa-map-marker-alt"></i> -->
@@ -148,8 +132,7 @@ if ($hasImage) {
                         </div>
                     </div>
                 </div>
-        <button type="submit" class="btn_1">Modifier mon profil</button>
-
+                <button type="submit" class="btn_1">Modifier mon profil</button>
                 <?php
                    
                     $url = $router->generate(
@@ -160,8 +143,6 @@ if ($hasImage) {
                     );
 
                     echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer mon compte </a>';
-                
-
                 ?>
             </div>
         </div>

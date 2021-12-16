@@ -207,6 +207,7 @@ class SurferController extends CoreController
         //suppression CPT surfer-profile
         if ($surferId) {
 
+            //TODO Token
             $current_user = wp_get_current_user();
 
             $deletedProfile = wp_delete_post($surferId, true);
