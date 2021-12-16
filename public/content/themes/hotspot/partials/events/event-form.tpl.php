@@ -1,10 +1,13 @@
-    <form class="form-contact contact_form" action="#" method="post" id="addEventForm" novalidate="novalidate" enctype="multipart/form-data">
+
+   <form class="form-contact contact_form" action="#" method="post" id="addEventForm" novalidate="novalidate" enctype="multipart/form-data">
 
     <?php wp_nonce_field('marie', 'lol'); ?>
+
         <div class="row">
-            <div class="col-12">
-                <h2 class="contact-title">Créez votre Event</h2>
+            <div class="col-12 mb-4">
+                <h2 class="contact-title">Créez votre Event!</h2>
             </div>
+
             <div class="col-sm-12 d-flex">
                 <div class="col-sm-2">Spot :</div>
                 <div class=" col-sm-12 d-flex justify-content-between">
