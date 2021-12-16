@@ -271,7 +271,7 @@ class EventController extends CoreController
         if (isset($_POST['addComment'])) {
 
             $postId = get_the_id();
-            $userId = get_current_user_id();
+            $user = wp_get_current_user();
 
             extract($_POST['addComment']);
 
@@ -280,8 +280,9 @@ class EventController extends CoreController
             if (!empty($content)) {
                 $data = ['comment_content' => $content,
                     'comment_post_ID' => $postId,
-                    'user_id' => $userId];
-            
+                    'user_id' => $user->ID,
+                    'comment_author' => $user->data->user_login];
+                
                 $commentId = wp_insert_comment($data);
             }
 
