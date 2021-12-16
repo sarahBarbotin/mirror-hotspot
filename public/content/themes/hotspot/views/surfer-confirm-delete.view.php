@@ -42,10 +42,7 @@ $surferId = $router->match()['params']['surferId'];
                     echo '<form method="POST" id="surfer_delete_button" action="#">';
                     echo '<button type="submit" for="surfer_delete_button" class="genric-btn success circle mr-5 mt-5 leave">Supprimer mon compte </button>';
                     echo '</form>';
-
-                    dump($surferId);
-                    dump(wp_get_current_user()->ID);
-
+                    
                 ?>
 
                 

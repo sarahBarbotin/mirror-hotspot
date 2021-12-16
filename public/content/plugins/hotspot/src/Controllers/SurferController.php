@@ -82,7 +82,6 @@ class SurferController extends CoreController
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
                 $content = filter_var($content, FILTER_SANITIZE_STRING);
                 $city = filter_var($city, FILTER_SANITIZE_STRING);
-                $surferProfileId = filter_var($surferProfileId, FILTER_VALIDATE_INT);
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
                 $departementId = filter_var($departement, FILTER_VALIDATE_INT);
                 
@@ -90,7 +89,7 @@ class SurferController extends CoreController
                 
                 // Envoi du nouvel event
                 $data = [
-                        'ID' => $surferProfileId,
+                        'ID' => $surferId,
                         'post_author' => get_current_user_id(),
                         'post_type' => 'surfer-profile',
                         'post_status' => 'publish',
@@ -206,34 +205,34 @@ class SurferController extends CoreController
 
         //suppression CPT surfer-profile
         if ($surferId) {
-
             //TODO Token
             $current_user = wp_get_current_user();
+            if (!in_array('administrator', $current_user->roles)) {
+                $deletedProfile = wp_delete_post($surferId, true);
 
-            $deletedProfile = wp_delete_post($surferId, true);
-
-            if ($deletedProfile) {
+                if ($deletedProfile) {
 
                 //suppression WP user
-                require_once ABSPATH . '/wp-admin/includes/user.php';
-                $deletedUser = wp_delete_user( $current_user->ID , true);
+                    require_once ABSPATH . '/wp-admin/includes/user.php';
+                    $deletedUser = wp_delete_user($current_user->ID, true);
                 
-                //redirect
-                if($deletedUser){
-                    wp_redirect(get_home_url(), 302);
-                    exit();
-                }else {
-                    echo 'erreur lors de la suppression de l\'utilisateur';
-            }
+                    //redirect
+                    if ($deletedUser) {
+                        wp_redirect(get_home_url(), 302);
+                        exit();
+                    } else {
+                        echo 'erreur lors de la suppression de l\'utilisateur';
+                    }
+                } else {
+                    echo 'erreur lors de la suppression du profil';
+                }
             } else {
-                echo 'erreur lors de la suppression du profil';
+                echo ('Vous ne pouvez pas supprimer votre compte. Veuillez contacter l\'administrateur du site.' );
+                exit();
             }
-        } else {
-            get_permalink(get_page_by_title('404'));
-            exit();
-        }
-
         
+        }
+    
         
     }
 }
