@@ -26,7 +26,6 @@ class EventController extends CoreController
         if (isset($_POST['addEvent'])) {
 
             if (wp_verify_nonce($_POST['lol'], 'marie')) {
-                dump($_POST);
                 extract($_POST['addEvent']);
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -68,7 +67,6 @@ class EventController extends CoreController
                         ),
                     ];
                     $postId = wp_insert_post($data);
-                    //dump($postId);
 
                     wp_set_object_terms($postId, array($levelId), 'level');                   
                     wp_set_object_terms($postId, $discipline, 'event_discipline');
@@ -176,7 +174,6 @@ class EventController extends CoreController
                 
                     
                 $postId = wp_insert_post($data);
-                //dump($postId);
                 if (!empty($levelId)) {
                     wp_set_object_terms($postId, array($levelId), 'level');
                 }
@@ -293,5 +290,6 @@ class EventController extends CoreController
             }
         }
     }
+
     
 }

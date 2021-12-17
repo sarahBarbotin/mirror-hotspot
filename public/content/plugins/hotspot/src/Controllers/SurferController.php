@@ -201,19 +201,26 @@ class SurferController extends CoreController
         if ($surferId) {
             //TODO Token
             $current_user = wp_get_current_user();
+            $this->deleteEventsByAuthor($current_user->ID);
             if (!in_array('administrator', $current_user->roles)) {
                 $deletedProfile = wp_delete_post($surferId, true);
 
                 if ($deletedProfile) {
 
                     //suppression WP user
+                    $userId = $current_user->ID;
                     require_once ABSPATH . '/wp-admin/includes/user.php';
-                    $deletedUser = wp_delete_user($current_user->ID, true);
+                    $deletedUser = wp_delete_user($userId, true);
 
                     //redirect
                     if ($deletedUser) {
+                        // deleting the events created by the user
+                        $this->deleteEventsByAuthor($userId);
+
+                        // also deleting user's participation to events
                         $surferEventModel = new SurferEventModel;
-                        $surferEventModel->deleteBySurferId($current_user->ID);
+                        $surferEventModel->deleteBySurferId($userId);
+
                         wp_redirect(get_home_url(), 302);
                         exit();
                     } else {
@@ -226,6 +233,23 @@ class SurferController extends CoreController
                 echo ('Vous ne pouvez pas supprimer votre compte. Veuillez contacter l\'administrateur du site.');
                 exit();
             }
+        }
+    }
+
+    public function deleteEventsByAuthor($userId)
+    {
+        $eventQuery = new WP_Query([
+            'post_type' => 'event',
+            'author' => $userId
+        ]);
+        
+        if (!empty($eventQuery->posts)) {
+            foreach ($eventQuery->posts as $post) {
+                wp_delete_post($post->ID);               
+            }
+            return true;
+        } else {
+            return false;
         }
     }
 }
