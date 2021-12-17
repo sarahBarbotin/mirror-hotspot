@@ -1,6 +1,6 @@
 <?php if (is_user_logged_in()) : ?>
 
-<section class="contact-section">
+<section class="contact-section" id="spotForm">
     <div class="container">
         <div class="row">
             <div class="col-12 mb-4">

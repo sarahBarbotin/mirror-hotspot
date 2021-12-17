@@ -1,11 +1,48 @@
 <!-- hotel list css start-->
-
 <?php
-$args = array(
-    'post_type' => 'spot',
-    'posts_per_page' => 9
-);
-$the_query = new WP_Query($args); ?>
+
+$taxonomyFilter = get_query_var('taxonomy');
+$termFilter = get_query_var('term');
+$pageFilter = get_query_var('paged');
+
+
+if (!empty($taxonomyFilter) && !empty($termFilter)) {
+
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
+    $spotList = new WP_Query(
+        [
+            'post_type' => 'spot',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => $taxonomyFilter,
+                    'terms' => $termFilter,
+                    'field' => 'slug',
+                )
+            ),
+            'paged' => $paged,
+            'posts_per_page' => 6,
+            'order' => 'ASC',
+            'orderby' => 'rand',
+            
+        ],
+    
+    );
+    
+    
+} else {
+    $paged = ( $pageFilter ) ? $pageFilter : 1; 
+    $spotList = new WP_Query(
+        [
+            'post_type' => 'spot',
+            'paged' => $paged,
+            'posts_per_page' => 6,
+            'order' => 'ASC',
+            'orderby' => 'rand',
+            
+        ],
+    );
+}
+?>
 
 
 <section class="top_place section_padding">
@@ -18,12 +55,14 @@ $the_query = new WP_Query($args); ?>
                 </div>
             </div>
         </div>
+        
         <div class="row">
 
-            <?php if ($the_query->have_posts()) : ?>
-                <?php while ($the_query->have_posts()) : $the_query->the_post(); ?>
+            <?php if ($spotList->have_posts()) : ?>
+                <?php while ($spotList->have_posts()) : $spotList->the_post(); ?>
 
                     <?php
+                    
                     // Récupération des images thumbnail
                     $articleId = get_the_id();
                     $hasImage = has_post_thumbnail($articleId);
@@ -36,9 +75,8 @@ $the_query = new WP_Query($args); ?>
                     // Récupération des taxonomies
                     $taxonomies = wp_get_post_terms($post->ID, ['level', 'departement']);
 
-                    //dump($the_query);
-
-                    $fields = get_fields();
+                    $city = get_post_field('city');
+                    
                     ?>
 
 
@@ -56,22 +94,18 @@ $the_query = new WP_Query($args); ?>
                                         }
                                     } ?>
                                     <h3><?php the_title(); ?></h3>
-                                    <p><?php
-                                        if (!empty($fields['city'])) {
+                                    <p>
+                                        <?php
+                                        if (!empty($city)) {
 
-                                            echo $fields['city'];
+                                            echo $city;
+
                                         } else {
+
                                             echo '-';
                                         }
-                                        ?> </p>
-                                    <!-- <div class="place_review">
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <a href="#"><i class="fas fa-star"></i></a>
-                                <span>(210 review)</span>
-                            </div> -->
+                                        ?> 
+                                    </p>
                                 </div>
                                 <div class="details_icon text-right">
                                     <a href="<?php echo  get_the_permalink(); ?>"><i class="fas fa-arrow-right"></i></a>
@@ -80,14 +114,19 @@ $the_query = new WP_Query($args); ?>
                         </div>
                     </div>
 
-                <?php endwhile; ?>
 
+                <?php endwhile; ?>
+                
             <?php endif; ?>
+            <?php if (function_exists('custom_pagination')) { $paginationLinks = custom_pagination($spotList->max_num_pages, "", $paged);}?> 
+                                        
+            <?php wp_reset_postdata(); ?> 
 
         </div>
+
         <?php
-        get_template_part('partials/pagination.tpl');
-        get_template_part('partials/spots/spot-form.tpl');
+            get_template_part('partials/pagination.tpl', null, ['pagination_links' => $paginationLinks]);
+            get_template_part('partials/spots/spot-form.tpl');
         ?>
 
     </div>

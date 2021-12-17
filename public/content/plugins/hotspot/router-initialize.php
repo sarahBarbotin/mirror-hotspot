@@ -5,6 +5,7 @@
 
 use Hotspot\Controllers\SurferController;
 use Hotspot\Controllers\SpotController;
+use Hotspot\Controllers\EventController;
 use Hotspot\Controllers\TestController;
 
 global $router;
@@ -41,21 +42,45 @@ $router->map(
     'surfer-confirm-delete-account'
 );
 
-
-// ===========================================================
-// Routes pour la création de spot
-// ===========================================================
-
 $router->map(
-    'GET,POST',
-    '/surfer/spot-form/',
-    function() {
-        $surferController = new SpotController();
-        $surferController->home();
+    'GET',
+    '/surfer/event-update-form/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->update($eventId);
     },
-    'spot-form'
+    'event-update-form'
 );
 
+$router->map(
+    'POST',
+    '/surfer/event-update-form/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->handleUpdateEventForm($eventId);
+    },
+    'event-update-post'
+);
+
+$router->map(
+    'GET',
+    '/surfer/event-confirm-delete/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->handleEventConfirmDelete($eventId);
+    },
+    'event-confirm-delete'
+);
+
+$router->map(
+    'POST',
+    '/surfer/event-confirm-delete/[i:eventId]/',
+    function($eventId) {
+        $eventController = new EventController();
+        $eventController->handleEventDelete($eventId);
+    },
+    'event-delete-post'
+);
 
 
 // ===========================================================
@@ -69,4 +94,71 @@ $router->map(
         $testController->test();
     },
     'model-tests-test'
+);
+
+//Participation
+$router->map(
+    'GET',
+    '/surfer/event/participate/[i:eventId]/',
+    function($eventId) {
+
+        $userController = new SurferController();
+        $userController->participateToEvent($eventId);
+
+    },
+    'surfer-event-participate'
+);
+
+$router->map(
+    'GET',
+    '/surfer/event/leave/[i:eventId]/',
+    function($eventId) {
+
+        $userController = new SurferController();
+        $userController->leaveEvent($eventId);
+
+    },
+    'surfer-event-leave'
+);
+
+// Profil User Update
+$router->map(
+    'GET',
+    '/surfer/surfer-profile-update-form/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->updateForm($surferId);
+    },
+    'surfer-profile-update-form'
+);
+
+$router->map(
+    'POST',
+    '/surfer/surfer-profile-update-form/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleUpdateSurferProfileForm($surferId);
+    },
+    'surfer-profile-update-post'
+);
+
+// Profile user delete
+$router->map(
+    'GET',
+    '/surfer/surfer-confirm-delete/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleSurferConfirmDelete($surferId);
+    },
+    'surfer-confirm-delete'
+);
+
+$router->map(
+    'POST',
+    '/surfer/surfer-confirm-delete/[i:surferId]/',
+    function($surferId) {
+        $surferController = new SurferController();
+        $surferController->handleSurferDelete($surferId);
+    },
+    'surfer-delete-post'
 );
