@@ -27,6 +27,8 @@ $spotDepartement = wp_get_post_terms($spotId, 'departement');
 // binding participation between the current user/surfer and the event
 $surferEventModel = new SurferEventModel();
 $participation = $surferEventModel->isParticipating($userId, $articleId);
+$participants = $surferEventModel->getSurfersByEventId($articleId);
+dump(count($participants));
 
 // Taxonomies
 $taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
@@ -152,7 +154,7 @@ $commenter = wp_get_current_commenter();
                         <div class="d-sm-flex justify-content-between text-center">
 
                             <!-- participation -->
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span><?= count($participants)?> personnes participent</p>
 
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
@@ -195,60 +197,9 @@ $commenter = wp_get_current_commenter();
 
                                 </div>
 
-
-
-                                <!-- SOCIAL MEDIA -->
-
-                                <!-- <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul> -->
                             </div>
 
-                            <!-- NAVIGATION -->
-
-                            <!-- <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/preview.png" alt="">$fields = get_fields();
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>Prev Post</p>
-                                        <a href="#">
-                                            <h4>Space The Final Frontier</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials">
-                                        <p>Next Post</p>
-                                        <a href="#">
-                                            <h4>Telescopes 101</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/next.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+                           
 
                         </div>
 

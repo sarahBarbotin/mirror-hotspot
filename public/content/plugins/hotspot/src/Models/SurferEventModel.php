@@ -167,4 +167,5 @@ class SurferEventModel extends CoreModel
             return false;
         }
     }
+
 }
