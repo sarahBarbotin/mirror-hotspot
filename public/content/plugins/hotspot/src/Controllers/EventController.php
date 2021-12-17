@@ -45,13 +45,14 @@ class EventController extends CoreController
                 if (empty($name)) {
                     $errorMessages[] = "Vous n'avez pas donné de nom à votre Event";
                 }
-                // if (empty($date) || $date === false) {
-                //     $errorMessages[] = 'Veuillez renseigner la date de votre Event';
-                // }
+                if (empty($date) || $date === false) {
+                    $errorMessages[] = 'Veuillez renseigner la date de votre Event';
+                }
 
                 if (empty($spotEvent) || $spotEvent === false) {
                     $errorMessages[] = 'Veuillez renseigner le spot de votre Event';
                 }
+                
 
                 // Envoi du nouvel event
                 if (empty($errorMessages)) {
@@ -66,6 +67,7 @@ class EventController extends CoreController
                             'spot_id'   => $spotEvent
                         ),
                     ];
+                    
                     $postId = wp_insert_post($data);
 
                     wp_set_object_terms($postId, array($levelId), 'level');                   
@@ -81,8 +83,8 @@ class EventController extends CoreController
                         $file = $_FILES['picture_upload'];
 
                         $_FILES = array("upload_file" => $file);
-                        $attachment_id = media_handle_upload("upload_file", $postId);
-
+                        $attachment_id = media_handle_upload('upload_file', $postId);
+                        
                         if (is_wp_error($attachment_id)) {
                             // There was an error uploading the image.
                             $errorMessages[] = "Error adding file";
@@ -108,23 +110,9 @@ class EventController extends CoreController
                 $surferEventModel = new SurferEventModel;
                 $surferEventModel->insert(get_current_user_id(), $postId);
 
-                unset($_FILES);
             }
         }
     }
-
-    // public function getEvent()
-    // {
-    //     $query = new WP_Query([
-    //         'event' => get_the_id(),
-    //         'post_type' => 'event'
-
-    //     ]);
-
-    //     $eventId = $query->post->ID;
-
-    //     return $eventId;
-    // }
 
     public function update($eventId)
     {
