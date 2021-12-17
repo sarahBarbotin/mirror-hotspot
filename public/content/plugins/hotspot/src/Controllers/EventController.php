@@ -26,7 +26,7 @@ class EventController extends CoreController
         if (isset($_POST['addEvent'])) {
 
             if (wp_verify_nonce($_POST['lol'], 'marie')) {
-                dump($_POST);
+                //dump($_FILES);
                 extract($_POST['addEvent']);
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -98,7 +98,7 @@ class EventController extends CoreController
 
                             set_post_thumbnail($postId, $attachment_id);
                         }
-                    }
+                   }
                 } else {
                     foreach ($errorMessages as $message) {
 
@@ -106,27 +106,28 @@ class EventController extends CoreController
                     }
                 }
 
-                // Adding user's participation to the event
-                $surferEventModel = new SurferEventModel;
-                $surferEventModel->insert(get_current_user_id(), $postId);
-
                 unset($_FILES);
+
+                // redirection toward the updated event
+                if (isset($postId)) {
+
+                    // Adding user's participation to the event
+                    $surferEventModel = new SurferEventModel;
+                    $surferEventModel->insert(get_current_user_id(), $postId);
+
+
+                    wp_redirect(get_permalink($postId), 302);
+                    exit();
+                }
             }
         }
     }
 
     public function update($eventId)
     {
-        if (!$this->isConnected()) {
-            get_permalink(get_page_by_title('404'));
-            exit();
-            
-        } else {
-            $this->show('views/event-update-form.view',
-            ['eventId' => $eventId]
-        
-            );
-        }
+        $this->show('views/event-update-form.view',
+        ['eventId' => $eventId]
+    );
     }
 
     public function handleUpdateEventForm($eventId)
