@@ -83,16 +83,17 @@ $commenter = wp_get_current_commenter();
                             <h2><?= get_the_title() ?></h2>
 
                             <?php
-                            $updateEventUrl = $router->generate(
-                                'event-update-form',
-                                [
+                            if (get_current_user_id() == get_the_author_meta('ID')) {
+                                $updateEventUrl = $router->generate(
+                                    'event-update-form',
+                                    [
                                     'eventId' => $articleId
                                 ]
-                            );
+                                );
 
                             
                                 echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
-                            
+                            }
 
                             ?>
                             <!-- Tags & nb comments-->
