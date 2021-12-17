@@ -115,24 +115,18 @@ class EventController extends CoreController
         }
     }
 
-    // public function getEvent()
-    // {
-    //     $query = new WP_Query([
-    //         'event' => get_the_id(),
-    //         'post_type' => 'event'
-
-    //     ]);
-
-    //     $eventId = $query->post->ID;
-
-    //     return $eventId;
-    // }
-
     public function update($eventId)
     {
-        $this->show('views/event-update-form.view',
-        ['eventId' => $eventId]
-    );
+        if (!$this->isConnected()) {
+            get_permalink(get_page_by_title('404'));
+            exit();
+            
+        } else {
+            $this->show('views/event-update-form.view',
+            ['eventId' => $eventId]
+        
+            );
+        }
     }
 
     public function handleUpdateEventForm($eventId)
