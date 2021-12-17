@@ -35,11 +35,6 @@ $taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
 $postCommentCount = get_comments_number($post->ID);
 $comments = get_comments(['post_id' => $articleId]);
 
-/*
-* Comment author information fetched from the comment cookies.
-*/
-$commenter = wp_get_current_commenter();
-
 ?>
 
 
@@ -195,60 +190,8 @@ $commenter = wp_get_current_commenter();
 
                                 </div>
 
-
-
-                                <!-- SOCIAL MEDIA -->
-
-                                <!-- <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul> -->
                             </div>
 
-                            <!-- NAVIGATION -->
-
-                            <!-- <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/preview.png" alt="">$fields = get_fields();
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>Prev Post</p>
-                                        <a href="#">
-                                            <h4>Space The Final Frontier</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials">
-                                        <p>Next Post</p>
-                                        <a href="#">
-                                            <h4>Telescopes 101</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/next.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
                         </div>
 
@@ -257,19 +200,10 @@ $commenter = wp_get_current_commenter();
                             <div class="media align-items-center">
                                 <div>
                                     <?php
-
-                                    //TODO Aller chercher le profil de l'auteur et pas WPuser
-                                    // $userID = get_current_user_id();
-                                    // $surferProfile = new WP_Query(
-                                    //     ['post_type' => 'surfer-profile',
-                                    //     'author' => $userID]
-                                    // );
-
                                     $authorProfileQuery = new WP_Query([
                                         'post_type' => 'surfer-profile',
                                         'author' => get_the_author_meta('ID')
                                     ]);
-                                    //echo get_avatar( get_the_author_meta( 'ID' ), 32 );
 
                                     ?>
                                 </div>
@@ -337,7 +271,6 @@ $commenter = wp_get_current_commenter();
                                 </div>
                             <?php } ?>
 
-
                             <!-- Reply -->
 
                             <div class="comment-form">
@@ -349,21 +282,6 @@ $commenter = wp_get_current_commenter();
                                                 <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                    </div>
-                                </div> -->
                                     </div>
                                     <div class="form-group mt-2">
                                         <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
@@ -371,7 +289,6 @@ $commenter = wp_get_current_commenter();
                                 </form>
                             </div>
                         </div>
-                        <!-- a lot of asides -->
                     </div>
                 </div>
         </section>
