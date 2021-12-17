@@ -159,20 +159,27 @@ class SurferController extends CoreController
 
     public function participateToEvent($eventId)
     {
-        // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
+        // TODO vérifier que l'utilisateur est connecté 
 
-        $model = new SurferEventModel();
-        $user = wp_get_current_user();
-        $userId = $user->ID;
-        
+        if (!$this->isConnected()) {
+            $url = get_post_type_archive_link('event');
+            header('Location: ' . $url);
+            exit();
+        } else {
 
-        $model->insert(
-            $userId,
-            $eventId
-        );
+            $model = new SurferEventModel();
+            $user = wp_get_current_user();
+            $userId = $user->ID;
+            
 
-        $url = get_post_type_archive_link('event');
-        header('Location: ' . $url);
+            $model->insert(
+                $userId,
+                $eventId
+            );
+
+            $url = get_post_type_archive_link('event');
+            header('Location: ' . $url);
+        }
     }
 
     public function leaveEvent($eventId)
@@ -190,7 +197,8 @@ class SurferController extends CoreController
     public function handleSurferConfirmDelete($surferId) 
     {
         if (!$this->isConnected()) {
-            get_permalink(get_page_by_title('404'));
+            $url = get_post_type_archive_link('event');
+            header('Location: ' . $url);
             exit();
         } else {
             $this->show(
