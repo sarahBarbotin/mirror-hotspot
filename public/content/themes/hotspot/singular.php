@@ -156,42 +156,41 @@ $commenter = wp_get_current_commenter();
                             <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
 
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                                 <div class="col-sm-4 text-center my-2 my-sm-0">
-                                    <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                                     <?php
-                                    if (get_the_author_meta('ID') == $userId) {
+                                    if(is_user_logged_in()) {
+                                        if (get_the_author_meta('ID') == $userId) {
 
-                                        $url = $router->generate(
-                                            'event-confirm-delete',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                            $url = $router->generate(
+                                                'event-confirm-delete',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
-                                    } elseif ($participation === false) {
+                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
+                                        } elseif ($participation === false) {
 
-                                        $url = $router->generate(
-                                            'surfer-event-participate',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                            $url = $router->generate(
+                                                'surfer-event-participate',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
-                                    } elseif ($participation === true) {
+                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
+                                        } elseif ($participation === true) {
 
-                                        $url = $router->generate(
-                                            'surfer-event-leave',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                            $url = $router->generate(
+                                                'surfer-event-leave',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Quitter</a>';
+                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Quitter</a>';
+                                        }
                                     }
-
                                     ?>
 
                                 </div>
