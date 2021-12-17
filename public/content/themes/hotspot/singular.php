@@ -295,10 +295,25 @@ $commenter = wp_get_current_commenter();
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
                                                 <?php
-                                                
-                                                $commentAuthorID = $comment->comment_author_id;
 
-                                                echo get_avatar($commentAuthorID);
+                                                // recup id du commenteur
+                                                $commentAuthorId = $comment->user_id;
+                                                // recup profile à partir de l'id
+                                                $commentAuthorProfileQuery = new WP_Query([
+                                                    'post_type' => 'surfer-profile',
+                                                    'author' => $commentAuthorId,
+                                                ]);
+
+                                                $commentorProfile = $commentAuthorProfileQuery->posts[0];
+                                                
+                                                // image profile
+                                                $hasProfileImage = has_post_thumbnail($commentorProfile->ID);
+                                                if ($hasProfileImage) {
+                                                    $imageCommentorURL = get_the_post_thumbnail_url($commentorProfile->ID);
+                                                } else {
+                                                    $imageCommentorURL = 'https://picsum.photos/300/200?random=1';
+                                                }
+                                                echo '<img src="'.$imageCommentorURL.'">';
 
                                                 ?>
                                             </div>
@@ -309,7 +324,8 @@ $commenter = wp_get_current_commenter();
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex align-items-center">
                                                         <h5>
-                                                            <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author; ?></a>
+                                                            <a href="<?php 
+                                                            echo $commentorProfile->guid; ?>"><?php echo $commentorProfile->post_title; ?></a>
                                                         </h5>
                                                         <p class="date"><?php echo $comment->comment_date; ?> </p>
                                                     </div>
