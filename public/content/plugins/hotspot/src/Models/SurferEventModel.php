@@ -120,6 +120,19 @@ class SurferEventModel extends CoreModel
         );
     }
 
+    public function deleteBySurferId($surferId)
+    {
+        // $surferId is the id of the wp user, not the surfer profile CPT
+        $conditions = [
+            'surfer_id' => $surferId
+        ];
+
+        $this->wpdb->delete(
+            $this->getTableName(),
+            $conditions
+        );
+    }
+
     public function updateDateByEventIdAndSurferId($eventId, $surferId)
     {
         // équivalent du WHERE
