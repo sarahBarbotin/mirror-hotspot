@@ -174,7 +174,7 @@ class SurferController extends CoreController
             }
 
         }
-        }
+        
 
     public function leaveEvent($eventId)
     {
