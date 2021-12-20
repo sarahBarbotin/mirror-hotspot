@@ -11,7 +11,7 @@
                         <li><a href="<?= get_permalink( get_page_by_title( 'about'
                                     ) ); ?>">About</a></li>
                     </ul>
-                    <a class="navbar-brand" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png'); ?>" alt="logo"> </a>
+                    <a class="navbar-brand mt-4" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png'); ?>" alt="logo"> </a>
 
                 </div>
             </div>
