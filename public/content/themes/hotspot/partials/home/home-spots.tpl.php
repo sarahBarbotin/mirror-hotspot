@@ -31,13 +31,12 @@ $the_query = new WP_Query( $args ); ?>
                     $imageURL = get_the_post_thumbnail_url();
                 }
                 else {
-                    $imageURL = 'https://picsum.photos/300/200?random=1';
+                    $imageURL = get_theme_file_uri('assets/img/spot-image-default.png');
                 }
 
                 // Récupération des taxonomies
                 $taxonomies = wp_get_post_terms( $post->ID, ['level','departement'] );
 
-                //dump($the_query);
 
                 $fields = get_fields();
                 $city = get_post_field('city');

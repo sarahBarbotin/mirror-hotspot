@@ -104,6 +104,7 @@ class UserRegistration
         // récupération du mot de passe envoyé par l'utilisateur
         $password0 = filter_input(INPUT_POST, 'user_password');
         $password1 = filter_input(INPUT_POST, 'user_password_confirmation');
+        $conditionsAccepted = filter_input(INPUT_POST, 'user_accept_conditions');
 
         // vérification est ce que les deux mots de passe sont identiques
         if($password0 !== $password1) {
@@ -158,7 +159,14 @@ class UserRegistration
         if($letterPosition !== false) {
             $errors->add(
                 'password-no-special-character',
-                '<strong>' . __('Error: ') . '</strong> You can not user "@" character'
+                '<strong>' . __('Error: ') . '</strong> You can not use "@" character'
+            );
+        }
+
+        if(!isset($conditionsAccepted)) {
+            $errors->add(
+                'conditions-not-accepted',
+                '<strong>' . __('Error: ') . '</strong> You must accept terms and conditions'
             );
         }
 
