@@ -15,9 +15,9 @@
                         <div class="collapse navbar-collapse main-menu-item justify-content-center"
                             id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="<?=get_home_url();?>">Home</a>
-                                </li>
+                                </li> -->
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'about'
                                     ) ); ?>">About</a>
@@ -42,8 +42,8 @@
 
                         <?php
                             if(!is_user_logged_in()) {
-                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block mr-2">Connexion</a>';
-                                echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block">Inscription</a>';
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block ml-2">Connexion</a>';
+                                echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block ml-2">Inscription</a>';
                             }
                             else {
                                 $user = wp_get_current_user();
@@ -58,8 +58,8 @@
                                     'author' => $userID]
                                 );
 
-                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
-                                echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
+                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block ml-2">Profil</a>';
+                                echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block ml-2">Déconnexion</a>';
 
                                 
                             }
