@@ -11,8 +11,8 @@
 
                         <?php
                             if(!is_user_logged_in()) {
-                                echo '<a href="' . wp_login_url() . '" class="btn_1 mr-5">Connexion</a>';
-                                echo '<a href="'. wp_registration_url() .'" class="btn_1">Inscription</a>';
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 ml-5">Connexion</a>';
+                                echo '<a href="'. wp_registration_url() .'" class="btn_1 ml-5">Inscription</a>';
                             }
                             else {
                                 $user = wp_get_current_user();

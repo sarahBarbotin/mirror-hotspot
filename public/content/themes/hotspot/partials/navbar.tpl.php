@@ -15,6 +15,7 @@
                         <div class="collapse navbar-collapse main-menu-item justify-content-center"
                             id="navbarSupportedContent">
                             <ul class="navbar-nav">
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'about'
                                     ) ); ?>">À propos</a>
@@ -36,8 +37,9 @@
                                 </li>
                                 <?php
                             if(!is_user_logged_in()) {
-                                echo '<li class="nav-item search-form mr-2"><a href="' . wp_login_url() . '" class="btn_1 d-lg-block">Connexion</a></li>';
-                                echo '<li class="nav-item search-form mr-2"><a href="'. wp_registration_url() .'" class="btn_2 d-lg-block">Inscription</a></li>';
+
+                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block ml-2">Connexion</a>';
+                                echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block ml-2">Inscription</a>';
                             }
                             else {
                                 $user = wp_get_current_user();
@@ -52,16 +54,14 @@
                                     'author' => $userID]
                                 );
 
-                                echo '<li class="nav-item search-form mr-2"><a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-lg-block">Mon Profil</a></li>';
-                                echo '<li class="nav-item search-form mr-2"><a href="'. wp_logout_url() .'" class="btn_2 d-lg-block">Déconnexion</a></li>';
-
+                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block ml-2">Profil</a>';
+                                echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block ml-2">Déconnexion</a>';
                                 
                             }
                         ?>
                             </ul>
                         </div>
 
-                        
 
 
                     </nav>
