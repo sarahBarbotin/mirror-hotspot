@@ -41,6 +41,8 @@ if ($hasImage) {
     ?>
 </head>
 
+<body>
+
 <?php get_template_part('partials/navbar.tpl'); ?>
 <?php get_template_part('partials/banner.tpl'); ?>
 
@@ -242,6 +244,7 @@ if ($hasImage) {
 
 <?php get_template_part('partials/footer.tpl'); ?>
 <?php get_footer(); ?>
+
 </body>
 
 </html>
