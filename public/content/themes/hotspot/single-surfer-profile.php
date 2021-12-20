@@ -1,5 +1,13 @@
 <?php
 the_post();
+
+$articleId = get_the_id();
+    $hasImage = has_post_thumbnail($articleId);
+    if ($hasImage) {
+        $imageURL = get_the_post_thumbnail_url();
+    } else {
+        $imageURL = 'https://picsum.photos/300/200?random=1';
+    }
 ?>
 
 <!doctype html>
@@ -25,18 +33,7 @@ the_post();
     get_template_part('partials/banner.tpl');
     ?>
     <!-- Header end -->
-
-    <?php
-    $articleId = get_the_id();
-    $hasImage = has_post_thumbnail($articleId);
-    if ($hasImage) {
-        $imageURL = get_the_post_thumbnail_url();
-    } else {
-        $imageURL = 'https://picsum.photos/300/200?random=1';
-    }
-    ?>
-
-
+     <!--================Surfer Profile Area =================-->
     <section class="blog_area single-post-area my-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -118,7 +115,7 @@ the_post();
             </div>
         </div>
     </section>
-
+ <!--================EVENT Area =================-->
 
     <!-- Footer start -->
     <?php

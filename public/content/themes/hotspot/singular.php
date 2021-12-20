@@ -61,8 +61,7 @@ $comments = get_comments(['post_id' => $articleId]);
     ?>
     <!-- Header end -->
 
-    <!--================EVENT Area =================-->
-
+    <!--================Event Area =================-->
     <div class="container">
     <section class="blog_area single-post-area section_padding">
         <div class="container">
@@ -293,7 +292,7 @@ $comments = get_comments(['post_id' => $articleId]);
                 </div>
         </section>
     </div>
-    <!--================ Blog Area end =================-->
+    <!--================ Event Area end =================-->
 
 
     <!-- Footer start -->
