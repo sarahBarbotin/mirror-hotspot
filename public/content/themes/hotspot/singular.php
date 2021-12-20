@@ -36,11 +36,6 @@ $taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
 $postCommentCount = get_comments_number($post->ID);
 $comments = get_comments(['post_id' => $articleId]);
 
-/*
-* Comment author information fetched from the comment cookies.
-*/
-$commenter = wp_get_current_commenter();
-
 ?>
 
 
@@ -67,71 +62,73 @@ $commenter = wp_get_current_commenter();
     ?>
     <!-- Header end -->
 
-    <!--================EVENT Area =================-->
-
+    <!--================Event Area =================-->
     <div class="container">
-        <section class="blog_area single-post-area section_padding">
-            <div class="container">
-                <div class="row">
-                    <div class="posts-list">
-                        <div class="single-post">
-                            <div class="feature-img">
-                                <!-- Image -->
-                                <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
-                            </div>
-                            <div class="blog_details">
-                                <!-- Title -->
-                                <h2><?= get_the_title() ?></h2>
 
-                                <?php
+    <section class="blog_area single-post-area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <!-- Image -->
+                            <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
+                        </div>
+                        <div class="blog_details">
+                            <!-- Title -->
+                            <h2><?= get_the_title() ?></h2>
+
+                            <?php
+                            if (get_current_user_id() == get_the_author_meta('ID')) {
                                 $updateEventUrl = $router->generate(
                                     'event-update-form',
                                     [
-                                        'eventId' => $articleId
-                                    ]
+                                    'eventId' => $articleId
+                                ]
                                 );
 
+                            
+                                echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
+                            }
 
-                                echo '<a href="' . $updateEventUrl . '" class="button button-contactForm btn_1"> Editer </a>';
+                            ?>
+                            <!-- Tags & nb comments-->
+                            <ul class="blog-info-link mt-3 mb-4">
+                                <li><i class="far fa-user"></i>
+                                    <?php if (!empty($taxonomies)) {
+                                        foreach ($taxonomies as $taxonomy) {
+                                            echo $taxonomy->name . ' ';
+                                        }
+                                    } ?></li>
+                                <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
+                                        $date = get_field('date');
+                                        echo $date;
+                                    } else {
+                                        echo "-";
+                                    } ?></li>
+                            </ul>
+                            <!-- excert -->
+                            <p class="excert">
+                                <?= get_the_content(); ?>
+                            </p>
 
+                            <!-- spot map -->
+                            <div class="quote-wrapper">
+                                <div class="quotes">
+                                    <div class="col-lg-6">
 
-                                ?>
-                                <!-- Tags & nb comments-->
-                                <ul class="blog-info-link mt-3 mb-4">
-                                    <li><i class="far fa-user"></i>
-                                        <?php if (!empty($taxonomies)) {
-                                            foreach ($taxonomies as $taxonomy) {
-                                                echo $taxonomy->name . ' ';
-                                            }
-                                        } ?></li>
-                                    <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
-                                                                                $date = get_field('date');
-                                                                                echo $date;
-                                                                            } else {
-                                                                                echo "-";
-                                                                            } ?></li>
-                                </ul>
-                                <!-- excert -->
-                                <p class="excert">
-                                    <?= get_the_content(); ?>
-                                </p>
+                                        <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
 
-                                <!-- spot map -->
-                                <div class="quote-wrapper">
-                                    <div class="quotes">
-                                        <div class="col-lg-6">
+                                        <i class="ti-direction"></i>
+                                        <?php 
+                                        if (!empty($spotCity)) {
+                                            echo $spotCity;
+                                        }
+                                        ?>
+                                        <br />
+                                        <i class="ti-location-pin"></i>
+                                            <?php 
 
-                                            <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
-
-                                            <i class="ti-direction"></i>
-                                            <?php
-                                            if (!empty($spotCity)) {
-                                                echo $spotCity;
-                                            }
-                                            ?>
-                                            <br />
-                                            <i class="ti-location-pin"></i>
-                                            <?php
 
                                             if (!empty($spotDepartement)) {
                                                 echo ($spotDepartement[0]->name);
@@ -156,49 +153,48 @@ $commenter = wp_get_current_commenter();
                             <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span><?= count($participants) ?> personnes participent</p>
 
                             <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                                 <div class="col-sm-4 text-center my-2 my-sm-0">
-                                    <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
                                     <?php
-                                    if (get_the_author_meta('ID') == $userId) {
 
-                                        $url = $router->generate(
-                                            'event-confirm-delete',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                    if(is_user_logged_in()) {
+                                        if (get_the_author_meta('ID') == $userId) {
 
-                                        echo '<a href="' . $url . '" class="btn_2">Supprimer l\'événement</a>';
-                                    } elseif ($participation === false) {
+                                            $url = $router->generate(
+                                                'event-confirm-delete',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
 
-                                        $url = $router->generate(
-                                            'surfer-event-participate',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                            echo '<a href="' . $url . '" class="btn_2">Supprimer l\'événement</a>';
+                                        } elseif ($participation === false) {
 
-                                        echo '<a href="' . $url . '" class="btn_1">Participer</a>';
-                                    } elseif ($participation === true) {
+                                            $url = $router->generate(
+                                                'surfer-event-participate',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
 
-                                        $url = $router->generate(
-                                            'surfer-event-leave',
-                                            [
-                                                'eventId' => $articleId
-                                            ]
-                                        );
+                                            echo '<a href="' . $url . '" class="btn_1">Participer</a>';
+                                        } elseif ($participation === true) {
 
-                                        echo '<a href="' . $url . '" class="btn_2">Quitter</a>';
+                                            $url = $router->generate(
+                                                'surfer-event-leave',
+                                                [
+                                                    'eventId' => $articleId
+                                                ]
+                                            );
+
+                                            echo '<a href="' . $url . '" class="btn_2">Quitter</a>';
+                                        }
+
                                     }
-
                                     ?>
 
                                 </div>
 
                             </div>
-
-
 
                         </div>
 
@@ -207,19 +203,10 @@ $commenter = wp_get_current_commenter();
                             <div class="media align-items-center">
                                 <div>
                                     <?php
-
-                                    //TODO Aller chercher le profil de l'auteur et pas WPuser
-                                    // $userID = get_current_user_id();
-                                    // $surferProfile = new WP_Query(
-                                    //     ['post_type' => 'surfer-profile',
-                                    //     'author' => $userID]
-                                    // );
-
                                     $authorProfileQuery = new WP_Query([
                                         'post_type' => 'surfer-profile',
                                         'author' => get_the_author_meta('ID')
                                     ]);
-                                    //echo get_avatar( get_the_author_meta( 'ID' ), 32 );
 
                                     ?>
                                 </div>
@@ -246,9 +233,24 @@ $commenter = wp_get_current_commenter();
                                             <div class="thumb">
                                                 <?php
 
-                                                $commentAuthorID = $comment->comment_author_id;
+                                                // recup id du commenteur
+                                                $commentAuthorId = $comment->user_id;
+                                                // recup profile à partir de l'id
+                                                $commentAuthorProfileQuery = new WP_Query([
+                                                    'post_type' => 'surfer-profile',
+                                                    'author' => $commentAuthorId,
+                                                ]);
 
-                                                echo get_avatar($commentAuthorID);
+                                                $commentorProfile = $commentAuthorProfileQuery->posts[0];
+                                                
+                                                // image profile
+                                                $hasProfileImage = has_post_thumbnail($commentorProfile->ID);
+                                                if ($hasProfileImage) {
+                                                    $imageCommentorURL = get_the_post_thumbnail_url($commentorProfile->ID);
+                                                } else {
+                                                    $imageCommentorURL = 'https://picsum.photos/300/200?random=1';
+                                                }
+                                                echo '<img src="'.$imageCommentorURL.'">';
 
                                                 ?>
                                             </div>
@@ -259,7 +261,8 @@ $commenter = wp_get_current_commenter();
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex align-items-center">
                                                         <h5>
-                                                            <a href="<?php echo $comment->comment_author_url; ?>"><?php echo $comment->comment_author; ?></a>
+                                                            <a href="<?php 
+                                                            echo $commentorProfile->guid; ?>"><?php echo $commentorProfile->post_title; ?></a>
                                                         </h5>
                                                         <p class="date"><?php echo $comment->comment_date; ?> </p>
                                                     </div>
@@ -270,7 +273,6 @@ $commenter = wp_get_current_commenter();
                                     </div>
                                 </div>
                             <?php } ?>
-
 
                             <!-- Reply -->
                             <?php if (get_current_user_id()) { ?>
@@ -285,6 +287,7 @@ $commenter = wp_get_current_commenter();
                                                 </div>
                                             </div>
                                         </div>
+
                                         <div class="form-group mt-2">
                                             <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
                                         </div>
@@ -300,13 +303,13 @@ $commenter = wp_get_current_commenter();
 
                             <?php }  ?>
 
+
                         </div>
-                        <!-- a lot of asides -->
                     </div>
                 </div>
         </section>
     </div>
-    <!--================ Blog Area end =================-->
+    <!--================ Event Area end =================-->
 
 
     <!-- Footer start -->
