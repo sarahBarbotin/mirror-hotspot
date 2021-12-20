@@ -9,7 +9,7 @@ $hasImage = has_post_thumbnail($articleId);
 if ($hasImage) {
     $imageURL = get_the_post_thumbnail_url();
 } else {
-    $imageURL = 'https://picsum.photos/300/200?random=1';
+    $imageURL = get_theme_file_uri('assets/img/surfer-avatar-default.png');
 }
 
 

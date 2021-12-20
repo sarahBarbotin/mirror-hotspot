@@ -63,7 +63,7 @@ if ($eventList->have_posts()) {
                 if ($hasImage) {
                     $imageURL = get_the_post_thumbnail_url();
                 } else {
-                    $imageURL = 'https://picsum.photos/300/200?random=1';
+                    $imageURL = get_theme_file_uri('assets/img/event-image-default.png');
                 }
                 ?>
                 <img class="card-img rounded-0" src="<?= $imageURL ?>" alt="image de l'event">
