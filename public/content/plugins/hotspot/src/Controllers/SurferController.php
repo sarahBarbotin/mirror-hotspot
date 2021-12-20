@@ -42,7 +42,6 @@ class SurferController extends CoreController
         }
     }
 
-
     public function updateForm()
     {
 
@@ -152,23 +151,30 @@ class SurferController extends CoreController
         }
     }
 
+
     public function participateToEvent($eventId)
-    {
-        // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
+        {
+            // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
 
-        $model = new SurferEventModel();
-        $user = wp_get_current_user();
-        $userId = $user->ID;
+            $model = new SurferEventModel();
+            $user = wp_get_current_user();
+            $userId = $user->ID;
 
 
-        $model->insert(
-            $userId,
-            $eventId
-        );
+            $participationToEvent = $model->insert(
+                $userId,
+                $eventId
+            );
 
-        $url = get_post_type_archive_link('event');
-        header('Location: ' . $url);
-    }
+            $url = get_post_type_archive_link('event');
+
+            if ($participationToEvent) {
+                header('Location: ' . $url . '?participation=yes');
+                exit();
+            }
+
+        }
+        }
 
     public function leaveEvent($eventId)
     {
@@ -176,16 +182,23 @@ class SurferController extends CoreController
         $user = wp_get_current_user();
         $userId = $user->ID;
 
-        $model->delete($eventId, $userId);
+        $leavedEvent = $model->delete($eventId, $userId);
 
         $url = get_post_type_archive_link('event');
-        header('Location: ' . $url);
+        
+        if ($leavedEvent) {
+            header('Location: ' . $url . '?participation=no');
+            exit();
+        }
+         
+        
     }
 
     public function handleSurferConfirmDelete($surferId)
     {
         if (!$this->isConnected()) {
-            get_permalink(get_page_by_title('404'));
+            $url = get_post_type_archive_link('event');
+            header('Location: ' . $url);
             exit();
         } else {
             $this->show(
@@ -252,4 +265,5 @@ class SurferController extends CoreController
             return false;
         }
     }
+
 }

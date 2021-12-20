@@ -26,6 +26,7 @@ class EventController extends CoreController
         if (isset($_POST['addEvent'])) {
 
             if (wp_verify_nonce($_POST['lol'], 'marie')) {
+
                 extract($_POST['addEvent']);
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -98,7 +99,7 @@ class EventController extends CoreController
 
                             set_post_thumbnail($postId, $attachment_id);
                         }
-                    }
+                   }
                 } else {
                     foreach ($errorMessages as $message) {
 
@@ -106,10 +107,20 @@ class EventController extends CoreController
                     }
                 }
 
-                // Adding user's participation to the event
-                $surferEventModel = new SurferEventModel;
-                $surferEventModel->insert(get_current_user_id(), $postId);
 
+                unset($_FILES);
+
+                // redirection toward the updated event
+                if (isset($postId)) {
+
+                    // Adding user's participation to the event
+                    $surferEventModel = new SurferEventModel;
+                    $surferEventModel->insert(get_current_user_id(), $postId);
+
+
+                    wp_redirect(get_permalink($postId), 302);
+                    exit();
+                }
             }
         }
     }
@@ -226,8 +237,7 @@ class EventController extends CoreController
                 ['eventId' => $eventId]
             );
         }
-    }
-    
+    }    
 
     public function handleEventDelete($eventId)
     {

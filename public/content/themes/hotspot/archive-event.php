@@ -69,7 +69,11 @@
     <div class="container">
             <div class="row">
         <?php
-        get_template_part('partials/events/event-form.tpl');
+
+        if (is_user_logged_in()) {
+            get_template_part('partials/events/event-form.tpl');
+        }
+
         ?>
             </div>
     </div>

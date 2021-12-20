@@ -56,6 +56,8 @@ class SurferEventModel extends CoreModel
             $this->getTableName(),
             $data
         );
+
+        return true;
     }
 
     public function getEventsBySurferId($surferId)
@@ -97,15 +99,18 @@ class SurferEventModel extends CoreModel
 
     public function delete($eventId, $surferId)
     {
-        $conditions = [
+            $conditions = [
             'surfer_id' => $surferId,
             'event_id' => $eventId
         ];
 
-        $this->wpdb->delete(
-            $this->getTableName(),
-            $conditions
-        );
+            $this->wpdb->delete(
+                $this->getTableName(),
+                $conditions
+            );
+
+            return true;
+
     }
 
     public function deleteByEventId($eventId)
@@ -180,4 +185,5 @@ class SurferEventModel extends CoreModel
             return false;
         }
     }
+
 }
