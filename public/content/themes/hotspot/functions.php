@@ -159,7 +159,7 @@ function get_breadcrumb() {
             }
     } elseif (is_post_type_archive( 'event' )) {
         echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-        echo ("Liste des évènement");
+        echo ("Liste des évènements");
     } elseif (is_post_type_archive( 'spot' )) {
         echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
         echo ("Liste des spots");

@@ -298,7 +298,7 @@ $comments = get_comments(['post_id' => $articleId]);
 
                                 <div class="comment-form">
                                     <h4>Laisser un commentaire</h4>
-                                    <p>Inscrivez-vous ou connectez-vous pour laisser un commentaire.</p>
+                                    <p>Inscrivez-vous ou connectez-vous pour pouvoir laisser un commentaire.</p>
                                 </div>
 
                             <?php }  ?>

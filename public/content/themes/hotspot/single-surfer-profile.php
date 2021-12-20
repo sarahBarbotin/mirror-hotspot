@@ -1,4 +1,7 @@
+<!--================   DATAS ===============================-->
+
 <?php
+use Hotspot\Models\SurferEventModel;
 the_post();
 
 $articleId = get_the_id();
@@ -8,7 +11,15 @@ if ($hasImage) {
 } else {
     $imageURL = 'https://picsum.photos/300/200?random=1';
 }
+
+
+//get event by surfer ID
+$surferEventModel = new SurferEventModel();
+$eventsParticipation = $surferEventModel->getEventsBySurferId(get_current_user_id());
+
 ?>
+
+<!--================   HEAD ===============================-->
 
 <!doctype html>
 <html lang="<?= get_bloginfo('language'); ?>">
@@ -23,7 +34,10 @@ if ($hasImage) {
      -->
 </head>
 
+<!--================   BODY ==============================-->
+
 <body>
+    
     <!-- Header start-->
     <?php
     get_template_part('partials/navbar.tpl');
@@ -33,7 +47,9 @@ if ($hasImage) {
     get_template_part('partials/banner.tpl');
     ?>
     <!-- Header end -->
+
     <!--================Surfer Profile Area =================-->
+
     <section class="blog_area single-post-area my-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -110,66 +126,78 @@ if ($hasImage) {
                     ?>
                 </div>
 
+                <!--================Events  Area =================-->
+
+
                 <div class="col-12 my-5">
                     <h2 class="contact-title">Evénements auxquels vous participez</h2>
                 </div>
-
+                
                 <div class="col-lg-12">
                     <div class="row">
-                        <div class="col-12 col-md-6 col-lg-4">
+                        
+
+                        <?php foreach($eventsParticipation as $eventParticipation) :?>
+
+                            <div class="col-12 col-md-6 col-lg-4">
+                            
                             <article class="blog_item">
                                 <div class="blog_item_img">
                                     <?php
-                                    $articleId = get_the_id();
+                                    $articleId = $eventParticipation->event_id;
+                                    $eventParticipated = get_post($articleId);
                                     $hasImage = has_post_thumbnail($articleId);
                                     if ($hasImage) {
-                                        $imageURL = get_the_post_thumbnail_url();
+                                        $imageURL = get_the_post_thumbnail_url($articleId);
                                     } else {
                                         $imageURL = 'https://picsum.photos/300/200?random=1';
                                     }
                                     ?>
                                     <img class="card-img rounded-0" src="<?= $imageURL ?>" alt="image de l'event">
                                     <div class="blog_item_date">
-                                        <h3><?= date("d", strtotime($post->date)); ?></h3>
-                                        <p><?= date("M", strtotime($post->date)); ?></p>
+                                        <h3><?= date("d", strtotime($eventParticipated->date)); ?></h3>
+                                        <p><?= date("M", strtotime($eventParticipated->date)); ?></p>
                                     </div>
                                 </div>
 
                                 <div class="blog_details">
-                                    <a class="d-inline-block" href="<?= get_the_permalink() ?>">
-                                        <h2><?= get_the_title() ?></h2>
+                                    <a class="d-inline-block" href="<?= get_permalink($eventParticipated) ?>">
+                                        <h2><?= get_the_title($eventParticipated) ?></h2>
                                     </a>
-                                    <p><?= get_the_excerpt() ?></p>
+                                    <p><?= get_the_excerpt($eventParticipated) ?></p>
                                     <ul class="blog-info-link">
                                         <li><i class="far"></i>
                                             <?php
-                                            $disciplines = wp_get_post_terms($post->ID, 'event_discipline');
+                                            $disciplines = wp_get_post_terms($articleId, 'event_discipline');
                                             if (empty($disciplines)) {
-                                                echo ("Libre");
+                                                echo("Libre");
                                             } else {
                                                 foreach ($disciplines as $discipline) {
-                                                    echo ('<span>' . $discipline->name . "</span>");
+                                                    echo('<span>' . $discipline->name . "</span>");
                                                 }
                                             }
                                             ?>
                                         </li>
                                         <li><i class="far"></i>
                                             <?php
-                                            $levels = wp_get_post_terms($post->ID, 'level');
+                                            $levels = wp_get_post_terms($articleId, 'level');
                                             if (empty($levels)) {
-                                                echo ("Tout niveaux");
+                                                echo("Tout niveaux");
                                             } else {
                                                 foreach ($levels as $level) {
-                                                    echo ('<span>' . $level->name . "</span>");
+                                                    echo('<span>' . $level->name . "</span>");
                                                 }
                                             }
                                             ?>
                                         </li>
-                                        <li><i class="far fa-comments"></i> <?= get_comments_number() ?> Commentaires</li>
+                                        <li><i class="far fa-comments"></i> <?= get_comments_number($eventParticipated) ?> Commentaires</li>
                                     </ul>
                                 </div>
                             </article>
+
                         </div>
+
+                        <?php endforeach ?>
                     </div>
 
                 </div>
