@@ -81,6 +81,8 @@
                             ?>
                         </div>
 
+                        <p>Cliquez sur la carte pour remplir la latitude et la longitude</p>
+
                         <div class="form-group mt-3">
                             <button type="submit" class="button button-contactForm btn_1">Créez votre spot</button>
                         </div>
