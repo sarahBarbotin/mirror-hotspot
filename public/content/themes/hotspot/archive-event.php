@@ -23,7 +23,7 @@
 
     <!-- Header end -->
     <!--================Blog Area =================-->
-    <section class="blog_area section_padding">
+    <section class="blog_area mt-5">
         <div class="container">
             <div class="row">
 

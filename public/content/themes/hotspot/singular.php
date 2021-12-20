@@ -1,3 +1,4 @@
+<!--=======================  DATAS ==========================-->
 <?php
 the_post();
 
@@ -38,6 +39,7 @@ $comments = get_comments(['post_id' => $articleId]);
 
 ?>
 
+<!--================================= HEAD =========================================-->
 
 <!doctype html>
 <html lang="<?= get_bloginfo('language'); ?>">
@@ -51,7 +53,10 @@ $comments = get_comments(['post_id' => $articleId]);
 
 </head>
 
+<!--================================= BODY =========================================-->
+
 <body>
+
     <!-- Header start-->
     <?php
     get_template_part('partials/navbar.tpl');
@@ -62,141 +67,119 @@ $comments = get_comments(['post_id' => $articleId]);
     ?>
     <!-- Header end -->
 
-    <!--================Event Area =================-->
+    <!--================ Event Area =================-->
     <div class="container">
 
-    <section class="blog_area single-post-area section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="posts-list">
-                    <div class="single-post">
-                        <div class="feature-img">
-                            <!-- Image -->
-                            <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
-                        </div>
-                        <div class="blog_details">
-                            <!-- Title -->
-                            <h2><?= get_the_title() ?></h2>
+        <section class="blog_area single-post-area section_padding">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="posts-list col-lg-8">
+                        <div class="single-post">
+                            <div class="feature-img">
+                                <!-- Image -->
+                                <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
+                            </div>
+                            <!-- Blog details -->
+                            <div class="blog_details">
 
-                            <?php
-                            if (get_current_user_id() == get_the_author_meta('ID')) {
-                                $updateEventUrl = $router->generate(
-                                    'event-update-form',
-                                    [
-                                    'eventId' => $articleId
-                                ]
-                                );
-
-                            
-                                echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
-                            }
-
-                            ?>
-                            <!-- Tags & nb comments-->
-                            <ul class="blog-info-link mt-3 mb-4">
-                                <li><i class="far fa-user"></i>
-                                    <?php if (!empty($taxonomies)) {
-                                        foreach ($taxonomies as $taxonomy) {
-                                            echo $taxonomy->name . ' ';
-                                        }
-                                    } ?></li>
-                                <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
-                                        $date = get_field('date');
-                                        echo $date;
-                                    } else {
-                                        echo "-";
-                                    } ?></li>
-                            </ul>
-                            <!-- excert -->
-                            <p class="excert">
-                                <?= get_the_content(); ?>
-                            </p>
-
-                            <!-- spot map -->
-                            <div class="quote-wrapper">
-                                <div class="quotes">
-                                    <div class="col-lg-6">
-
-                                        <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
-
-                                        <i class="ti-direction"></i>
-                                        <?php 
-                                        if (!empty($spotCity)) {
-                                            echo $spotCity;
-                                        }
-                                        ?>
-                                        <br />
-                                        <i class="ti-location-pin"></i>
-                                            <?php 
+                                <!-- Title -->
+                                <h2><?= get_the_title() ?></h2>
 
 
-                                            if (!empty($spotDepartement)) {
-                                                echo ($spotDepartement[0]->name);
+                                <div class="d-sm-flex align-items-center justify-content-between my-4">
+
+                                    <!-- participation count-->
+                                    <div class="me-auto">
+                                        <i class="far fa-heart mr-1"></i><?= count($participants) ?> personnes participent
+                                    </div>
+
+                                    <!-- CRUD section -->
+                                    <div class="d-flex">
+                                            <?php
+                                            if (get_current_user_id() == get_the_author_meta('ID')) {
+                                                $updateEventUrl = $router->generate('event-update-form',['eventId' => $articleId]);
+                                                echo '<a href="' . $updateEventUrl . '" class="button button-contactForm btn_1 m-2"> Editer </a>';
+                                            }
+                                    
+                                            if (is_user_logged_in()) {
+                                                if (get_the_author_meta('ID') == $userId) {
+
+                                                    $url = $router->generate(
+                                                        'event-confirm-delete',['eventId' => $articleId]);
+                                                    echo '<a href="' . $url . '" class="btn_2 button-contactForm m-2">SUPPRIMER</a>';
+
+                                                } elseif ($participation === false) {
+
+                                                    $url = $router->generate('surfer-event-participate',['eventId' => $articleId]);
+                                                    echo '<a href="' . $url . '" class="btn_1 m-2">Participer</a>';
+
+                                                } elseif ($participation === true) {
+
+                                                    $url = $router->generate('surfer-event-leave',['eventId' => $articleId]);
+                                                    echo '<a href="' . $url . '" class="btn_2 button-contactForm m-2">Quitter</a>';
+                                                }
                                             }
                                             ?>
+                                    </div>
 
+                                </div>
+
+                                <!-- Tags & nb comments-->
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <li>
+                                        <i class="far fa-user"></i>
+
+                                        <?php 
+                                        if (!empty($taxonomies)) {
+                                            foreach ($taxonomies as $taxonomy) {
+                                                echo $taxonomy->name . ' ';
+                                            }
+                                        } 
+                                        ?>
+                                        
+                                    </li>
+                                    <li>
+                                        <i class="ti ti-announcement"></i> 
+
+                                        <?php 
+                                        if (!empty(get_field('date'))) {
+                                            $date = get_field('date');
+                                            echo $date;
+                                        } else {
+                                            echo "-";
+                                        } 
+                                        ?>
+                                        
+                                    </li>
+                                </ul>
+
+                                <!-- excerpt -->
+                                <p class="excert">
+                                    <?= get_the_content(); ?>
+                                </p>
+
+                                <!-- spot map -->
+                                <div class="quote-wrapper">
+                                    <div class="quotes">
+                                        <div class="col-lg-6">
+
+                                            <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
+                                            
+                                            <p><i class="ti-direction"></i><?php if (!empty($spotCity)) { echo $spotCity;}?></p>
+                                            <p><i class="ti-location-pin"></i><?php if (!empty($spotDepartement)) {echo ($spotDepartement[0]->name);}?></p>
                                         </div>
 
                                     </div>
 
                                     <?php get_template_part('partials/map.tpl', null, ['spotId' => $spotId]); ?>
 
-
                                 </div>
+
                             </div>
                         </div>
                     </div>
+
                     <div class="navigation-top">
-                        <div class="d-sm-flex justify-content-between text-center">
-
-                            <!-- participation -->
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span><?= count($participants) ?> personnes participent</p>
-
-                            <div class="col-sm-4 text-center my-2 my-sm-0">
-                                <div class="col-sm-4 text-center my-2 my-sm-0">
-                                    <?php
-
-                                    if(is_user_logged_in()) {
-                                        if (get_the_author_meta('ID') == $userId) {
-
-                                            $url = $router->generate(
-                                                'event-confirm-delete',
-                                                [
-                                                    'eventId' => $articleId
-                                                ]
-                                            );
-
-                                            echo '<a href="' . $url . '" class="btn_2">Supprimer l\'événement</a>';
-                                        } elseif ($participation === false) {
-
-                                            $url = $router->generate(
-                                                'surfer-event-participate',
-                                                [
-                                                    'eventId' => $articleId
-                                                ]
-                                            );
-
-                                            echo '<a href="' . $url . '" class="btn_1">Participer</a>';
-                                        } elseif ($participation === true) {
-
-                                            $url = $router->generate(
-                                                'surfer-event-leave',
-                                                [
-                                                    'eventId' => $articleId
-                                                ]
-                                            );
-
-                                            echo '<a href="' . $url . '" class="btn_2">Quitter</a>';
-                                        }
-
-                                    }
-                                    ?>
-
-                                </div>
-
-                            </div>
-
-                        </div>
 
                         <!-- Author -->
                         <div class="blog-author">
@@ -229,7 +212,7 @@ $comments = get_comments(['post_id' => $articleId]);
                             <?php foreach ($comments as $comment) { ?>
                                 <div class="comment-list">
                                     <div class="single-comment justify-content-between d-flex">
-                                        <div class="user justify-content-between d-flex">
+                                        <div class="user justify-content-between align-items-center d-flex">
                                             <div class="thumb">
                                                 <?php
 
@@ -242,7 +225,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 ]);
 
                                                 $commentorProfile = $commentAuthorProfileQuery->posts[0];
-                                                
+
                                                 // image profile
                                                 $hasProfileImage = has_post_thumbnail($commentorProfile->ID);
                                                 if ($hasProfileImage) {
@@ -250,7 +233,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 } else {
                                                     $imageCommentorURL = 'https://picsum.photos/300/200?random=1';
                                                 }
-                                                echo '<img src="'.$imageCommentorURL.'">';
+                                                echo '<img src="' . $imageCommentorURL . '">';
 
                                                 ?>
                                             </div>
@@ -261,8 +244,8 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex align-items-center">
                                                         <h5>
-                                                            <a href="<?php 
-                                                            echo $commentorProfile->guid; ?>"><?php echo $commentorProfile->post_title; ?></a>
+                                                            <a href="<?php
+                                                                        echo $commentorProfile->guid; ?>"><?php echo $commentorProfile->post_title; ?></a>
                                                         </h5>
                                                         <p class="date"><?php echo $comment->comment_date; ?> </p>
                                                     </div>

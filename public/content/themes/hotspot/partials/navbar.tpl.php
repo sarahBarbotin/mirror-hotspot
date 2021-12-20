@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row align-items-center ">
                 <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+                    <nav class="navbar navbar-expand-xl navbar-light justify-content-between">
                         <a class="navbar-brand" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png');?>" alt="logo"> </a>
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                             data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -16,14 +16,11 @@
                             id="navbarSupportedContent">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?=get_home_url();?>">Home</a>
-                                </li>
-                                <li class="nav-item">
                                     <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'about'
-                                    ) ); ?>">About</a>
+                                    ) ); ?>">À propos</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Events</a>
+                                    <a class="nav-link" href="<?=get_post_type_archive_link('event');?>">Événements</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="<?=get_post_type_archive_link('spot');?>">Spots</a>
@@ -32,18 +29,15 @@
                                     <a class="nav-link" href="<?= get_permalink( get_page_by_title( 'contact'
                                     ) ); ?>">Contact</a>
                                 </li>
-                                <li class="nav-item search-form">
-                                    <span class="nav-item">
+                                <li class="nav-item search-form mr-2">
+                                    <span>
                                         <?php get_search_form(); ?>
                                     </span>
                                 </li>
-                            </ul>
-                        </div>
-
-                        <?php
+                                <?php
                             if(!is_user_logged_in()) {
-                                echo '<a href="' . wp_login_url() . '" class="btn_1 d-none d-lg-block mr-2">Connexion</a>';
-                                echo '<a href="'. wp_registration_url() .'" class="btn_2 d-none d-lg-block">Inscription</a>';
+                                echo '<li class="nav-item search-form mr-2"><a href="' . wp_login_url() . '" class="btn_1 d-lg-block">Connexion</a></li>';
+                                echo '<li class="nav-item search-form mr-2"><a href="'. wp_registration_url() .'" class="btn_2 d-lg-block">Inscription</a></li>';
                             }
                             else {
                                 $user = wp_get_current_user();
@@ -58,12 +52,16 @@
                                     'author' => $userID]
                                 );
 
-                                echo '<a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-none d-lg-block mr-2">Mon Profil</a>';
-                                echo '<a href="'. wp_logout_url() .'" class="btn_2 d-none d-lg-block">Déconnexion</a>';
+                                echo '<li class="nav-item search-form mr-2"><a href="'. $surferProfile->posts[0]->guid .'" class="btn_1 d-lg-block">Mon Profil</a></li>';
+                                echo '<li class="nav-item search-form mr-2"><a href="'. wp_logout_url() .'" class="btn_2 d-lg-block">Déconnexion</a></li>';
 
                                 
                             }
                         ?>
+                            </ul>
+                        </div>
+
+                        
 
 
                     </nav>

@@ -22,7 +22,7 @@
 
 
 
-    <section class="blog_area section_padding">
+    <section class="blog_area">
         <div class="container">
             <div class="row">
 
