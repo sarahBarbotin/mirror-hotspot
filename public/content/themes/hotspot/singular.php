@@ -16,7 +16,7 @@ $hasImage = has_post_thumbnail($articleId);
 if ($hasImage) {
     $imageURL = get_the_post_thumbnail_url();
 } else {
-    $imageURL = 'https://picsum.photos/300/200?random=1';
+    $imageURL = get_theme_file_uri('assets/img/event-image-default.png');
 }
 
 //get spot datas of current event
@@ -231,7 +231,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 if ($hasProfileImage) {
                                                     $imageCommentorURL = get_the_post_thumbnail_url($commentorProfile->ID);
                                                 } else {
-                                                    $imageCommentorURL = 'https://picsum.photos/300/200?random=1';
+                                                    $imageCommentorURL = get_theme_file_uri('assets/img/surfer-avatar-default.png');
                                                 }
                                                 echo '<img src="' . $imageCommentorURL . '">';
 
