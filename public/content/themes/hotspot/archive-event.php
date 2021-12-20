@@ -23,7 +23,7 @@
 
     <!-- Header end -->
     <!--================Blog Area =================-->
-    <section class="blog_area section_padding">
+    <section class="blog_area mt-5">
         <div class="container">
             <div class="row">
 
@@ -51,9 +51,6 @@
 
                         <?php
                         get_template_part('partials/aside/searchbar.tpl');
-                        ?>
-
-                        <?php
                         get_template_part('partials/aside/filter-taxonomy-level.tpl');
                         get_template_part('partials/aside/filter-taxonomy-discipline.tpl');
                         ?>
@@ -64,15 +61,21 @@
         </div>
     </section>
 
+    <?php if(is_user_logged_in()) { ?>
     <section class="contact-section mx-sm-4">
     <div class="container">
             <div class="row">
         <?php
-        get_template_part('partials/events/event-form.tpl');
+
+        if (is_user_logged_in()) {
+            get_template_part('partials/events/event-form.tpl');
+        }
+
         ?>
             </div>
     </div>
     </section>
+    <?php }?>
     <!--================Blog Area =================-->
 
     <!-- Footer start -->

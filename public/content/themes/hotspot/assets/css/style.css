@@ -509,6 +509,9 @@ ul {
 /* line 47, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_button.scss */
 .btn_2 {
   background-color: #051622;
+  border-radius: 4
+px
+;
 }
 
 /* line 49, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_button.scss */
@@ -1728,8 +1731,8 @@ ul {
 
 /* line 1191, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
 .single-post-area .blog-author img {
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin-right: 30px;
 }
@@ -1738,8 +1741,8 @@ ul {
   /* line 1191, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
   .single-post-area .blog-author img {
     margin-right: 15px;
-    width: 45px;
-    height: 45px;
+    width: 150px;
+    height: 150px;
   }
 }
 
@@ -1930,7 +1933,8 @@ ul {
 
 /* line 1372, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
 .comments-area .thumb img {
-  width: 70px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
 }
 
@@ -2228,6 +2232,11 @@ ul {
 /* line 4, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
 .main_menu .navbar-brand {
   padding-top: 0rem;
+  transition: all .2s ease-in-out;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.1);
 }
 
 .navbar-brand {
@@ -2286,8 +2295,8 @@ ul {
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 33, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
-  .main_menu .main-menu-item ul li .nav-link {
-    padding: 35px 16px;
+  .main_menu .main-menu-item ul li .nav-link, .search-form {
+    padding: 15px 16px;
   }
 }
 
@@ -2357,7 +2366,7 @@ ul {
     z-index: 9999 !important;
     position: absolute;
     left: 0;
-    top: 65px;
+    top: 95px;
     width: 100%;
     background-color: #fff;
     text-align: center !important;
@@ -2383,6 +2392,10 @@ ul {
   /* line 143, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_menu.scss */
   .main_menu .main-menu-item .nav-item a {
     padding: 0 !important;
+  }
+
+  .main_menu .main-menu-item .search-form a{
+    padding: 10px !important;
   }
 }
 

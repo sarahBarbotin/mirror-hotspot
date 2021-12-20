@@ -14,7 +14,7 @@
                                 $filter = '';
                             }
                             if(is_post_type_archive( 'event' )) {
-                                echo ("Liste des évènement" . $filter);
+                                echo ("Liste des événements" . $filter);
                             } elseif (is_post_type_archive( 'spot' )) {
                                 echo ("Liste des spots" . $filter);
                             } else {

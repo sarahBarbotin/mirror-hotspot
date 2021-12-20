@@ -147,19 +147,19 @@ function get_breadcrumb() {
             if (is_single()) {
                 if (get_post_type(get_the_ID()) === 'event') {
                     
-                    echo ("Liste des évènements");
+                    echo '<a href="'.get_post_type_archive_link('event').'" rel="nofollow">Liste des évènements</a>';
                     echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
                 }
                 elseif (get_post_type(get_the_ID()) === 'spot') {
                     
-                    echo ("Liste des spots");
+                    echo '<a href="'.get_post_type_archive_link('spot').'" rel="nofollow">Liste des spots</a>';
                     echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
                 }
                 the_title();
             }
     } elseif (is_post_type_archive( 'event' )) {
         echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
-        echo ("Liste des évènement");
+        echo ("Liste des évènements");
     } elseif (is_post_type_archive( 'spot' )) {
         echo "&nbsp;&nbsp;&#187;&nbsp;&nbsp;";
         echo ("Liste des spots");

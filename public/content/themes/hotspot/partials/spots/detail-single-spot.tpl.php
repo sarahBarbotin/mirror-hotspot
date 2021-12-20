@@ -7,14 +7,14 @@ if($hasImage) {
     $imageURL = get_the_post_thumbnail_url();
 }
 else {
-    $imageURL = 'https://picsum.photos/300/200?random=1';
+    $imageURL = get_theme_file_uri('assets/img/spot-image-default.png');
 }
 
 // Taxonomies
 $taxonomies = wp_get_post_terms( $post->ID, ['level','departement', 'event_discipline'] );
 
 $fields = get_fields();
-// dump($fields);
+
 
 
 ?>

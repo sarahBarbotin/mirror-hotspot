@@ -22,7 +22,7 @@
 
 
 
-    <section class="blog_area section_padding">
+    <section class="blog_area">
         <div class="container">
             <div class="row">
 
@@ -45,6 +45,7 @@
                     <div class="blog_right_sidebar">
 
                     <?php
+                        get_template_part('partials/aside/searchbar.tpl');
                         get_template_part('partials/aside/filter-taxonomy-level.tpl');
                         get_template_part('partials/aside/filter-taxonomy-departement.tpl');
                         ?>
