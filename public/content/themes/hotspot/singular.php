@@ -27,6 +27,7 @@ $spotDepartement = wp_get_post_terms($spotId, 'departement');
 // binding participation between the current user/surfer and the event
 $surferEventModel = new SurferEventModel();
 $participation = $surferEventModel->isParticipating($userId, $articleId);
+$participants = $surferEventModel->getSurfersByEventId($articleId);
 
 // Taxonomies
 $taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
@@ -69,68 +70,68 @@ $commenter = wp_get_current_commenter();
     <!--================EVENT Area =================-->
 
     <div class="container">
-    <section class="blog_area single-post-area section_padding">
-        <div class="container">
-            <div class="row">
-                <div class="posts-list">
-                    <div class="single-post">
-                        <div class="feature-img">
-                            <!-- Image -->
-                            <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
-                        </div>
-                        <div class="blog_details">
-                            <!-- Title -->
-                            <h2><?= get_the_title() ?></h2>
+        <section class="blog_area single-post-area section_padding">
+            <div class="container">
+                <div class="row">
+                    <div class="posts-list">
+                        <div class="single-post">
+                            <div class="feature-img">
+                                <!-- Image -->
+                                <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
+                            </div>
+                            <div class="blog_details">
+                                <!-- Title -->
+                                <h2><?= get_the_title() ?></h2>
 
-                            <?php
-                            $updateEventUrl = $router->generate(
-                                'event-update-form',
-                                [
-                                    'eventId' => $articleId
-                                ]
-                            );
+                                <?php
+                                $updateEventUrl = $router->generate(
+                                    'event-update-form',
+                                    [
+                                        'eventId' => $articleId
+                                    ]
+                                );
 
-                            
-                                echo '<a href="'.$updateEventUrl.'" class="button button-contactForm btn_1"> Editer </a>';
-                            
 
-                            ?>
-                            <!-- Tags & nb comments-->
-                            <ul class="blog-info-link mt-3 mb-4">
-                                <li><i class="far fa-user"></i>
-                                    <?php if (!empty($taxonomies)) {
-                                        foreach ($taxonomies as $taxonomy) {
-                                            echo $taxonomy->name . ' ';
-                                        }
-                                    } ?></li>
-                                <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
-                                        $date = get_field('date');
-                                        echo $date;
-                                    } else {
-                                        echo "-";
-                                    } ?></li>
-                            </ul>
-                            <!-- excert -->
-                            <p class="excert">
-                                <?= get_the_content(); ?>
-                            </p>
+                                echo '<a href="' . $updateEventUrl . '" class="button button-contactForm btn_1"> Editer </a>';
 
-                            <!-- spot map -->
-                            <div class="quote-wrapper">
-                                <div class="quotes">
-                                    <div class="col-lg-6">
 
-                                        <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
+                                ?>
+                                <!-- Tags & nb comments-->
+                                <ul class="blog-info-link mt-3 mb-4">
+                                    <li><i class="far fa-user"></i>
+                                        <?php if (!empty($taxonomies)) {
+                                            foreach ($taxonomies as $taxonomy) {
+                                                echo $taxonomy->name . ' ';
+                                            }
+                                        } ?></li>
+                                    <li><i class="ti ti-announcement"></i> <?php if (!empty(get_field('date'))) {
+                                                                                $date = get_field('date');
+                                                                                echo $date;
+                                                                            } else {
+                                                                                echo "-";
+                                                                            } ?></li>
+                                </ul>
+                                <!-- excert -->
+                                <p class="excert">
+                                    <?= get_the_content(); ?>
+                                </p>
 
-                                        <i class="ti-direction"></i>
-                                        <?php 
-                                        if (!empty($spotCity)) {
-                                            echo $spotCity;
-                                        }
-                                        ?>
-                                        <br />
-                                        <i class="ti-location-pin"></i>
-                                            <?php 
+                                <!-- spot map -->
+                                <div class="quote-wrapper">
+                                    <div class="quotes">
+                                        <div class="col-lg-6">
+
+                                            <h3><a href="<?= get_permalink($spotId) ?>"><?= $spot->post_title ?></a></h3>
+
+                                            <i class="ti-direction"></i>
+                                            <?php
+                                            if (!empty($spotCity)) {
+                                                echo $spotCity;
+                                            }
+                                            ?>
+                                            <br />
+                                            <i class="ti-location-pin"></i>
+                                            <?php
 
                                             if (!empty($spotDepartement)) {
                                                 echo ($spotDepartement[0]->name);
@@ -152,7 +153,7 @@ $commenter = wp_get_current_commenter();
                         <div class="d-sm-flex justify-content-between text-center">
 
                             <!-- participation -->
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span><?= count($participants) ?> personnes participent</p>
 
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <!-- <p class="comment-count"><span class="align-middle"><i class="far fa-comment"></i></span> 06 Comments</p> -->
@@ -168,7 +169,7 @@ $commenter = wp_get_current_commenter();
                                             ]
                                         );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
+                                        echo '<a href="' . $url . '" class="btn_2">Supprimer l\'événement</a>';
                                     } elseif ($participation === false) {
 
                                         $url = $router->generate(
@@ -178,7 +179,7 @@ $commenter = wp_get_current_commenter();
                                             ]
                                         );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
+                                        echo '<a href="' . $url . '" class="btn_1">Participer</a>';
                                     } elseif ($participation === true) {
 
                                         $url = $router->generate(
@@ -188,67 +189,16 @@ $commenter = wp_get_current_commenter();
                                             ]
                                         );
 
-                                        echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Quitter</a>';
+                                        echo '<a href="' . $url . '" class="btn_2">Quitter</a>';
                                     }
 
                                     ?>
 
                                 </div>
 
-
-
-                                <!-- SOCIAL MEDIA -->
-
-                                <!-- <ul class="social-icons">
-                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                            </ul> -->
                             </div>
 
-                            <!-- NAVIGATION -->
 
-                            <!-- <div class="navigation-area">
-                            <div class="row">
-                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/preview.png" alt="">$fields = get_fields();
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-left"></span>
-                                        </a>
-                                    </div>
-                                    <div class="detials">
-                                        <p>Prev Post</p>
-                                        <a href="#">
-                                            <h4>Space The Final Frontier</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                    <div class="detials">
-                                        <p>Next Post</p>
-                                        <a href="#">
-                                            <h4>Telescopes 101</h4>
-                                        </a>
-                                    </div>
-                                    <div class="arrow">
-                                        <a href="#">
-                                            <span class="lnr text-white ti-arrow-right"></span>
-                                        </a>
-                                    </div>
-                                    <div class="thumb">
-                                        <a href="#">
-                                            <img class="img-fluid" src="img/post/next.png" alt="">
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
 
                         </div>
 
@@ -295,7 +245,7 @@ $commenter = wp_get_current_commenter();
                                         <div class="user justify-content-between d-flex">
                                             <div class="thumb">
                                                 <?php
-                                                
+
                                                 $commentAuthorID = $comment->comment_author_id;
 
                                                 echo get_avatar($commentAuthorID);
@@ -323,37 +273,33 @@ $commenter = wp_get_current_commenter();
 
 
                             <!-- Reply -->
+                            <?php if (get_current_user_id()) { ?>
 
-                            <div class="comment-form">
-                                <h4>Laissez un commentaire</h4>
-                                <form class="form-contact comment_form" action="#" method="POST" id="commentForm">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
+                                <div class="comment-form">
+                                    <h4>Laissez un commentaire</h4>
+                                    <form class="form-contact comment_form" action="#" method="POST" id="commentForm">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="name" id="name" type="text" placeholder="Name">
-                                    </div>
+                                        <div class="form-group mt-2">
+                                            <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
+                                        </div>
+                                    </form>
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <input class="form-control" name="email" id="email" type="email" placeholder="Email">
-                                    </div>
+
+                            <?php } else { ?>
+
+                                <div class="comment-form">
+                                    <h4>Laisser un commentaire</h4>
+                                    <p>Inscrivez-vous ou connectez-vous pour laisser un commentaire.</p>
                                 </div>
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <input class="form-control" name="website" id="website" type="text" placeholder="Website">
-                                    </div>
-                                </div> -->
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
-                                    </div>
-                                </form>
-                            </div>
+
+                            <?php }  ?>
+
                         </div>
                         <!-- a lot of asides -->
                     </div>

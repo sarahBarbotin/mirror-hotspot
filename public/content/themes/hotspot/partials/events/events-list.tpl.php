@@ -42,6 +42,12 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
     );
 }
 
+if($_GET && ("yes" == $_GET['participation'])){
+    echo "<div class='container alert alert-success py-3' role='alert'>Votre participation à l'événement a bien été enregistrée</div>";
+}
+else if($_GET && ("no" == $_GET['participation']) ){
+    echo "<div class='container alert alert-info py-3' role='alert'>Votre participation à l'événement a bien été retirée</div>";
+}
 
 
 if ($eventList->have_posts()) {
