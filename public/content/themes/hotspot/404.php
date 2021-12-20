@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="<?=get_bloginfo('language');?>">
 
@@ -20,9 +21,18 @@
     ?>
     <!-- Header end -->
 
-    <p>404 TODO</p>
-
-
+    <section class="blog_area single-post-area section_padding">
+        <div class="container">
+            <div>
+                <img src="<?= get_theme_file_uri('assets/img/404.png'); ?>" alt="error 404 - surfer falling" class="img-fluid">
+            </div>
+            <div class="row justify-content-center my-3">
+                <div>
+                    <a href="<?= get_home_url() ?>" class="btn_1">Retour à l'accueil</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
 <!-- Footer start -->

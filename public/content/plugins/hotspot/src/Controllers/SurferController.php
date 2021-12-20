@@ -30,25 +30,23 @@ class SurferController extends CoreController
     {
 
         // si l'utilisateur n'est pas connecté, nous affichons une page d'erreur avec l'entête http "forbidden"
-        if(!$this->isConnected()) {
+        if (!$this->isConnected()) {
 
 
 
             header("HTTP/1.1 403 Forbidden");
             // BONUS il es possible de faire http_response_code(403);
             $this->show('views/surfer-forbidden');
-        }
-        else {
+        } else {
             $this->show('views/surfer-confirm-delete-account.view');
         }
     }
-
 
     public function updateForm()
     {
 
         // si l'utilisateur n'est pas connecté, nous affichons une page d'erreur avec l'entête http "forbidden"
-        if(!$this->isConnected()) {
+        if (!$this->isConnected()) {
 
 
             // BONUS E10 header il est possible de faire
@@ -56,8 +54,7 @@ class SurferController extends CoreController
 
 
             $this->show('views/surfer-forbidden');
-        }
-        else {
+        } else {
 
 
             $profile = $this->getProfile();
@@ -71,7 +68,7 @@ class SurferController extends CoreController
 
     public function handleUpdateSurferProfileForm($surferId)
     {
-        
+
         if (isset($_POST['updateSurferProfile'])) {
 
 
@@ -84,27 +81,27 @@ class SurferController extends CoreController
                 $city = filter_var($city, FILTER_SANITIZE_STRING);
                 $levelId = filter_var($levelId, FILTER_VALIDATE_INT);
                 $departementId = filter_var($departement, FILTER_VALIDATE_INT);
-                
+
                 $picture_upload = filter_var($picture_upload, FILTER_SANITIZE_URL);
-                
+
                 // Envoi du nouvel event
                 $data = [
-                        'ID' => $surferId,
-                        'post_author' => get_current_user_id(),
-                        'post_type' => 'surfer-profile',
-                        'post_status' => 'publish',
-                        'meta_input'   => array(
-                            'city' => $city,
-                            'level'   => $levelId,
-                        ),
-                    ];
+                    'ID' => $surferId,
+                    'post_author' => get_current_user_id(),
+                    'post_type' => 'surfer-profile',
+                    'post_status' => 'publish',
+                    'meta_input'   => array(
+                        'city' => $city,
+                        'level'   => $levelId,
+                    ),
+                ];
                 if (!empty($content)) {
                     $data['post_content'] = $content;
                 }
                 if (!empty($name)) {
                     $data['post_title'] = $name;
                 }
-                    
+
                 $postId = wp_insert_post($data);
 
                 if (!empty($departementId)) {
@@ -144,36 +141,40 @@ class SurferController extends CoreController
 
                 // empty the datas
                 unset($_FILES);
-                
+
                 // redirection toward the updated surfer profile
                 if ($postId) {
                     wp_redirect(get_permalink($postId), 302);
                     exit();
                 }
-            
             }
         }
-
-        
     }
+
 
     public function participateToEvent($eventId)
-    {
-        // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
+        {
+            // TODO vérifier que l'utilisateur est connecté et qu'il a le rôle developer
 
-        $model = new SurferEventModel();
-        $user = wp_get_current_user();
-        $userId = $user->ID;
+            $model = new SurferEventModel();
+            $user = wp_get_current_user();
+            $userId = $user->ID;
+
+
+            $participationToEvent = $model->insert(
+                $userId,
+                $eventId
+            );
+
+            $url = get_post_type_archive_link('event');
+
+            if ($participationToEvent) {
+                header('Location: ' . $url . '?participation=yes');
+                exit();
+            }
+
+        }
         
-
-        $model->insert(
-            $userId,
-            $eventId
-        );
-
-        $url = get_post_type_archive_link('event');
-        header('Location: ' . $url);
-    }
 
     public function leaveEvent($eventId)
     {
@@ -181,16 +182,23 @@ class SurferController extends CoreController
         $user = wp_get_current_user();
         $userId = $user->ID;
 
-        $model->delete($eventId, $userId);
+        $leavedEvent = $model->delete($eventId, $userId);
 
         $url = get_post_type_archive_link('event');
-        header('Location: ' . $url);
+        
+        if ($leavedEvent) {
+            header('Location: ' . $url . '?participation=no');
+            exit();
+        }
+         
+        
     }
 
-    public function handleSurferConfirmDelete($surferId) 
+    public function handleSurferConfirmDelete($surferId)
     {
         if (!$this->isConnected()) {
-            get_permalink(get_page_by_title('404'));
+            $url = get_post_type_archive_link('event');
+            header('Location: ' . $url);
             exit();
         } else {
             $this->show(
@@ -202,22 +210,30 @@ class SurferController extends CoreController
 
     public function handleSurferDelete($surferId)
     {
-
         //suppression CPT surfer-profile
         if ($surferId) {
             //TODO Token
             $current_user = wp_get_current_user();
+            $this->deleteEventsByAuthor($current_user->ID);
             if (!in_array('administrator', $current_user->roles)) {
                 $deletedProfile = wp_delete_post($surferId, true);
 
                 if ($deletedProfile) {
 
-                //suppression WP user
+                    //suppression WP user
+                    $userId = $current_user->ID;
                     require_once ABSPATH . '/wp-admin/includes/user.php';
-                    $deletedUser = wp_delete_user($current_user->ID, true);
-                
+                    $deletedUser = wp_delete_user($userId, true);
+
                     //redirect
                     if ($deletedUser) {
+                        // deleting the events created by the user
+                        $this->deleteEventsByAuthor($userId);
+
+                        // also deleting user's participation to events
+                        $surferEventModel = new SurferEventModel;
+                        $surferEventModel->deleteBySurferId($userId);
+
                         wp_redirect(get_home_url(), 302);
                         exit();
                     } else {
@@ -227,12 +243,27 @@ class SurferController extends CoreController
                     echo 'erreur lors de la suppression du profil';
                 }
             } else {
-                echo ('Vous ne pouvez pas supprimer votre compte. Veuillez contacter l\'administrateur du site.' );
+                echo ('Vous ne pouvez pas supprimer votre compte. Veuillez contacter l\'administrateur du site.');
                 exit();
             }
-        
         }
-    
-        
     }
+
+    public function deleteEventsByAuthor($userId)
+    {
+        $eventQuery = new WP_Query([
+            'post_type' => 'event',
+            'author' => $userId
+        ]);
+        
+        if (!empty($eventQuery->posts)) {
+            foreach ($eventQuery->posts as $post) {
+                wp_delete_post($post->ID);               
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }

@@ -42,6 +42,12 @@ if (!empty($taxonomyFilter) && !empty($termFilter)) {
     );
 }
 
+if(!empty($_GET['participation']) && ("yes" == $_GET['participation'])){
+    echo "<div class='container alert alert-success py-3' role='alert'>Votre participation à l'événement a bien été enregistrée</div>";
+}
+else if(!empty($_GET['participation']) && ("no" == $_GET['participation']) ){
+    echo "<div class='container alert alert-info py-3' role='alert'>Votre participation à l'événement a bien été retirée</div>";
+}
 
 
 if ($eventList->have_posts()) {
@@ -54,12 +60,10 @@ if ($eventList->have_posts()) {
                 <?php
                 $articleId = get_the_id();
                 $hasImage = has_post_thumbnail($articleId);
-                //dump($hasImage);
                 if ($hasImage) {
                     $imageURL = get_the_post_thumbnail_url();
-                //dump($imageURL);   
                 } else {
-                    $imageURL = 'https://picsum.photos/300/200?random=1';
+                    $imageURL = get_theme_file_uri('assets/img/event-image-default.png');
                 }
                 ?>
                 <img class="card-img rounded-0" src="<?= $imageURL ?>" alt="image de l'event">
