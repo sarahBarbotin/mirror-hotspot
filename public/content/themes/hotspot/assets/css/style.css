@@ -1728,8 +1728,8 @@ ul {
 
 /* line 1191, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
 .single-post-area .blog-author img {
-  width: 90px;
-  height: 90px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
   margin-right: 30px;
 }
@@ -1738,8 +1738,8 @@ ul {
   /* line 1191, /Applications/MAMP/htdocs/palash/cl/july 2019/193 Travel/193 travel html/sass/_blog.scss */
   .single-post-area .blog-author img {
     margin-right: 15px;
-    width: 45px;
-    height: 45px;
+    width: 150px;
+    height: 150px;
   }
 }
 

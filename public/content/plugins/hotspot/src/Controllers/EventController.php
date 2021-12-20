@@ -236,8 +236,7 @@ class EventController extends CoreController
                 ['eventId' => $eventId]
             );
         }
-    }
-    
+    }    
 
     public function handleEventDelete($eventId)
     {

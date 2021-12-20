@@ -27,6 +27,7 @@ $spotDepartement = wp_get_post_terms($spotId, 'departement');
 // binding participation between the current user/surfer and the event
 $surferEventModel = new SurferEventModel();
 $participation = $surferEventModel->isParticipating($userId, $articleId);
+$participants = $surferEventModel->getSurfersByEventId($articleId);
 
 // Taxonomies
 $taxonomies = wp_get_post_terms($post->ID, ['departement', 'event_discipline']);
@@ -63,6 +64,7 @@ $comments = get_comments(['post_id' => $articleId]);
 
     <!--================Event Area =================-->
     <div class="container">
+
     <section class="blog_area single-post-area section_padding">
         <div class="container">
             <div class="row">
@@ -127,6 +129,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                         <i class="ti-location-pin"></i>
                                             <?php 
 
+
                                             if (!empty($spotDepartement)) {
                                                 echo ($spotDepartement[0]->name);
                                             }
@@ -147,11 +150,12 @@ $comments = get_comments(['post_id' => $articleId]);
                         <div class="d-sm-flex justify-content-between text-center">
 
                             <!-- participation -->
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> 7 personnes participent</p>
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span><?= count($participants) ?> personnes participent</p>
 
                             <div class="col-sm-4 text-center my-2 my-sm-0">
                                 <div class="col-sm-4 text-center my-2 my-sm-0">
                                     <?php
+
                                     if(is_user_logged_in()) {
                                         if (get_the_author_meta('ID') == $userId) {
 
@@ -162,7 +166,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 ]
                                             );
 
-                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Supprimer l\'événement</a>';
+                                            echo '<a href="' . $url . '" class="btn_2">Supprimer l\'événement</a>';
                                         } elseif ($participation === false) {
 
                                             $url = $router->generate(
@@ -172,7 +176,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 ]
                                             );
 
-                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 participate">Participer</a>';
+                                            echo '<a href="' . $url . '" class="btn_1">Participer</a>';
                                         } elseif ($participation === true) {
 
                                             $url = $router->generate(
@@ -182,15 +186,15 @@ $comments = get_comments(['post_id' => $articleId]);
                                                 ]
                                             );
 
-                                            echo '<a href="' . $url . '" class="genric-btn success circle mr-5 leave">Quitter</a>';
+                                            echo '<a href="' . $url . '" class="btn_2">Quitter</a>';
                                         }
+
                                     }
                                     ?>
 
                                 </div>
 
                             </div>
-
 
                         </div>
 
@@ -271,22 +275,35 @@ $comments = get_comments(['post_id' => $articleId]);
                             <?php } ?>
 
                             <!-- Reply -->
+                            <?php if (get_current_user_id()) { ?>
 
-                            <div class="comment-form">
-                                <h4>Laissez un commentaire</h4>
-                                <form class="form-contact comment_form" action="#" method="POST" id="commentForm">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group">
-                                                <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
+                                <div class="comment-form">
+                                    <h4>Laissez un commentaire</h4>
+                                    <form class="form-contact comment_form" action="#" method="POST" id="commentForm">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <textarea class="form-control w-100" name="addComment[content]" id="comment" cols="30" rows="9" placeholder="Ecrivez votre commentaire"></textarea>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="form-group mt-2">
-                                        <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
-                                    </div>
-                                </form>
-                            </div>
+
+                                        <div class="form-group mt-2">
+                                            <button type="submit" class="button button-contactForm btn_1">Envoyer</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            <?php } else { ?>
+
+                                <div class="comment-form">
+                                    <h4>Laisser un commentaire</h4>
+                                    <p>Inscrivez-vous ou connectez-vous pour laisser un commentaire.</p>
+                                </div>
+
+                            <?php }  ?>
+
+
                         </div>
                     </div>
                 </div>
