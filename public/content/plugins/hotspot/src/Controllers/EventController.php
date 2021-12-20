@@ -26,7 +26,7 @@ class EventController extends CoreController
         if (isset($_POST['addEvent'])) {
 
             if (wp_verify_nonce($_POST['lol'], 'marie')) {
-                //dump($_FILES);
+
                 extract($_POST['addEvent']);
 
                 $name = filter_var($name, FILTER_SANITIZE_STRING);
@@ -46,13 +46,14 @@ class EventController extends CoreController
                 if (empty($name)) {
                     $errorMessages[] = "Vous n'avez pas donné de nom à votre Event";
                 }
-                // if (empty($date) || $date === false) {
-                //     $errorMessages[] = 'Veuillez renseigner la date de votre Event';
-                // }
+                if (empty($date) || $date === false) {
+                    $errorMessages[] = 'Veuillez renseigner la date de votre Event';
+                }
 
                 if (empty($spotEvent) || $spotEvent === false) {
                     $errorMessages[] = 'Veuillez renseigner le spot de votre Event';
                 }
+                
 
                 // Envoi du nouvel event
                 if (empty($errorMessages)) {
@@ -67,8 +68,8 @@ class EventController extends CoreController
                             'spot_id'   => $spotEvent
                         ),
                     ];
+                    
                     $postId = wp_insert_post($data);
-                    //dump($postId);
 
                     wp_set_object_terms($postId, array($levelId), 'level');                   
                     wp_set_object_terms($postId, $discipline, 'event_discipline');
@@ -83,8 +84,8 @@ class EventController extends CoreController
                         $file = $_FILES['picture_upload'];
 
                         $_FILES = array("upload_file" => $file);
-                        $attachment_id = media_handle_upload("upload_file", $postId);
-
+                        $attachment_id = media_handle_upload('upload_file', $postId);
+                        
                         if (is_wp_error($attachment_id)) {
                             // There was an error uploading the image.
                             $errorMessages[] = "Error adding file";
@@ -105,6 +106,7 @@ class EventController extends CoreController
                         echo "<br/><div class='container alert alert-danger' role='alert'>$message</div>";
                     }
                 }
+
 
                 unset($_FILES);
 
@@ -171,7 +173,6 @@ class EventController extends CoreController
                 
                     
                 $postId = wp_insert_post($data);
-                //dump($postId);
                 if (!empty($levelId)) {
                     wp_set_object_terms($postId, array($levelId), 'level');
                 }
@@ -287,5 +288,6 @@ class EventController extends CoreController
             }
         }
     }
+
     
 }

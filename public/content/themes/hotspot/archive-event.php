@@ -64,6 +64,7 @@
         </div>
     </section>
 
+    <?php if(is_user_logged_in()) { ?>
     <section class="contact-section mx-sm-4">
     <div class="container">
             <div class="row">
@@ -77,6 +78,7 @@
             </div>
     </div>
     </section>
+    <?php }?>
     <!--================Blog Area =================-->
 
     <!-- Footer start -->
