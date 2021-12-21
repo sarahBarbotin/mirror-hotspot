@@ -26,7 +26,7 @@ $fields = get_fields();
                 <div class="single-post">
                     <!-- Author -->
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="blog-author" style="margin-top:0;height:100%;">
                                 <div class="media align-items-center">
                                     <img src="<?= $imageURL; ?>" alt="">
