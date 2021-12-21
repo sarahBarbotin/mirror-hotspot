@@ -79,7 +79,7 @@
                 <div class="d-flex flex-wrap justify-content-between align-items-center">
                     <?php $disciplineQuery = get_terms(['taxonomy' => 'event_discipline', 'hide_empty' => false]) ?>
                     <?php foreach ($disciplineQuery as $discipline) {
-                        echo '<div>
+                        echo '<div class="pr-1">
                         <input type="checkbox" id="discipline-' . $discipline->term_id . '" name="addEvent[discipline][]" value="' . $discipline->name . '">
                         <label for="discipline-' . $discipline->term_id . '">' . $discipline->name . '</label>
                         </div>';
