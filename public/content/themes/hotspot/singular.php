@@ -73,11 +73,11 @@ $comments = get_comments(['post_id' => $articleId]);
         <section class="blog_area single-post-area section_padding">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="posts-list col-lg-8">
+                    <div class="posts-list col-lg-10">
                         <div class="single-post">
                             <div class="feature-img">
                                 <!-- Image -->
-                                <img class="img-fluid" src="<?php echo $imageURL ?>" alt="">
+                                <img class="img-fluid w-100" src="<?php echo $imageURL ?>" alt="">
                             </div>
                             <!-- Blog details -->
                             <div class="blog_details">
