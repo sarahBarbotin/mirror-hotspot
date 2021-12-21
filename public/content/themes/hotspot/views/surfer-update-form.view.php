@@ -197,7 +197,7 @@ if ($hasImage) {
 
                                                 <label for="content">Ma biographie</label>
 
-                                                <textarea class="form-control" name="updateSurferProfile[content]" id="content" type="text" onfocus="this.placeholder = ''" onblur="this.placeholder = '<?= $content ?>'" placeholder='<?= !empty($content) ? $content : 'Description' ?>' value="<?= $content ?>" rows="5"></textarea>
+                                                <textarea rows="5" class="form-control" name="updateSurferProfile[content]" id="content" type="text" onfocus="this.placeholder=''" onblur="this.placeholder='<?= $content ?>'" placeholder='<?= !empty($content) ? $content : 'Description' ?>'><?= $content ?></textarea>
 
                                             </div>
 
