@@ -40,7 +40,7 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
     <?php get_template_part('partials/banner.tpl'); ?>
 
 
-    <!--=================================== BODY =============================================-->
+<!--=================================== BODY =============================================-->
 
     <section class="contact-section ">
         <div class="container">
