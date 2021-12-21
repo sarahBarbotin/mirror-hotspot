@@ -42,9 +42,9 @@ $the_query = new WP_Query( $args ); ?>
                 $city = get_post_field('city');
             ?>
 
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-6 col-xl-4">
                 <div class="single_place">
-                    <img src="<?=$imageURL;?>" alt="">
+                    <img src="<?=$imageURL;?>" alt="" class="img-fluid">
                     <div class="hover_Text d-flex align-items-end justify-content-between">
                         <div class="hover_text_iner">
 
