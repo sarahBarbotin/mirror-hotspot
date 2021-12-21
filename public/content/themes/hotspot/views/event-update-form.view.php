@@ -120,7 +120,7 @@ $taxonomies = wp_get_post_terms($eventCPTObject->ID, ['level', 'event_discipline
                             <div class="col-sm-12">
                                 <div class="form-group">
                                     <label for="description">Description de votre Event :</label>
-                                    <textarea class="form-control w-100" name="updateEvent[description]" id="description" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description de votre Event'" placeholder='<?= $eventContent ?>' value="<?= $eventContent ?>"></textarea>
+                                    <textarea class="form-control w-100" name="updateEvent[description]" id="description" cols="30" rows="9" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description de votre Event'" placeholder='<?= $eventContent ?>'><?= $eventContent ?></textarea>
                                 </div>
                             </div>
                         </div>
