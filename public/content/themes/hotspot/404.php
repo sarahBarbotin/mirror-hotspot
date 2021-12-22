@@ -19,7 +19,7 @@
 
     <!-- Header end -->
 
-    <section class="blog_area single-post-area section_padding">
+    <section class="blog_area single-post-area my-5">
         <div class="container">
             <div class="section_tittle text-center">
                 <h2>Erreur 404</h2>
@@ -28,7 +28,7 @@
             <div class="text-center">
                 <img src="<?= get_theme_file_uri('assets/img/404.png'); ?>" alt="error 404 - surfer falling" class="img-fluid">
             </div>
-            <div class="row justify-content-center my-3">
+            <div class="row justify-content-center my-5">
                 <div>
                     <a href="<?= get_home_url() ?>" class="btn_1">Retour à l'accueil</a>
                 </div>
