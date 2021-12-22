@@ -16,9 +16,6 @@
     <?php
     get_template_part('partials/navbar.tpl');
     ?>
-    <?php
-    get_template_part('partials/banner.tpl');
-    ?>
     <!-- Header end -->
 
     <section class="blog_area single-post-area section_padding">
