@@ -16,19 +16,18 @@
     <?php
     get_template_part('partials/navbar.tpl');
     ?>
+
     <!-- Header end -->
 
-    <section class="text-center">
-        <img src="<?= get_theme_file_uri('assets/img/404.png'); ?>" alt="error 404 - surfer falling" class="img-fluid w-100">
-    </section>
-    
     <section class="blog_area single-post-area section_padding">
         <div class="container">
             <div class="section_tittle text-center">
                 <h2>Erreur 404</h2>
                 <p>Vous n'avez pas pris la bonne vague...</p>
             </div>
-
+            <div class="text-center">
+                <img src="<?= get_theme_file_uri('assets/img/404.png'); ?>" alt="error 404 - surfer falling" class="img-fluid">
+            </div>
             <div class="row justify-content-center my-3">
                 <div>
                     <a href="<?= get_home_url() ?>" class="btn_1">Retour à l'accueil</a>
