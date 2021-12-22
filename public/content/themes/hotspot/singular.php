@@ -90,7 +90,14 @@ $comments = get_comments(['post_id' => $articleId]);
 
                                     <!-- participation count-->
                                     <div class="me-auto">
-                                        <i class="far fa-heart mr-1"></i><?= count($participants) ?> personnes participent
+                                        <i class="far fa-heart mr-1"></i>
+                                        <?php
+                                        if (count($participants) == 1) {
+                                            echo "1 personne participe";
+                                        } else {
+                                            echo count($participants) . "personnes participent";
+                                        }
+                                         ?>
                                     </div>
 
                                     <!-- CRUD section -->
