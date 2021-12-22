@@ -95,7 +95,7 @@ $comments = get_comments(['post_id' => $articleId]);
                                         if (count($participants) == 1) {
                                             echo "1 personne participe";
                                         } else {
-                                            echo count($participants) . "personnes participent";
+                                            echo count($participants) . "&nbsp;personnes participent";
                                         }
                                          ?>
                                     </div>
