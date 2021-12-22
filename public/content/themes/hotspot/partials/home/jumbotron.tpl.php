@@ -6,7 +6,7 @@
             <div class="col-lg-10">
                 <div class="banner_text text-center">
                     <div class="banner_text_iner">
-                        <h1> Welcome to HotSpot</h1>
+                        <h1> Bienvenue sur HotSpot</h1>
                         <p><?=get_bloginfo('description');?></p>
 
                         <?php

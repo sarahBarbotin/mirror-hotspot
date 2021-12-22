@@ -5,7 +5,7 @@
             <div class="col-sm-8 col-md-7">
                 <div class="single-footer-widget">
                     <h4>Découvrir plus</h4>
-                    <ul>
+                    <ul class="d-block">
                         <li><a href="<?= get_permalink( get_page_by_title( 'mentions'
                                     ) ); ?>">Mentions Légales</a></li>
                         <li><a href="<?= get_permalink( get_page_by_title( 'about'
@@ -19,9 +19,9 @@
             <div class="col-sm-6 col-md-3">
                 <div class="single-footer-widget footer_icon">
                     <h4>Contactez nous</h4>
-                    <p>99666, Chamelon, Wonderland
+                    <p>99666, Chameleon, Wonderland
                         +880 362 352 783</p>
-                    <span>suppot@hotspot.com</span>
+                    <span>hotsupport@hotspot.com</span>
                     <div class="social-icons">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"><i class="ti-twitter-alt"></i></a>
