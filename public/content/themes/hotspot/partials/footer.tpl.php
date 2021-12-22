@@ -5,7 +5,7 @@
             <div class="col-sm-8 col-md-7">
                 <div class="single-footer-widget">
                     <h4>Découvrir plus</h4>
-                    <ul class="d-block">
+                    <ul class="d-flex flex-column">
                         <li><a href="<?= get_permalink( get_page_by_title( 'mentions'
                                     ) ); ?>">Mentions Légales</a></li>
                         <li><a href="<?= get_permalink( get_page_by_title( 'about'
