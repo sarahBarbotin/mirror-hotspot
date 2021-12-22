@@ -9,7 +9,7 @@
                         <li><a href="<?= get_permalink( get_page_by_title( 'mentions'
                                     ) ); ?>">Mentions Légales</a></li>
                         <li><a href="<?= get_permalink( get_page_by_title( 'about'
-                                    ) ); ?>">About</a></li>
+                                    ) ); ?>">À propos</a></li>
                     </ul>
                     <a class="navbar-brand mt-4" href="<?= get_home_url(); ?>"> <img src="<?php echo get_theme_file_uri('assets/img/logo.png'); ?>" alt="logo"> </a>
 
@@ -40,7 +40,7 @@
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;<script>
                             document.write(new Date().getFullYear());
-                        </script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </script> Tous droits réservés | Ce thème a été conçu avec <i class="ti-heart" aria-hidden="true"></i> par <a href="https://colorlib.com" target="_blank">Colorlib</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
